@@ -21,7 +21,7 @@
                 {% when 'ブルーグレー' %}
                     {% assign color_code = '#AFC0CD' %}
                 {% when 'ストライプ' %}
-                    {% assign color_code = 'repeating-linear-gradient(45deg, #000 0px, #000 1px, #FFF 1px, #FFF 3px)' %}
+                    {% assign color_code = 'repeating-linear-gradient(45deg, #000 0px, #000 3px, #FFF 3px, #FFF 4px)' %}
                 {% when 'ベージュ' %}
                     {% assign color_code = '#F5F5DC' %}
                 {% when 'グレー' %}
@@ -31,8 +31,7 @@
                 {% when 'シルバー' %}
                     {% assign color_code = '#C0C0C0' %}
                 {% when '千鳥柄' or 'チェックガラ' %}
-                    {% assign color_code = 'repeating-linear-gradient(45deg, #000 25%, transparent 25%, transparent 50%, #000 50%, #000 75%, transparent 75%, transparent), repeating-linear-gradient(-45deg, #000 25%, #FFF 25%, #FFF 50%, #000 50%, #000 75%, #FFF 75%, #FFF)' %}
-                    {% assign background_size = '6px 6px' %}
+                    {% assign color_code = 'repeating-linear-gradient(45deg, #000 0 4px, #FFF 4px 8px), repeating-linear-gradient(-45deg, #000 0 4px, #FFF 4px 8px)' %}
                 {% when 'レモンイエロー' %}
                     {% assign color_code = '#F5F3CA' %} 
                 {% when 'ブルー' %}
