@@ -1,1 +1,416 @@
-{"parent":"index.json","context":{"market":"jp"},"sections":{"slideshow_JF6wh":{"type":"slideshow","disabled":false,"custom_css":[".slider-button--prev {position: absolute; left: 4vw; top: 50%; transform: translateY(-50%);}",".slider-button--next {position: absolute; right: 4vw; top: 50%; transform: translateY(-50%);}",".slideshow__text.banner__box {background: none;}",".slider-buttons {transform: translate(0px, -100%); border: none;}"],"settings":{"layout":"full_bleed","slide_height":"adapt_image","slider_visual":"dots","auto_rotate":false,"change_slides_speed":5,"header-1451e7a6101d9244ac7e60bd187fb9fa":null,"image_behavior":"none","header-0c5a365a0ce4399c6e12f124ad163b12":null,"show_text_below":false,"header-f6f5cd25bf1b7aa0443943114927efc4":null,"accessibility_info":""},"blocks":{"slide_gbyPt":{"type":"slide","disabled":false,"settings":{"image":"shopify:\/\/shop_images\/8da268663168055b51e5c43c2fe5ec76.jpg","heading":"","heading_size":"h1","subheading":"","button_label":"","link":"shopify:\/\/products\/透け感コルセット付けロングワンピース","button_style_secondary":false,"box_align":"middle-center","show_text_box":true,"text_alignment":"center","image_overlay_opacity":0,"color_scheme":"","header-ebdad26f6bef700241baeb477091975b":null,"text_alignment_mobile":"center"}},"slide_QJGnc":{"type":"slide","disabled":false,"settings":{"image":"shopify:\/\/shop_images\/20250425-225221.jpg","heading":"","heading_size":"h1","subheading":"","button_label":"","link":"shopify:\/\/products\/ゴスクロスプリント浴衣セット","button_style_secondary":false,"box_align":"middle-center","show_text_box":true,"text_alignment":"center","image_overlay_opacity":0,"color_scheme":"scheme-1","header-01cdaff106f31ca062632ec6ec54bb6a":null,"text_alignment_mobile":"center"}},"slide_6UpWA":{"type":"slide","disabled":false,"settings":{"image":"shopify:\/\/shop_images\/7e4ac2be9f3bfbbc64c85a9d58c1a4cc.jpg","heading":"","heading_size":"h1","subheading":"","button_label":"","link":"shopify:\/\/products\/姫袖リボンレースアップブラウス","button_style_secondary":false,"box_align":"middle-center","show_text_box":true,"text_alignment":"center","image_overlay_opacity":0,"color_scheme":"","header-b6f87f257b3a513f6b61e30d10ccdfef":null,"text_alignment_mobile":"center"}},"slide_TNGf4":{"type":"slide","disabled":false,"settings":{"image":"shopify:\/\/shop_images\/20511-2.jpg","heading":"","heading_size":"h1","subheading":"","button_label":"","link":"shopify:\/\/products\/スクエアネックビッグリボンワンピースセット-1","button_style_secondary":false,"box_align":"middle-center","show_text_box":true,"text_alignment":"center","image_overlay_opacity":0,"color_scheme":"scheme-1","header-daf256c7d414e2ef26e3342d9fa1b01a":null,"text_alignment_mobile":"center"}},"slide_GT4ap":{"type":"slide","disabled":false,"settings":{"image":"shopify:\/\/shop_images\/a7bcf6b8c5483eeaea0930a116533d72.jpg","heading":"","heading_size":"h1","subheading":"","button_label":"","link":"shopify:\/\/products\/チャイナ風ワンピースセットアップ","button_style_secondary":false,"box_align":"middle-center","show_text_box":true,"text_alignment":"center","image_overlay_opacity":0,"color_scheme":"scheme-1","header-e962594cb4d2e325b9100ea3eccfaae8":null,"text_alignment_mobile":"center"}}},"block_order":["slide_gbyPt","slide_QJGnc","slide_6UpWA","slide_TNGf4","slide_GT4ap"]},"featured_collection_zchdC":{"type":"featured-collection","disabled":false,"custom_css":[".card .card__inner .card__media {width: 100%;}",".card--standard .card__media {margin: 4px;}",".card--card:after,.card--standard .card__inner:after {background: #f4f4f4;}",".price__regular {font-size: 13px; padding: 2px 4px;}",".jdgm-prev-badge {font-size: 12px; padding: 2px 4px;}",".inline-richtext {margin-bottom: 0px;}",".collection__title {margin-bottom: 0px;}"],"settings":{"title":"New Arrivals","heading_size":"h2","description":"","show_description":false,"description_style":"body","collection":"newarrivals","products_to_show":18,"columns_desktop":4,"full_width":false,"show_view_all":false,"view_all_style":"solid","enable_desktop_slider":true,"color_scheme":"scheme-2","header-633bfb9e72ab57be1f653c14c55d99f1":null,"image_ratio":"adapt","image_shape":"default","show_secondary_image":false,"show_vendor":false,"show_rating":false,"quick_add":"none","header-eec8ad57114fc2621be57ff069954ad1":null,"columns_mobile":"2","swipe_on_mobile":true,"header-a525c99d39614dd7c8e9783e21cedb6a":null,"padding_top":0,"padding_bottom":0},"blocks":{},"block_order":[]},"featured_collection_ALVRc":{"type":"featured-collection","disabled":false,"custom_css":[".price__regular {font-size: 13px; padding: 2px 4px;}",".jdgm-prev-badge {font-size: 12px; padding: 2px 4px;}",".inline-richtext {margin-bottom: 0px;}",".collection__title {margin-bottom: 0px;}"],"settings":{"title":"Ranking","heading_size":"h2","description":"","show_description":false,"description_style":"body","collection":"ranking","products_to_show":10,"columns_desktop":4,"full_width":false,"show_view_all":false,"view_all_style":"solid","enable_desktop_slider":false,"color_scheme":"scheme-2","header-1eb9f3655040cebedf7e1200b1304a56":null,"image_ratio":"adapt","image_shape":"default","show_secondary_image":false,"show_vendor":false,"show_rating":false,"quick_add":"none","header-bd69b9403b4b96eef028f9a1740966d5":null,"columns_mobile":"2","swipe_on_mobile":false,"header-be1979de38baba8a61773297a2355b02":null,"padding_top":4,"padding_bottom":36},"blocks":{},"block_order":[]},"rich_text_6Ft4F":{"type":"rich-text","disabled":false,"custom_css":[".rich-text__heading {margin-left: -20px;}"],"settings":{"desktop_content_position":"left","content_alignment":"left","color_scheme":"scheme-2","full_width":true,"header-baa0d84a1bedb0821961fe78aea70cb3":null,"padding_top":28,"padding_bottom":44},"blocks":{"heading_FxBgy":{"type":"heading","disabled":false,"settings":{"heading":"アイテム別から探す","heading_size":"h2"}}},"block_order":["heading_FxBgy"]},"featured_collection_ERWai":{"type":"featured-collection","disabled":false,"custom_css":[".card .card__inner .card__media {width: 100%;}",".card--standard .card__media {margin: 4px;}",".card--card:after,.card--standard .card__inner:after {background: #f4f4f4;}",".price__regular {font-size: 13px; padding: 2px 4px;}",".jdgm-prev-badge {font-size: 12px; padding: 2px 4px;}",".inline-richtext {margin-bottom: 0px;}",".collection__title {margin-bottom: 0px;}"],"settings":{"title":"トップス","heading_size":"h2","description":"<p>Tops<\/p>","show_description":true,"description_style":"body","collection":"tops","products_to_show":25,"columns_desktop":4,"full_width":false,"show_view_all":true,"view_all_style":"solid","enable_desktop_slider":false,"color_scheme":"scheme-2","header-4e6cb92dadb1b964e2c95934ae3c4d60":null,"image_ratio":"adapt","image_shape":"default","show_secondary_image":false,"show_vendor":false,"show_rating":false,"quick_add":"none","header-c206eddb83d201836f8ca615f08a4197":null,"columns_mobile":"2","swipe_on_mobile":false,"header-812e210c6b29607f42491d7d886b7adc":null,"padding_top":0,"padding_bottom":0},"blocks":{},"block_order":[]},"featured_collection_y4gY4":{"type":"featured-collection","disabled":false,"custom_css":[".card .card__inner .card__media {width: 100%;}",".card--standard .card__media {margin: 4px;}",".card--card:after,.card--standard .card__inner:after {background: #f4f4f4;}",".price__regular {font-size: 13px; padding: 2px 4px;}",".jdgm-prev-badge {font-size: 12px; padding: 2px 4px;}",".inline-richtext {margin-bottom: 0px;}",".collection__title {margin-bottom: 0px;}"],"settings":{"title":"ボトムス","heading_size":"h2","description":"","show_description":false,"description_style":"body","collection":"bottoms","products_to_show":10,"columns_desktop":4,"full_width":false,"show_view_all":true,"view_all_style":"solid","enable_desktop_slider":false,"color_scheme":"scheme-2","header-d61d41024be4df9e301529a73893503c":null,"image_ratio":"square","image_shape":"default","show_secondary_image":false,"show_vendor":false,"show_rating":false,"quick_add":"none","header-88338783dd586602135bfb1da0ac764f":null,"columns_mobile":"2","swipe_on_mobile":false,"header-0d6bd9973d969b17503e237dd1ef5daa":null,"padding_top":0,"padding_bottom":0},"blocks":{},"block_order":[]},"featured_collection_iiBxTX":{"disabled":false,"custom_css":[".card .card__inner .card__media {width: 100%;}",".card--standard .card__media {margin: 4px;}",".card--card:after,.card--standard .card__inner:after {background: #f4f4f4;}",".price__regular {font-size: 13px; padding: 2px 4px;}",".jdgm-prev-badge {font-size: 12px; padding: 2px 4px;}",".inline-richtext {margin-bottom: 0px;}",".collection__title {margin-bottom: 0px;}"],"settings":{"title":"アウター","collection":"outer","products_to_show":15},"blocks":{}},"featured_collection_whFRMG":{"custom_css":[".card .card__inner .card__media {width: 100%;}",".card--standard .card__media {margin: 4px;}",".card--card:after,.card--standard .card__inner:after {background: #f4f4f4;}",".price__regular {font-size: 13px; padding: 2px 4px;}",".jdgm-prev-badge {font-size: 12px; padding: 2px 4px;}",".inline-richtext {margin-bottom: 0px;}",".collection__title {margin-bottom: 0px;}"],"settings":{"title":"ワンピースセットアップ","products_to_show":14},"blocks":{}},"featured_collection_Lqyhdh":{"custom_css":[".card .card__inner .card__media {width: 100%;}",".card--standard .card__media {margin: 4px;}",".card--card:after,.card--standard .card__inner:after {background: #f4f4f4;}",".price__regular {font-size: 13px; padding: 2px 4px;}",".jdgm-prev-badge {font-size: 12px; padding: 2px 4px;}",".inline-richtext {margin-bottom: 0px;}",".collection__title {margin-bottom: 0px;}"],"settings":{"image_shape":"default","show_secondary_image":false,"show_rating":false,"title":"アクセサリー"},"blocks":{}},"rich_text_ye7rHj":{"settings":{},"blocks":{"text_V6VNdW":{"settings":{"text":"<h5>ようこそ、♡NoGenki webショップへ<\/h5><h5>♡NoGenkiは、大人気量産型や地雷系などを取り扱うブランドです。<\/h5><h5>♡華麗、可愛い、神秘、セクシー♡\u2028<\/h5><h5>ーーーーーーーーーーーーーーーー<\/h5><h5><\/h5><h5>もし何かお気づきの点やご要望などございましたら、お気軽にお知らせいただければ幸いです。\u2028<\/h5><h5>\u2028皆様のご意見を大切にし、より良いサービスをご提供できるよう努力致します。<\/h5><h5>また、新しいアイテムも続々と登場予定ですので、ぜひご期待くださいませ。\u2028<\/h5><h5>今後ともNoGenkiをどうぞよろしくお願い申し上げます。<\/h5>"}}}}},"order":["slideshow_JF6wh","featured_collection_zchdC","featured_collection_ALVRc","rich_text_6Ft4F","featured_collection_ERWai","featured_collection_iiBxTX","featured_collection_whFRMG","featured_collection_y4gY4","featured_collection_Lqyhdh","rich_text_ye7rHj"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "parent": "index.json",
+  "context": {
+    "market": "jp"
+  },
+  "sections": {
+    "slideshow_JF6wh": {
+      "type": "slideshow",
+      "disabled": false,
+      "custom_css": [
+        ".slider-button--prev {position: absolute; left: 4vw; top: 50%; transform: translateY(-50%);}",
+        ".slider-button--next {position: absolute; right: 4vw; top: 50%; transform: translateY(-50%);}",
+        ".slideshow__text.banner__box {background: none;}",
+        ".slider-buttons {transform: translate(0px, -100%); border: none;}"
+      ],
+      "settings": {
+        "layout": "full_bleed",
+        "slide_height": "adapt_image",
+        "slider_visual": "dots",
+        "auto_rotate": false,
+        "change_slides_speed": 5,
+        "header-8157025811d4653e641ad2354f810764": null,
+        "image_behavior": "none",
+        "header-a1a84edc804bf39b92070c2e51c83328": null,
+        "show_text_below": false,
+        "header-d9c08188ef2bc80ff271bad2df26b889": null,
+        "accessibility_info": ""
+      },
+      "blocks": {
+        "slide_gbyPt": {
+          "type": "slide",
+          "disabled": false,
+          "settings": {
+            "image": "shopify://shop_images/8da268663168055b51e5c43c2fe5ec76.jpg",
+            "heading": "",
+            "heading_size": "h1",
+            "subheading": "",
+            "button_label": "",
+            "link": "shopify://products/透け感コルセット付けロングワンピース",
+            "button_style_secondary": false,
+            "box_align": "middle-center",
+            "show_text_box": true,
+            "text_alignment": "center",
+            "image_overlay_opacity": 0,
+            "color_scheme": "",
+            "header-42348b44d4418eaa1fd0fe69a919d084": null,
+            "text_alignment_mobile": "center"
+          }
+        },
+        "slide_QJGnc": {
+          "type": "slide",
+          "disabled": false,
+          "settings": {
+            "image": "shopify://shop_images/20250425-225221.jpg",
+            "heading": "",
+            "heading_size": "h1",
+            "subheading": "",
+            "button_label": "",
+            "link": "shopify://products/ゴスクロスプリント浴衣セット",
+            "button_style_secondary": false,
+            "box_align": "middle-center",
+            "show_text_box": true,
+            "text_alignment": "center",
+            "image_overlay_opacity": 0,
+            "color_scheme": "scheme-1",
+            "header-913fac5a424ae50a4377a7ce07c8baf3": null,
+            "text_alignment_mobile": "center"
+          }
+        },
+        "slide_6UpWA": {
+          "type": "slide",
+          "disabled": false,
+          "settings": {
+            "image": "shopify://shop_images/7e4ac2be9f3bfbbc64c85a9d58c1a4cc.jpg",
+            "heading": "",
+            "heading_size": "h1",
+            "subheading": "",
+            "button_label": "",
+            "link": "shopify://products/姫袖リボンレースアップブラウス",
+            "button_style_secondary": false,
+            "box_align": "middle-center",
+            "show_text_box": true,
+            "text_alignment": "center",
+            "image_overlay_opacity": 0,
+            "color_scheme": "",
+            "header-c9f9945e6e9e044f7abfdc37fb9760a2": null,
+            "text_alignment_mobile": "center"
+          }
+        },
+        "slide_TNGf4": {
+          "type": "slide",
+          "disabled": false,
+          "settings": {
+            "image": "shopify://shop_images/20511-2.jpg",
+            "heading": "",
+            "heading_size": "h1",
+            "subheading": "",
+            "button_label": "",
+            "link": "shopify://products/スクエアネックビッグリボンワンピースセット-1",
+            "button_style_secondary": false,
+            "box_align": "middle-center",
+            "show_text_box": true,
+            "text_alignment": "center",
+            "image_overlay_opacity": 0,
+            "color_scheme": "scheme-1",
+            "header-c860cea16ad39353bc0953fbaadfc115": null,
+            "text_alignment_mobile": "center"
+          }
+        },
+        "slide_GT4ap": {
+          "type": "slide",
+          "disabled": false,
+          "settings": {
+            "image": "shopify://shop_images/a7bcf6b8c5483eeaea0930a116533d72.jpg",
+            "heading": "",
+            "heading_size": "h1",
+            "subheading": "",
+            "button_label": "",
+            "link": "shopify://products/チャイナ風ワンピースセットアップ",
+            "button_style_secondary": false,
+            "box_align": "middle-center",
+            "show_text_box": true,
+            "text_alignment": "center",
+            "image_overlay_opacity": 0,
+            "color_scheme": "scheme-1",
+            "header-57f26a0607ed6b33e445178b2270691e": null,
+            "text_alignment_mobile": "center"
+          }
+        }
+      },
+      "block_order": [
+        "slide_gbyPt",
+        "slide_QJGnc",
+        "slide_6UpWA",
+        "slide_TNGf4",
+        "slide_GT4ap"
+      ]
+    },
+    "featured_collection_zchdC": {
+      "type": "featured-collection",
+      "disabled": false,
+      "custom_css": [
+        ".price__regular {font-size: 13px; padding: 2px 4px;}",
+        ".jdgm-prev-badge {font-size: 12px; padding: 2px 4px;}",
+        ".inline-richtext {margin-bottom: 0px;}",
+        ".collection__title {margin-bottom: 0px;}",
+        ".card__inner {border: none !important; box-shadow: none !important; background: none !important;}"
+      ],
+      "settings": {
+        "title": "New Arrivals",
+        "heading_size": "h2",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "collection": "newarrivals",
+        "products_to_show": 18,
+        "columns_desktop": 4,
+        "full_width": false,
+        "show_view_all": false,
+        "view_all_style": "solid",
+        "enable_desktop_slider": true,
+        "color_scheme": "scheme-28957b8d-d6dd-4267-a6b6-e5cd5c83768e",
+        "header-59663563b00f91ec22747accb1a01f95": null,
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "header-83816cea1c6aa9f67d65a5c297f8fe50": null,
+        "columns_mobile": "2",
+        "swipe_on_mobile": true,
+        "header-e79190e196a69ca6736cd4c2df18b558": null,
+        "padding_top": 0,
+        "padding_bottom": 0
+      },
+      "blocks": {},
+      "block_order": []
+    },
+    "featured_collection_ALVRc": {
+      "type": "featured-collection",
+      "disabled": false,
+      "custom_css": [
+        ".price__regular {font-size: 13px; padding: 2px 4px;}",
+        ".jdgm-prev-badge {font-size: 12px; padding: 2px 4px;}",
+        ".inline-richtext {margin-bottom: 0px;}",
+        ".collection__title {margin-bottom: 0px;}",
+        ".card__inner {border: none !important; box-shadow: none !important; background: none !important;}"
+      ],
+      "settings": {
+        "title": "Ranking",
+        "heading_size": "h2",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "collection": "ranking",
+        "products_to_show": 10,
+        "columns_desktop": 4,
+        "full_width": false,
+        "show_view_all": false,
+        "view_all_style": "solid",
+        "enable_desktop_slider": false,
+        "color_scheme": "scheme-28957b8d-d6dd-4267-a6b6-e5cd5c83768e",
+        "header-d32b9996fc6cb0d0ec645feadaebf77e": null,
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "header-f6c8eec74341a920b13ccf764163f528": null,
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "header-12f7811608971ead1549e036326460f0": null,
+        "padding_top": 4,
+        "padding_bottom": 36
+      },
+      "blocks": {},
+      "block_order": []
+    },
+    "rich_text_6Ft4F": {
+      "type": "rich-text",
+      "disabled": false,
+      "custom_css": [
+        ".rich-text__heading {margin-left: -20px;}"
+      ],
+      "settings": {
+        "desktop_content_position": "left",
+        "content_alignment": "left",
+        "color_scheme": "scheme-28957b8d-d6dd-4267-a6b6-e5cd5c83768e",
+        "full_width": true,
+        "header-530f796a2554a2a393c47fc6c64fe95a": null,
+        "padding_top": 28,
+        "padding_bottom": 44
+      },
+      "blocks": {
+        "heading_FxBgy": {
+          "type": "heading",
+          "disabled": false,
+          "settings": {
+            "heading": "アイテム別から探す",
+            "heading_size": "h2"
+          }
+        }
+      },
+      "block_order": [
+        "heading_FxBgy"
+      ]
+    },
+    "featured_collection_ERWai": {
+      "type": "featured-collection",
+      "disabled": false,
+      "custom_css": [
+        ".price__regular {font-size: 13px; padding: 2px 4px;}",
+        ".jdgm-prev-badge {font-size: 12px; padding: 2px 4px;}",
+        ".inline-richtext {margin-bottom: 0px;}",
+        ".collection__title {margin-bottom: 0px;}",
+        ".card__inner {border: none !important; box-shadow: none !important; background: none !important;}"
+      ],
+      "settings": {
+        "title": "トップス",
+        "heading_size": "h2",
+        "description": "<p>Tops</p>",
+        "show_description": true,
+        "description_style": "body",
+        "collection": "tops",
+        "products_to_show": 25,
+        "columns_desktop": 4,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "enable_desktop_slider": false,
+        "color_scheme": "scheme-28957b8d-d6dd-4267-a6b6-e5cd5c83768e",
+        "header-15b801bb445c23720de235d907afe820": null,
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "header-3aa7bba951f38c8ebe78aa31b5e0db01": null,
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "header-f1b8cdc058aea6002f93030262883cbe": null,
+        "padding_top": 0,
+        "padding_bottom": 0
+      },
+      "blocks": {},
+      "block_order": []
+    },
+    "featured_collection_y4gY4": {
+      "type": "featured-collection",
+      "disabled": false,
+      "custom_css": [
+        ".price__regular {font-size: 13px; padding: 2px 4px;}",
+        ".jdgm-prev-badge {font-size: 12px; padding: 2px 4px;}",
+        ".inline-richtext {margin-bottom: 0px;}",
+        ".collection__title {margin-bottom: 0px;}",
+        ".card__inner {border: none !important; box-shadow: none !important; background: none !important;}"
+      ],
+      "settings": {
+        "title": "ボトムス",
+        "heading_size": "h2",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "collection": "bottoms",
+        "products_to_show": 10,
+        "columns_desktop": 4,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "enable_desktop_slider": false,
+        "color_scheme": "scheme-28957b8d-d6dd-4267-a6b6-e5cd5c83768e",
+        "header-a0b6fa558ebc18b95d3b44b3ca020bbd": null,
+        "image_ratio": "portrait",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "header-1d4b0b1a051ef0add5a20def414ce3eb": null,
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "header-d87b32c8efacf26f71c329e42369dd91": null,
+        "padding_top": 0,
+        "padding_bottom": 0
+      },
+      "blocks": {},
+      "block_order": []
+    },
+    "featured_collection_iiBxTX": {
+      "disabled": false,
+      "custom_css": [
+        ".price__regular {font-size: 13px; padding: 2px 4px;}",
+        ".jdgm-prev-badge {font-size: 12px; padding: 2px 4px;}",
+        ".inline-richtext {margin-bottom: 0px;}",
+        ".collection__title {margin-bottom: 0px;}",
+        ".card__inner {border: none !important; box-shadow: none !important; background: none !important;}"
+      ],
+      "settings": {
+        "title": "アウター",
+        "collection": "outer",
+        "products_to_show": 15,
+        "color_scheme": "scheme-28957b8d-d6dd-4267-a6b6-e5cd5c83768e"
+      },
+      "blocks": {}
+    },
+    "featured_collection_whFRMG": {
+      "custom_css": [
+        ".price__regular {font-size: 13px; padding: 2px 4px;}",
+        ".jdgm-prev-badge {font-size: 12px; padding: 2px 4px;}",
+        ".inline-richtext {margin-bottom: 0px;}",
+        ".collection__title {margin-bottom: 0px;}",
+        ".card__inner {border: none !important; box-shadow: none !important; background: none !important;}"
+      ],
+      "settings": {
+        "title": "ワンピースセットアップ",
+        "products_to_show": 14,
+        "color_scheme": "scheme-28957b8d-d6dd-4267-a6b6-e5cd5c83768e"
+      },
+      "blocks": {}
+    },
+    "featured_collection_Lqyhdh": {
+      "custom_css": [
+        ".price__regular {font-size: 13px; padding: 2px 4px;}",
+        ".jdgm-prev-badge {font-size: 12px; padding: 2px 4px;}",
+        ".inline-richtext {margin-bottom: 0px;}",
+        ".collection__title {margin-bottom: 0px;}",
+        ".card__inner {border: none !important; box-shadow: none !important; background: none !important;}"
+      ],
+      "settings": {
+        "title": "アクセサリー",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_rating": false,
+        "color_scheme": "scheme-28957b8d-d6dd-4267-a6b6-e5cd5c83768e",
+        "image_ratio": "square"
+      },
+      "blocks": {}
+    },
+    "rich_text_ye7rHj": {
+      "settings": {
+        "color_scheme": "scheme-28957b8d-d6dd-4267-a6b6-e5cd5c83768e"
+      },
+      "blocks": {
+        "text_V6VNdW": {
+          "settings": {
+            "text": "<h5>ようこそ、♡NoGenki webショップへ</h5><h5>♡NoGenkiは、大人気量産型や地雷系などを取り扱うブランドです。</h5><h5>♡華麗、可愛い、神秘、セクシー♡ </h5><h5>ーーーーーーーーーーーーーーーー</h5><h5></h5><h5>もし何かお気づきの点やご要望などございましたら、お気軽にお知らせいただければ幸いです。 </h5><h5> 皆様のご意見を大切にし、より良いサービスをご提供できるよう努力致します。</h5><h5>また、新しいアイテムも続々と登場予定ですので、ぜひご期待くださいませ。 </h5><h5>今後ともNoGenkiをどうぞよろしくお願い申し上げます。</h5>"
+          }
+        }
+      }
+    }
+  },
+  "order": [
+    "slideshow_JF6wh",
+    "featured_collection_zchdC",
+    "featured_collection_ALVRc",
+    "rich_text_6Ft4F",
+    "featured_collection_ERWai",
+    "featured_collection_iiBxTX",
+    "featured_collection_whFRMG",
+    "featured_collection_y4gY4",
+    "featured_collection_Lqyhdh",
+    "rich_text_ye7rHj"
+  ]
+}

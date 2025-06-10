@@ -8,16 +8,9 @@
  * ------------------------------------------------------------
  */
 {
-  "parent": "footer-group.json",
-  "context": {
-    "market": "jp"
-  },
-  "sections": {
-    "footer": {
-      "settings": {
-        "color_scheme": "scheme-28957b8d-d6dd-4267-a6b6-e5cd5c83768e"
-      },
-      "blocks": {}
+  "markets": {
+    "jp": {
+      "parent": "@default"
     }
   }
 }
