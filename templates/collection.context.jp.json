@@ -1,0 +1,30 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "parent": "collection.json",
+  "context": {
+    "market": "jp"
+  },
+  "sections": {
+    "product-grid": {
+      "custom_css": [
+        ".price__regular {font-size: 13px; padding: 2px 4px;}",
+        ".jdgm-prev-badge {font-size: 12px; padding: 2px 4px;}",
+        ".inline-richtext {margin-bottom: 0px;}",
+        ".collection__title {margin-bottom: 0px;}",
+        ".card__inner {border: none !important; box-shadow: none !important; background: none !important;}"
+      ],
+      "settings": {
+        "color_scheme": "scheme-28957b8d-d6dd-4267-a6b6-e5cd5c83768e"
+      },
+      "blocks": {}
+    }
+  }
+}

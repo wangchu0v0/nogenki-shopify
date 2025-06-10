@@ -1,0 +1,47 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "parent": "page.json",
+  "context": {
+    "market": "jp"
+  },
+  "sections": {
+    "rich_text_QL7deK": {
+      "settings": {
+        "color_scheme": "scheme-28957b8d-d6dd-4267-a6b6-e5cd5c83768e"
+      },
+      "blocks": {
+        "text_8M9bJp": {
+          "settings": {
+            "text": "<p>  WHAT'S NOGENKI</p>"
+          }
+        }
+      }
+    },
+    "custom_liquid_c3T7G8": {
+      "settings": {
+        "color_scheme": "scheme-28957b8d-d6dd-4267-a6b6-e5cd5c83768e"
+      },
+      "blocks": {}
+    },
+    "custom_liquid_nzwwp7": {
+      "settings": {
+        "color_scheme": "scheme-28957b8d-d6dd-4267-a6b6-e5cd5c83768e"
+      },
+      "blocks": {}
+    }
+  },
+  "order": [
+    "main",
+    "custom_liquid_nzwwp7",
+    "rich_text_QL7deK",
+    "custom_liquid_c3T7G8"
+  ]
+}
