@@ -1,0 +1,5 @@
+.tax-included {
+  font-size: 10px !important;  /* 强制生效 */
+  color: #666 !important;
+  margin-left: -10px !important;
+}

@@ -1,0 +1,181 @@
+/* 调整卡片信息间距和居中 */
+.card-wrapper .card-information {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem !important;
+  align-items: center !important;  /* 添加居中对齐 */
+  text-align: center !important;   /* 文本居中 */
+}
+
+/* 减小标题大小和间距 */
+.card-wrapper .card__heading {
+  font-size: 1rem !important;
+  margin-bottom: 0.1rem !important;
+  line-height: 1.2 !important;
+  width: 100% !important;         /* 确保标题占满宽度 */
+  text-align: center !important;  /* 标题文本居中 */
+}
+
+/* 调整颜色选择器间距和居中 */
+.card-wrapper .card__colors {
+  margin: 0.1rem 0 !important;
+  padding: 0 !important;
+  justify-content: center !important;  /* 颜色选择器居中 */
+}
+
+/* 调整评论组件间距和居中 */
+.card-wrapper .jdgm-preview-badge {
+  margin: 0.1rem 0 !important;
+  padding: 0 !important;
+  justify-content: center !important;  /* 评论居中 */
+  width: 100% !important;             /* 确保评论组件占满宽度 */
+  text-align: center !important;      /* 评论文本居中 */
+}
+
+/* 调整价格显示样式 */
+.card-wrapper .price {
+  margin: 0.1rem 0 !important;
+  padding: 0 !important;
+  width: 100% !important;            
+  text-align: center !important;     
+  justify-content: center !important;
+  font-family: "Libre Baskerville", serif !important;
+  font-weight: 300 !important;
+  font-size: 0.95rem !important;    
+  letter-spacing: 0.02em !important;
+  display: flex !important;         
+  align-items: flex-end !important; /* 改为底部对齐 */
+  gap: 0.1rem !important;         /* 进一步减小间距 */
+  justify-content: center !important;
+  line-height: 1 !important;       /* 确保行高一致 */
+}
+
+/* 细化价格内部元素的字体 */
+.card-wrapper .price .price-item {
+  font-family: "Libre Baskerville", serif !important;
+  font-weight: 300 !important;
+  font-size: 0.95rem !important;    /* 与父元素保持一致 */
+}
+
+/* 税费信息使用更小更细的字体 */
+.card-wrapper .price .tax-included {
+  font-family: "Libre Baskerville", serif !important;
+  font-weight: 300 !important;
+  font-size: 0.75rem !important;
+  opacity: 0.8 !important;
+  margin-left: -0.3rem !important;  /* 负margin让它更靠近价格 */
+  position: relative !important;   
+  line-height: 1 !important;
+  bottom: 0rem !important;    
+}
+
+/* 移除可能的默认间距 */
+.card-wrapper .card-information > * {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* 确保颜色选择器列表居中 */
+.card-wrapper .color-swatch-list {
+  display: flex !important;
+  justify-content: center !important;
+  flex-wrap: wrap !important;
+  width: 100% !important;
+}
+
+/* 调整公告栏高度和样式 */
+.announcement-bar {
+  min-height: 38px !important;    /* 增加整体高度 */
+  padding: 0 !important;          
+  display: flex !important;       
+  align-items: center !important; 
+  justify-content: center !important;
+}
+
+.announcement-bar__message {
+  padding: 8px 0 !important;      /* 添加上下内边距 */
+  margin: 0 !important;
+  font-size: 1.1rem !important;   /* 增大文字大小 */
+  line-height: 1.2 !important;    /* 调整行高 */
+  font-weight: 400 !important;    
+  letter-spacing: 0.02em !important;
+  display: flex !important;
+  align-items: center !important;
+  height: 100% !important;
+}
+
+.announcement-bar-slider {
+  min-height: 38px !important;    /* 与公告栏高度保持一致 */
+  display: flex !important;
+  align-items: center !important; 
+  justify-content: center !important;
+  padding: 0 !important;
+}
+
+/* 调整滑块按钮位置和大小 */
+.slider-button {
+  height: 100% !important;
+  width: 30px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 5px !important;
+  opacity: 0.8 !important;
+}
+
+/* 自定义轮播图分页指示器样式 */
+.slider-counter__link--dots .dot {
+  width: 16px !important;
+  height: 16px !important;
+  margin: 0 8px !important;
+  background: transparent !important;  /* 保持透明背景 */
+  position: relative !important;
+  opacity: 0.4 !important;
+  transition: all 0.3s ease !important;
+  border: none !important;            /* 移除边框 */
+}
+
+/* 创建十字架形状 */
+.slider-counter__link--dots .dot::before,
+.slider-counter__link--dots .dot::after {
+  content: '' !important;
+  position: absolute !important;
+  background: #000 !important;
+  border-radius: 0 !important;        /* 移除圆角 */
+  left: 50% !important;
+}
+
+/* 十字架的垂直线 */
+.slider-counter__link--dots .dot::before {
+  width: 4px !important;
+  height: 16px !important;
+  top: 45% !important;
+  transform: translate(-50%, -50%) !important;
+}
+
+/* 十字架的水平线 */
+.slider-counter__link--dots .dot::after {
+  width: 10px !important;
+  height: 4px !important;
+  top: 35% !important;
+  transform: translate(-50%, -50%) !important;
+}
+
+/* 当前激活的分页指示器样式 */
+.slider-counter__link--active .dot {
+  opacity: 1 !important;
+  transform: scale(1.2) !important;
+}
+
+/* 分页指示器容器样式 */
+.slider-counter--dots {
+  margin: 15px 0 !important;
+  padding: 0 !important;
+}
+
+.slideshow__control-wrapper {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
