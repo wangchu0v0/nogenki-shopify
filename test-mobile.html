@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>移动端评价测试 | モバイル評価テスト</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .test-block {
+            border: 1px solid #ddd;
+            margin: 20px 0;
+            padding: 15px;
+        }
+        .test-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .mobile-test {
+            max-width: 320px;
+            margin: 0 auto;
+            border: 2px dashed #ccc;
+            padding: 10px;
+        }
+        .control {
+            margin-top: 20px;
+            padding-top: 10px;
+            border-top: 1px solid #eee;
+        }
+        button {
+            padding: 5px 10px;
+            margin-right: 10px;
+        }
+    </style>
+    <link rel="stylesheet" href="assets/review-stars-optimized.css">
+</head>
+<body>
+    <h1>Judge.me 评价星星移动端测试</h1>
+    <p>这个测试页面模拟了不同设备和状态下的Judge.me评价显示。</p>
+    
+    <div class="test-block">
+        <div class="test-title">桌面端基本测试</div>
+        <div class="jdgm-prev-badge">
+            <div class="jdgm-prev-badge__stars">
+                <span class="jdgm-star jdgm--on">★</span>
+                <span class="jdgm-star jdgm--on">★</span>
+                <span class="jdgm-star jdgm--on">★</span>
+                <span class="jdgm-star jdgm--on">★</span>
+                <span class="jdgm-star jdgm--off">☆</span>
+            </div>
+            <span class="jdgm-prev-badge__text">8件のレビュー</span>
+        </div>
+    </div>
+    
+    <div class="test-block">
+        <div class="test-title">英文版本</div>
+        <div class="jdgm-prev-badge">
+            <div class="jdgm-prev-badge__stars">
+                <span class="jdgm-star jdgm--on">★</span>
+                <span class="jdgm-star jdgm--on">★</span>
+                <span class="jdgm-star jdgm--on">★</span>
+                <span class="jdgm-star jdgm--on">★</span>
+                <span class="jdgm-star jdgm--on">★</span>
+            </div>
+            <span class="jdgm-prev-badge__text">15 reviews</span>
+        </div>
+    </div>
+    
+    <div class="test-block">
+        <div class="test-title">模拟移动端显示</div>
+        <div class="mobile-test">
+            <div class="jdgm-widget">
+                <div class="jdgm-prev-badge">
+                    <div class="jdgm-prev-badge__stars">
+                        <span class="jdgm-star jdgm--on">★</span>
+                        <span class="jdgm-star jdgm--on">★</span>
+                        <span class="jdgm-star jdgm--on">★</span>
+                        <span class="jdgm-star jdgm--off">☆</span>
+                        <span class="jdgm-star jdgm--off">☆</span>
+                    </div>
+                    <span class="jdgm-prev-badge__text">3 reviews</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="test-block">
+        <div class="test-title">带属性的测试</div>
+        <div class="jdgm-prev-badge" data-number-of-reviews="12">
+            <div class="jdgm-prev-badge__stars">
+                <span class="jdgm-star jdgm--on">★</span>
+                <span class="jdgm-star jdgm--on">★</span>
+                <span class="jdgm-star jdgm--on">★</span>
+                <span class="jdgm-star jdgm--on">★</span>
+                <span class="jdgm-star jdgm--on">★</span>
+            </div>
+            <span class="jdgm-prev-badge__text">12件のレビュー</span>
+        </div>
+    </div>
+
+    <div class="control">
+        <button id="testBtn">模拟动态加载</button>
+        <button id="resetBtn">重置测试</button>
+    </div>
+    
+    <div id="dynamic-container"></div>
+    
+    <script src="assets/judgeme-modifier-mobile.js"></script>
+    
+    <script>
+        document.getElementById('testBtn').addEventListener('click', function() {
+            // 模拟延迟加载
+            setTimeout(() => {
+                const container = document.getElementById('dynamic-container');
+                container.innerHTML = `
+                    <div class="test-block">
+                        <div class="test-title">动态加载的内容</div>
+                        <div class="jdgm-prev-badge">
+                            <div class="jdgm-prev-badge__stars">
+                                <span class="jdgm-star jdgm--on">★</span>
+                                <span class="jdgm-star jdgm--on">★</span>
+                                <span class="jdgm-star jdgm--on">★</span>
+                                <span class="jdgm-star jdgm--on">★</span>
+                                <span class="jdgm-star jdgm--on">★</span>
+                            </div>
+                            <span class="jdgm-prev-badge__text">7件のレビュー</span>
+                        </div>
+                    </div>
+                `;
+            }, 1000);
+        });
+        
+        document.getElementById('resetBtn').addEventListener('click', function() {
+            location.reload();
+        });
+    </script>
+</body>
+</html>

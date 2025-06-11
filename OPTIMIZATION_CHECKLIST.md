@@ -48,7 +48,9 @@
 ### 活跃文件 (正在使用)
 - `assets/review-stars-optimized.css` - 优化的CSS (64行)
 - `assets/judgeme-modifier-optimized.js` - 优化的JavaScript (134行)
+- `assets/judgeme-modifier-mobile.js` - 移动端专用优化JS (287行)
 - `layout/theme.liquid` - 已更新引用
+- `JUDGEME_CSS_SETTINGS.md` - Judge.me插件CSS设置指南
 
 ### 备份文件
 - `备份/custom-review-stars-backup.css` (原250行文件)
