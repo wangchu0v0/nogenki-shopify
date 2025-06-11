@@ -180,29 +180,3 @@ svg[class*="star"] {
   align-items: center;
   gap: 2px;
 }
-
-/* === Judge.me评价文本修改 - 通过JavaScript处理 === */
-/* 确保评价徽章显示 */
-.jdgm-prev-badge {
-  display: flex !important;
-  align-items: center !important;
-  gap: 8px !important;
-}
-
-/* 使用JavaScript友好的方式 - 在页面加载后替换文本 */
-.jdgm-prev-badge__text.text-modified {
-  font-size: 16px !important;        /* 与星星大小匹配 */
-  color: #666 !important;
-  display: inline-block !important;
-  visibility: visible !important;
-  line-height: 1 !important;         /* 与星星行高一致 */
-  vertical-align: baseline !important; /* 基线对齐 */
-  margin-left: 4px !important;       /* 与星星保持适当间距 */
-}
-
-/* 确保评价组件整体对齐 */
-.jdgm-prev-badge {
-  display: flex !important;
-  align-items: center !important;
-  gap: 4px !important;
-}

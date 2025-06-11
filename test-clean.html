@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Judge.me修改测试</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f5f5f5;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .test-section {
+            margin: 30px 0;
+            padding: 20px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+        }
+        .before { border-color: #ff9999; background-color: #fff5f5; }
+        .after { border-color: #99ff99; background-color: #f5fff5; }
+        
+        .jdgm-prev-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 15px 0;
+            padding: 10px;
+            background: #fafafa;
+            border-radius: 5px;
+        }
+        .jdgm-star {
+            color: #A889A8;
+            font-size: 16px;
+        }
+        .jdgm-prev-badge__text {
+            color: #333;
+            font-size: 14px;
+        }
+        .size-demo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 10px 0;
+            padding: 8px;
+            background: #f0f0f0;
+            border-radius: 4px;
+        }
+        button {
+            background: #007cba;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+            font-size: 14px;
+        }
+        button:hover { background: #005a87; }
+        
+        .log {
+            background: #000;
+            color: #0f0;
+            padding: 15px;
+            font-family: 'Courier New', monospace;
+            height: 200px;
+            overflow-y: auto;
+            border-radius: 5px;
+            font-size: 12px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎯 Judge.me文本修改测试</h1>
+        
+        <div class="test-section">
+            <h3>📏 字体大小对比</h3>
+            <div class="size-demo">
+                <span style="font-size: 16px;">★★★★☆</span>
+                <span style="font-size: 16px;">(16px) 原始大小</span>
+            </div>
+            <div class="size-demo">
+                <span style="font-size: 16px;">★★★★☆</span>
+                <span style="font-size: 14px;">(14px) 稍小</span>
+            </div>
+            <div class="size-demo">
+                <span style="font-size: 16px;">★★★★☆</span>
+                <span style="font-size: 12px;">(12px) 更小</span>
+            </div>
+            <div class="size-demo">
+                <span style="font-size: 16px;">★★★★☆</span>
+                <span style="font-size: 10px;">(10px) 很小</span>
+            </div>
+        </div>
+
+        <div class="test-section before">
+            <h3>修改前</h3>
+            <div class="jdgm-prev-badge">
+                <span>★★★★☆</span>
+                <span class="jdgm-prev-badge__text">7件のレビュー</span>
+            </div>
+            <div class="jdgm-prev-badge">
+                <span>★★★★★</span>
+                <span class="jdgm-prev-badge__text">23件のレビュー</span>
+            </div>
+        </div>
+
+        <div class="test-section after">
+            <h3>修改后（目标效果）</h3>
+            <div class="jdgm-prev-badge">
+                <span>★★★★☆</span>
+                <span style="font-size: 12px; color: #666;">(7)</span>
+            </div>
+            <div class="jdgm-prev-badge">
+                <span>★★★★★</span>
+                <span style="font-size: 12px; color: #666;">(23)</span>
+            </div>
+        </div>
+
+        <div class="test-section">
+            <h3>🎮 交互测试</h3>
+            <button onclick="testModification()">测试修改功能</button>
+            <button onclick="addDynamicContent()">添加动态内容</button>
+            <button onclick="checkResults()">检查结果</button>
+            <div id="dynamic-content"></div>
+        </div>
+
+        <div class="test-section">
+            <h3>📊 控制台日志</h3>
+            <div id="console-log" class="log"></div>
+        </div>
+    </div>
+
+    <script>
+        // 控制台重定向
+        const logContainer = document.getElementById('console-log');
+        const originalLog = console.log;
+        
+        console.log = function(...args) {
+            originalLog.apply(console, args);
+            const div = document.createElement('div');
+            div.style.margin = '2px 0';
+            div.textContent = `[${new Date().toLocaleTimeString()}] ${args.join(' ')}`;
+            logContainer.appendChild(div);
+            logContainer.scrollTop = logContainer.scrollHeight;
+        };
+
+        // 简单的修改函数
+        function modifyJudgemeText() {
+            console.log('🚀 开始修改Judge.me文本...');
+            let count = 0;
+            
+            // 查找所有包含"のレビュー"的元素
+            const elements = document.querySelectorAll('*');
+            elements.forEach(el => {
+                if (el.textContent && el.textContent.includes('のレビュー') && el.children.length === 0) {
+                    const originalText = el.textContent.trim();
+                    const numberMatch = originalText.match(/(\d+)/);
+                    
+                    if (numberMatch) {
+                        const newText = '(' + numberMatch[1] + ')';
+                        el.textContent = newText;
+                        el.style.fontSize = '12px';
+                        el.style.color = '#666';
+                        count++;
+                        console.log(`✅ 修改: "${originalText}" → "${newText}"`);
+                    }
+                }
+            });
+            
+            console.log(`🎉 总共修改了 ${count} 个元素`);
+            return count;
+        }
+
+        // 测试函数
+        function testModification() {
+            console.log('🧪 手动触发修改测试...');
+            modifyJudgemeText();
+        }
+
+        function addDynamicContent() {
+            const container = document.getElementById('dynamic-content');
+            const randomNum = Math.floor(Math.random() * 999) + 1;
+            const div = document.createElement('div');
+            div.className = 'jdgm-prev-badge';
+            div.innerHTML = `
+                <span>★★★☆☆</span>
+                <span class="jdgm-prev-badge__text">${randomNum}件のレビュー</span>
+            `;
+            container.appendChild(div);
+            console.log(`➕ 添加了动态内容: ${randomNum}件のレビュー`);
+        }
+
+        function checkResults() {
+            console.log('🔍 检查当前所有文本元素...');
+            const textElements = document.querySelectorAll('.jdgm-prev-badge__text');
+            textElements.forEach((el, i) => {
+                const style = getComputedStyle(el);
+                console.log(`元素${i+1}: "${el.textContent}" | 字体:${style.fontSize} | 颜色:${style.color}`);
+            });
+        }
+
+        // 页面加载完成后执行
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('📄 页面加载完成');
+            console.log('💡 点击"测试修改功能"按钮来手动触发修改');
+        });
+    </script>
+</body>
+</html>

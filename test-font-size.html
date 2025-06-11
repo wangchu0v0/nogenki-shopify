@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>字体大小测试</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .test-item {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .original {
+            background-color: #f0f0f0;
+        }
+        .modified {
+            background-color: #e8f5e8;
+        }
+        .size-demo {
+            margin: 10px 0;
+        }
+        .size-16 { font-size: 16px; }
+        .size-14 { font-size: 14px; }
+        .size-13 { font-size: 13px; }
+        .size-12 { font-size: 12px; }
+        .size-10 { font-size: 10px; }
+        
+        .jdgm-prev-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 10px 0;
+        }
+        .jdgm-star {
+            color: #A889A8;
+            font-size: 16px;
+        }
+        .jdgm-prev-badge__text {
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <h1>字体大小对比测试</h1>
+    
+    <div class="test-item original">
+        <h3>字体大小对比</h3>
+        <div class="size-demo">
+            <span class="jdgm-star">★★★★☆</span>
+            <span class="size-16">(16px) 16像素</span>
+        </div>
+        <div class="size-demo">
+            <span class="jdgm-star">★★★★☆</span>
+            <span class="size-14">(14px) 14像素</span>
+        </div>
+        <div class="size-demo">
+            <span class="jdgm-star">★★★★☆</span>
+            <span class="size-13">(13px) 13像素</span>
+        </div>
+        <div class="size-demo">
+            <span class="jdgm-star">★★★★☆</span>
+            <span class="size-12">(12px) 12像素</span>
+        </div>
+        <div class="size-demo">
+            <span class="jdgm-star">★★★★☆</span>
+            <span class="size-10">(10px) 10像素</span>
+        </div>
+    </div>
+
+    <div class="test-item original">
+        <h3>原始Judge.me格式（修改前）</h3>
+        <div class="jdgm-prev-badge">
+            <span class="jdgm-prev-badge__stars">
+                <span class="jdgm-star">★★★★☆</span>
+            </span>
+            <span class="jdgm-prev-badge__text">7件のレビュー</span>
+        </div>
+    </div>
+
+    <div class="test-item modified">
+        <h3>修改后的格式（应该变成小括号）</h3>
+        <div class="jdgm-prev-badge">
+            <span class="jdgm-prev-badge__stars">
+                <span class="jdgm-star">★★★★☆</span>
+            </span>
+            <span class="jdgm-prev-badge__text">23件のレビュー</span>
+        </div>
+    </div>
+
+    <div class="test-item">
+        <h3>控制台输出</h3>
+        <div id="console-output" style="background: #000; color: #0f0; padding: 10px; font-family: monospace; height: 200px; overflow-y: auto;"></div>
+    </div>
+
+    <script>
+        // 捕获控制台输出
+        const originalConsoleLog = console.log;
+        const consoleOutput = document.getElementById('console-output');
+        
+        console.log = function(...args) {
+            originalConsoleLog.apply(console, args);
+            const div = document.createElement('div');
+            div.textContent = `[${new Date().toLocaleTimeString()}] ${args.join(' ')}`;
+            consoleOutput.appendChild(div);
+            consoleOutput.scrollTop = consoleOutput.scrollHeight;
+        };
+
+        // 手动测试样式应用
+        function testStyleApplication() {
+            console.log('🧪 开始手动测试样式应用');
+            
+            const testElements = document.querySelectorAll('.jdgm-prev-badge__text');
+            console.log('找到测试元素数量:', testElements.length);
+            
+            testElements.forEach((element, index) => {
+                const originalText = element.textContent;
+                console.log(`元素 ${index + 1} 原始文本:`, originalText);
+                
+                if (originalText.includes('のレビュー')) {
+                    const numberMatch = originalText.match(/(\d+)/);
+                    if (numberMatch) {
+                        const newText = '(' + numberMatch[1] + ')';
+                        element.textContent = newText;
+                        
+                        // 强制应用样式
+                        element.style.setProperty('font-size', '12px', 'important');
+                        element.style.setProperty('color', '#666', 'important');
+                        element.style.setProperty('line-height', '1', 'important');
+                        element.style.setProperty('vertical-align', 'baseline', 'important');
+                        
+                        console.log(`✅ 修改完成: ${originalText} → ${newText}`);
+                        console.log(`📏 应用样式: 12px, 颜色: #666`);
+                        
+                        // 验证样式是否生效
+                        const computedStyle = getComputedStyle(element);
+                        console.log(`🔍 实际字体大小: ${computedStyle.fontSize}`);
+                        console.log(`🔍 实际颜色: ${computedStyle.color}`);
+                    }
+                }
+            });
+        }
+
+        // 页面加载后测试
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('📄 DOM加载完成，开始测试');
+            setTimeout(testStyleApplication, 100);
+        });
+        
+        // 添加按钮重新测试
+        const button = document.createElement('button');
+        button.textContent = '重新测试修改';
+        button.style.margin = '10px';
+        button.style.padding = '10px 20px';
+        button.style.backgroundColor = '#007cba';
+        button.style.color = 'white';
+        button.style.border = 'none';
+        button.style.borderRadius = '4px';
+        button.style.cursor = 'pointer';
+        button.onclick = testStyleApplication;
+        document.body.insertBefore(button, document.body.firstChild);
+    </script>
+
+    <!-- 引入我们的修改脚本 -->
+    <script src="judgeme-modifier-simple.js"></script>
+</body>
+</html>
