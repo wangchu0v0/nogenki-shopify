@@ -1,1 +1,41 @@
-{"parent":"collection.tops.json","context":{"market":"jp"},"sections":{"product-grid":{"disabled":true,"settings":{"products_per_page":36,"columns_desktop":4,"quick_add":"bulk","enable_filtering":false},"blocks":{}},"banner":{"disabled":true,"settings":{},"blocks":{}},"featured_collection_JyFJj":{"type":"featured-collection","disabled":false,"settings":{"title":"","heading_size":"h1","description":"","show_description":false,"description_style":"body","collection":"tops","products_to_show":25,"columns_desktop":4,"full_width":false,"show_view_all":true,"view_all_style":"solid","enable_desktop_slider":false,"color_scheme":"","header-3626690cafdbb27c2ea9725928c688f1":null,"image_ratio":"adapt","image_shape":"default","show_secondary_image":false,"show_vendor":false,"show_rating":false,"quick_add":"none","header-5f149c1f2ab1c6f1c2c3e1b619770be1":null,"columns_mobile":"2","swipe_on_mobile":false,"header-19c8cfacf558ad28baef70ed80ed93ec":null,"padding_top":36,"padding_bottom":36},"blocks":{},"block_order":[],"name":"t:sections.featured-collection.presets.name"}},"order":["banner","rich_text_WghzN7","product-grid","featured_collection_JyFJj"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "parent": "collection.tops.json",
+  "context": {
+    "market": "jp"
+  },
+  "sections": {
+    "banner": {
+      "disabled": false,
+      "settings": {
+        "color_scheme": "scheme-28957b8d-d6dd-4267-a6b6-e5cd5c83768e"
+      },
+      "blocks": {}
+    },
+    "product-grid": {
+      "disabled": false,
+      "settings": {
+        "products_per_page": 36,
+        "columns_desktop": 4,
+        "color_scheme": "scheme-28957b8d-d6dd-4267-a6b6-e5cd5c83768e",
+        "image_ratio": "portrait",
+        "quick_add": "bulk",
+        "enable_filtering": false,
+        "show_rating": false
+      },
+      "blocks": {}
+    }
+  },
+  "order": [
+    "banner",
+    "product-grid"
+  ]
+}

@@ -1,10 +1,14 @@
 {%- if card_product != empty -%}
   <div class="card__colors">
+    {% assign color_option_index = 0 %}
     {% for option in card_product.options_with_values %}
-      {% if option.name == 'Color' or option.name == '颜色' %}
+      {% assign option_name_downcase = option.name | downcase %}
+      {% if option_name_downcase == 'color' or option_name_downcase == '颜色' or option_name_downcase == 'colour' %}
+        {% assign color_option_index = forloop.index %}
         <ul class="color-swatch-list">
           {% for value in option.values %}
-            {% assign color_variants = card_product.variants | where: "option2", value %}
+            {% assign variant_key = 'option' | append: color_option_index %}
+            {% assign color_variants = card_product.variants | where: variant_key, value %}
             {% assign variant = color_variants | first %}
             
             <!-- 为每种颜色设置对应的十六进制代码 -->
