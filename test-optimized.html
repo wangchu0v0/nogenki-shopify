@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>评价星星优化测试</title>
+    <link rel="stylesheet" href="assets/review-stars-optimized.css">
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .test-section { margin: 20px 0; padding: 15px; border: 1px solid #ddd; }
+        .test-title { font-weight: bold; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <h1>Judge.me 评价星星优化测试</h1>
+    
+    <div class="test-section">
+        <div class="test-title">测试1: 基本星星样式 (应显示紫色)</div>
+        <div class="jdgm-prev-badge">
+            <div class="jdgm-prev-badge__stars">
+                <span class="jdgm-star jdgm--on">★</span>
+                <span class="jdgm-star jdgm--on">★</span>
+                <span class="jdgm-star jdgm--on">★</span>
+                <span class="jdgm-star jdgm--on">★</span>
+                <span class="jdgm-star jdgm--off">☆</span>
+            </div>
+            <span class="jdgm-prev-badge__text" data-number-of-reviews="8">8件のレビュー</span>
+        </div>
+    </div>
+
+    <div class="test-section">
+        <div class="test-title">测试2: 英文版本</div>
+        <div class="jdgm-prev-badge">
+            <div class="jdgm-prev-badge__stars">
+                <span class="jdgm-star jdgm--on">★</span>
+                <span class="jdgm-star jdgm--on">★</span>
+                <span class="jdgm-star jdgm--on">★</span>
+                <span class="jdgm-star jdgm--on">★</span>
+                <span class="jdgm-star jdgm--on">★</span>
+            </div>
+            <span class="jdgm-prev-badge__text" data-number-of-reviews="15">15 reviews</span>
+        </div>
+    </div>
+
+    <div class="test-section">
+        <div class="test-title">测试3: 移动端样式</div>
+        <div class="jdgm-widget mobile-test">
+            <div class="jdgm-prev-badge">
+                <div class="jdgm-prev-badge__stars">
+                    <span class="jdgm-star jdgm--on">★</span>
+                    <span class="jdgm-star jdgm--on">★</span>
+                    <span class="jdgm-star jdgm--on">★</span>
+                    <span class="jdgm-star jdgm--off">☆</span>
+                    <span class="jdgm-star jdgm--off">☆</span>
+                </div>
+                <span class="jdgm-prev-badge__text" data-number-of-reviews="3">3件のレビュー</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/judgeme-modifier-optimized.js"></script>
+    
+    <script>
+        // 测试脚本加载效果
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('✅ 优化版本已加载');
+            
+            // 检查CSS是否生效
+            const stars = document.querySelectorAll('.jdgm-star');
+            stars.forEach(star => {
+                const color = window.getComputedStyle(star).color;
+                console.log('星星颜色:', color);
+            });
+        });
+    </script>
+</body>
+</html>
