@@ -231,3 +231,7 @@ svg[class*="star"] {
   align-items: center;
   gap: 2px;
 }
+
+.jdgm-prev-badge__text:after {
+  font-family: "Libre Baskerville", serif !important;
+}
