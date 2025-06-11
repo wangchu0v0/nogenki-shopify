@@ -15,14 +15,15 @@
         if (!document.getElementById(styleId)) {
             const style = document.createElement('style');
             style.id = styleId;
-            style.textContent = `
-                /* 评价文字样式 - 括号格式 */
+            style.textContent = `                /* 评价文字样式 - 括号格式 */
                 .jdgm-prev-badge__text {
-                    font-size: 14px !important;
+                    font-size: 12px !important;
                     color: #666 !important;
                     line-height: 1.2 !important;
                     vertical-align: middle !important;
                     margin-left: 4px !important;
+                    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !important;
+                    font-weight: 400 !important;
                 }
                 
                 /* 星星样式保持一致 */
@@ -35,8 +36,7 @@
                     display: inline-flex !important;
                     align-items: center !important;
                 }
-                
-                /* 移动端响应式调整 */
+                  /* 移动端响应式调整 */
                 @media screen and (max-width: 768px) {
                     .jdgm-prev-badge__text {
                         font-size: 12px !important;
@@ -49,7 +49,7 @@
                 /* 修复theme dev与实际显示差异 */
                 @media screen and (max-width: 480px) {
                     .jdgm-prev-badge__text {
-                        font-size: 11px !important;
+                        font-size: 12px !important;
                     }
                     .jdgm-star {
                         font-size: 13px !important;
@@ -77,13 +77,14 @@
                 const newText = `(${reviewCount})`;
                 
                 element.textContent = newText;
-                element.setAttribute(MODIFIED_ATTR, 'true');
-                element.style.cssText = `
-                    font-size: 14px !important;
+                element.setAttribute(MODIFIED_ATTR, 'true');                element.style.cssText = `
+                    font-size: 12px !important;
                     color: #666 !important;
                     line-height: 1.2 !important;
                     vertical-align: middle !important;
                     margin-left: 4px !important;
+                    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !important;
+                    font-weight: 400 !important;
                 `;
                 
                 count++;
@@ -121,13 +122,14 @@
                     
                     const span = document.createElement('span');
                     span.textContent = newText;
-                    span.setAttribute(MODIFIED_ATTR, 'true');
-                    span.style.cssText = `
-                        font-size: 14px !important;
+                    span.setAttribute(MODIFIED_ATTR, 'true');                    span.style.cssText = `
+                        font-size: 12px !important;
                         color: #666 !important;
                         line-height: 1.2 !important;
                         vertical-align: middle !important;
                         margin-left: 4px !important;
+                        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !important;
+                        font-weight: 400 !important;
                     `;
                     
                     textNode.parentElement.replaceChild(span, textNode);
