@@ -252,11 +252,9 @@
           font-size: 1.6rem;
         }
       }
-    {% endstyle %}
-
-    {{ 'base.css' | asset_url | stylesheet_tag }}
+    {% endstyle %}    {{ 'base.css' | asset_url | stylesheet_tag }}
     {{ 'custom-styles.css' | asset_url | stylesheet_tag }}
-    {{ 'custom-review-stars.css' | asset_url | stylesheet_tag }}
+    {{ 'custom-review-stars-new.css' | asset_url | stylesheet_tag }}
 
     {%- unless settings.type_body_font.system? -%}
       {% comment %}theme-check-disable AssetPreload{% endcomment %}

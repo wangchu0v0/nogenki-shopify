@@ -1,0 +1,158 @@
+/* Custom Review Stars Styling - 自定义评价星星样式 */
+
+/* === Judge.me 星星颜色设置 === */
+.jdgm-widget .jdgm-star,
+.jdgm-widget .jdgm-star.jdgm--on,
+.jdgm-widget .jdgm-star.jdgm--off,
+.jdgm-rev-widg__stars .jdgm-star,
+.jdgm-histogram__star,
+.jdgm-preview-badge .jdgm-star,
+.jdgm-prev-badge__stars .jdgm-star,
+.jdgm-star.jdgm--on:before,
+.jdgm-star.jdgm--off:before,
+.jdgm-star:before {
+  color: #A889A8 !important;
+  background-color: transparent !important;
+}
+
+/* 覆盖Judge.me的伪元素 */
+.jdgm-widget .jdgm-star:before,
+.jdgm-widget .jdgm-star.jdgm--on:before,
+.jdgm-prev-badge__stars .jdgm-star:before {
+  color: #A889A8 !important;
+  content: "★" !important;
+}
+
+.jdgm-widget .jdgm-star.jdgm--off:before {
+  color: #e0e0e0 !important;
+  content: "☆" !important;
+}
+
+/* 高优先级强制覆盖 */
+.jdgm-widget.jdgm-preview-badge .jdgm-prev-badge__stars .jdgm-star,
+.jdgm-widget.jdgm-preview-badge .jdgm-prev-badge__stars .jdgm-star.jdgm--on,
+.jdgm-widget.jdgm-preview-badge .jdgm-prev-badge__stars .jdgm-star.jdgm--off,
+div.jdgm-widget div.jdgm-prev-badge span.jdgm-prev-badge__stars span.jdgm-star {
+  color: #A889A8 !important;
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+body .jdgm-widget .jdgm-star,
+html body .jdgm-widget .jdgm-star.jdgm--on,
+html body div.jdgm-widget div.jdgm-prev-badge span.jdgm-star {
+  color: #A889A8 !important;
+}
+
+/* === Judge.me 布局优化 === */
+.jdgm-prev-badge {
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+}
+
+.jdgm-prev-badge__stars {
+  display: inline-flex !important;
+  align-items: center !important;
+}
+
+/* === 尺寸控制 === */
+/* 桌面端 */
+.jdgm-star {
+  font-size: 16px !important;
+  line-height: 1 !important;
+}
+
+.jdgm-prev-badge__text {
+  font-size: 14px !important;
+  color: #666 !important;
+  line-height: 1.2 !important;
+  vertical-align: middle !important;
+  margin-left: 4px !important;
+}
+
+/* === 响应式设计 === */
+/* 平板和小屏幕 */
+@media screen and (max-width: 768px) {
+  .jdgm-star {
+    font-size: 14px !important;
+  }
+  
+  .jdgm-prev-badge__text {
+    font-size: 12px !important;
+  }
+}
+
+/* 手机端 */
+@media screen and (max-width: 480px) {
+  .jdgm-star {
+    font-size: 13px !important;
+  }
+  
+  .jdgm-prev-badge__text {
+    font-size: 11px !important;
+  }
+}
+
+/* 小屏幕手机和theme dev环境 */
+@media screen and (max-width: 390px) {
+  .jdgm-star {
+    font-size: 12px !important;
+  }
+  
+  .jdgm-prev-badge__text {
+    font-size: 10px !important;
+  }
+}
+
+/* === CSS变量和SVG支持 === */
+.jdgm-widget,
+.jdgm-preview-badge,
+.jdgm-prev-badge {
+  --jdgm-star-color: #A889A8 !important;
+}
+
+.jdgm-widget svg,
+.jdgm-star svg,
+.jdgm-prev-badge svg {
+  fill: #A889A8 !important;
+  color: #A889A8 !important;
+}
+
+/* === 其他评价插件支持 === */
+.star-rating,
+.product-reviews .star,
+.review-star,
+.rating-star,
+.stars,
+.star-filled,
+.fa-star,
+.review-rating .star {
+  color: #A889A8 !important;
+  fill: #A889A8 !important;
+}
+
+/* Yotpo */
+.yotpo-star,
+.yotpo-stars .yotpo-star,
+.yotpo-bottomline .yotpo-star {
+  color: #A889A8 !important;
+}
+
+/* Loox */
+.loox-rating .loox-star,
+.loox-stars .loox-star {
+  color: #A889A8 !important;
+}
+
+/* Stamped.io */
+.stamped-starrating .stamped-fa-star,
+.stamped-review-rating .stamped-fa-star {
+  color: #A889A8 !important;
+}
+
+/* Product Reviews App */
+.spr-starrating .spr-star,
+.spr-badge-starrating .spr-star {
+  color: #A889A8 !important;
+}
