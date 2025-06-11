@@ -79,6 +79,73 @@ html,
   bottom: 0rem !important;    
 }
 
+/* 美化产品系列标题样式 */
+.collection-hero__title,
+.title-wrapper .title,
+h1.title,
+h2.title,
+h3.title,
+.title,
+.title-wrapper-with-link .title,
+.collection__title.title-wrapper .title,
+.multicolumn .title-wrapper-with-link .title,
+.featured-collection-title,
+.collection-list-title,
+.main-title,
+.section-header__title,
+.section-header h2,
+.section-title,
+.shopify-section h2,
+.page-width h2,
+.section-heading,
+.heading,
+.page-heading,
+.related-products__heading,
+h2[class*="heading"],
+div[class*="title"] h2,
+h2.h1, h2.h2, h2.h3,
+.h1, .h2, .h3,
+.shopify-section .title {
+  font-family: "Libre Baskerville", serif !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.05em !important;
+  text-transform: none !important; /* 确保不会全部大写 */
+}
+
+/* 调整各种标题的位置 */
+.title-wrapper .title,
+.title-wrapper-with-link .title,
+.collection__title.title-wrapper .title,
+.section-header h2,
+.featured-collection .title,
+.shopify-section h2,
+.title-wrapper h2 {
+  transform: translate(10px, 19px) !important; /* 向右10px，向下14+5=19px */
+  position: relative !important; /* 确保定位生效 */
+  display: inline-block !important; /* 保持正常流 */
+}
+
+/* 确保标题容器有足够的空间 */
+.title-wrapper,
+.title-wrapper-with-link,
+.collection__title.title-wrapper,
+.section-header,
+.page-width h2 {
+  min-height: 30px !important; /* 为移动后的标题提供空间 */
+  position: relative !important;
+}
+
+/* 适当调整产品系列标题样式 - 特定于collection-hero */
+.collection-hero__title {
+  font-family: "Libre Baskerville", serif !important;
+  font-style: normal;
+  letter-spacing: 0.05em !important;
+  transform: translate(10px, 14px) !important; /* 调整为向右移动10px，向下移动14px */
+  position: relative !important; /* 确保定位生效 */
+  display: inline-block !important; /* 保持正常流 */
+  z-index: 2 !important; /* 确保标题在其他元素上方 */
+}
+
 /* 移除可能的默认间距 */
 .card-wrapper .card-information > * {
   margin: 0 !important;

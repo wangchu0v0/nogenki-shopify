@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>标题位置测试</title>
+    <style>
+        /* 模拟主题的基本样式 */
+        body {
+            font-family: sans-serif;
+            background-color: #F2ECF6;
+            padding: 20px;
+            margin: 0;
+        }
+        
+        /* 添加与我们在custom-styles.css中相同的样式 */        .collection-hero__title {
+            font-family: "Libre Baskerville", serif !important;
+            font-style: normal;
+            letter-spacing: 0.05em !important;
+            transform: translate(10px, 14px) !important; /* 调整为向右移动10px */
+            position: relative !important; /* 确保定位生效 */
+            display: inline-block !important; /* 保持正常流 */
+        }
+        
+        .title-wrapper .title {
+            font-family: "Libre Baskerville", serif !important;
+            font-weight: 400 !important;
+            letter-spacing: 0.05em !important;
+            text-transform: none !important;
+            transform: translate(10px, 19px) !important; /* 调整为向右10px，向下19px */
+            position: relative !important; /* 确保定位生效 */
+            display: inline-block !important; /* 保持正常流 */
+        }
+        
+        /* 添加参考线以便检查位置 */
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+        }
+        
+        .title-container {
+            border: 1px dashed #999;
+            padding: 10px;
+            margin: 20px 0;
+            position: relative;
+        }
+          .reference-line-vertical {
+            position: absolute;
+            height: 100%;
+            width: 1px;
+            background-color: red;
+            left: 10px; /* 更改为10px参考线 */
+            top: 0;
+        }
+        
+        .reference-line-horizontal-1 {
+            position: absolute;
+            height: 1px;
+            width: 100%;
+            background-color: blue;
+            left: 0;
+            top: 14px;
+        }
+        
+        .reference-line-horizontal-2 {
+            position: absolute;
+            height: 1px;
+            width: 100%;
+            background-color: green;
+            left: 0;
+            top: 19px; /* 添加第二条水平参考线，显示19px位置 */
+        }
+        
+        .original {
+            font-family: sans-serif;
+            letter-spacing: normal;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+    <!-- 加载Libre Baskerville字体 -->
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <h1>标题位置测试页面</h1>
+    <p>此页面用于测试产品系列标题的位置调整，向右移动20px并向下移动14px。</p>
+    
+    <div class="grid-container">        <!-- 测试1：Collection Hero标题 -->
+        <div class="title-container">
+            <div class="reference-line-vertical"></div>
+            <div class="reference-line-horizontal-1"></div>
+            <h2 class="original">原始标题 (New Arrivals)</h2>
+            <h2 class="collection-hero__title">修改后标题 (New Arrivals)</h2>
+        </div>
+        
+        <!-- 测试2：普通标题 -->
+        <div class="title-container">
+            <div class="reference-line-vertical"></div>
+            <div class="reference-line-horizontal-1"></div>
+            <div class="reference-line-horizontal-2"></div>
+            <div class="title-wrapper">
+                <h2 class="original">原始标题 (Ranking)</h2>
+                <h2 class="title">修改后标题 (Ranking)</h2>
+            </div>
+        </div>
+    </div>
+    
+    <p>红线表示向右移动10px的参考线，蓝线表示向下移动14px的参考线（适用于New Arrivals），绿线表示向下移动19px的参考线（适用于其他标题）。</p>
+</body>
+</html>
