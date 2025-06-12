@@ -69,30 +69,35 @@ SEO优化代码 - 只影响搜索引擎，不影响用户界面
 {% assign final_keywords_ja = keywords_ja_array | join: ',' %}
 {% assign final_keywords_en = keywords_en_array | join: ',' %}
 
-{% comment %} 生成SEO标题（不影响页面显示） {% endcomment %}
-{% capture seo_title_ja %}
-{{ product.title | escape }}{% if final_keywords_ja != '' %} | {{ keywords_ja_array | slice: 0, 3 | join: '・' }}{% endif %} | {{ shop.name }}
-{% endcapture %}
+{% comment %} 生成SEO标题 - 客户可见部分保持简洁品牌标识 {% endcomment %}
+{% assign seo_title_ja = '地雷系 | 量産型 | 少女ブランド | NoGenki' %}
+{% assign seo_title_en = 'Jiraikei | Ryousangata | Japanese Girl Fashion | NoGenki' %}
 
-{% capture seo_title_en %}
-{{ product.title | escape }}{% if final_keywords_en != '' %} | {{ keywords_en_array | slice: 0, 3 | join: ' ' }}{% endif %} | {{ shop.name }}
-{% endcapture %}
+{% comment %} 生成丰富的后台SEO关键词（不影响客户可见内容） {% endcomment %}
+{% assign backend_keywords_ja = '地雷系,量産型,少女ブランド,地雷系ファッション,量産型ファッション,量産型ヲタク,地雷系女子,病みかわいい,ゆめかわいい,サブカル,天使界隈,原宿系,ゴシック,ロリータ,コスプレ,アニメ,オタク,kawaii,cute,sweet' %}
+{% assign backend_keywords_en = 'jiraikei,ryousangata,japanese girl fashion,jiraikei fashion,ryousangata otaku,yamikawaii,dark kawaii,angel kei,harajuku,gothic lolita,subcul fashion,japanese street fashion,kawaii fashion,anime fashion,otaku fashion,cosplay,cute fashion,sweet fashion' %}
 
-{% comment %} 生成SEO描述 {% endcomment %}
-{% capture seo_description_ja %}
-{{ product.title }}は{% if final_keywords_ja != '' %}{{ keywords_ja_array | slice: 0, 2 | join: '・' }}{% endif %}に最適なアイテム。{{ product.description | strip_html | truncate: 80 }}{% if final_keywords_ja != '' %}{{ keywords_ja_array | slice: 0, 3 | join: '、' }}{% endif %}ファッションの通販サイト{{ shop.name }}。
-{% endcapture %}
-
-{% capture seo_description_en %}
-Perfect {{ product.title }} for {% if final_keywords_en != '' %}{{ keywords_en_array | slice: 0, 2 | join: ' and ' }}{% endif %} fashion lovers. {{ product.description | strip_html | truncate: 80 }} Available at {{ shop.name }} - Japanese fashion online store.
-{% endcapture %}
+{% comment %} 合并检测到的关键词和后台关键词 {% endcomment %}
+{% assign all_keywords = backend_keywords_ja %}
+{% if final_keywords_ja != '' %}
+  {% assign all_keywords = all_keywords | append: ',' | append: final_keywords_ja %}
+{% endif %}
+{% if backend_keywords_en != '' %}
+  {% assign all_keywords = all_keywords | append: ',' | append: backend_keywords_en %}
+{% endif %}
+{% if final_keywords_en != '' %}
+  {% assign all_keywords = all_keywords | append: ',' | append: final_keywords_en %}
+{% endif %}
+{% comment %} 生成SEO描述 - 保持品牌简洁性 {% endcomment %}
+{% assign seo_description_ja = '地雷系・量産型ファッション専門の少女ブランドNoGenki。可愛くて個性的なアイテムを豊富に取り揃えています。高品質な日本製ファッションアイテムをお届け。' %}
+{% assign seo_description_en = 'NoGenki - Japanese girl fashion brand specializing in jiraikei and ryousangata styles. Cute and unique fashion items with high quality. Shop authentic Japanese kawaii fashion online.' %}
 
 {% comment %} 输出SEO Meta标签 - 仅影响搜索引擎 {% endcomment %}
 
 <!-- 日语SEO Meta标签 -->
 <meta name="title" content="{{ seo_title_ja | strip }}" />
 <meta name="description" content="{{ seo_description_ja | strip }}" />
-<meta name="keywords" content="{{ final_keywords_ja }}{% if final_keywords_en != '' %},{{ final_keywords_en }}{% endif %}" />
+<meta name="keywords" content="{{ all_keywords }}" />
 
 <!-- 英语SEO Meta标签 -->
 <meta name="title" lang="en" content="{{ seo_title_en | strip }}" />
@@ -121,7 +126,7 @@ Perfect {{ product.title }} for {% if final_keywords_en != '' %}{{ keywords_en_a
 {
   "@context": "https://schema.org/",
   "@type": "Product",
-  "name": "{{ product.title | escape }}",
+  "name": "{% if final_keywords_ja != '' %}{{ keywords_ja_array | slice: 0, 2 | join: '・' }}{% else %}量産型・地雷系{% endif %}ファッションアイテム",
   "description": "{{ seo_description_ja | strip_html | escape }}",
   "image": [
     {% for image in product.images limit: 5 %}
@@ -130,9 +135,9 @@ Perfect {{ product.title }} for {% if final_keywords_en != '' %}{{ keywords_en_a
   ],
   "brand": {
     "@type": "Brand",
-    "name": "{{ shop.name }}"
+    "name": "NoGenki"
   },
-  "category": "{% if product.collections.size > 0 %}{{ product.collections.first.title }}{% else %}ファッション{% endif %}",
+  "category": "{% if final_keywords_ja != '' %}{{ keywords_ja_array | first }}{% else %}地雷系{% endif %}ファッション",
   "keywords": "{{ final_keywords_ja }}{% if final_keywords_en != '' %}, {{ final_keywords_en }}{% endif %}",
   "offers": {
     "@type": "Offer",
@@ -141,7 +146,7 @@ Perfect {{ product.title }} for {% if final_keywords_en != '' %}{{ keywords_en_a
     "availability": "{% if product.available %}https://schema.org/InStock{% else %}https://schema.org/OutOfStock{% endif %}",
     "seller": {
       "@type": "Organization",
-      "name": "{{ shop.name }}",
+      "name": "NoGenki",
       "url": "{{ shop.secure_url }}"
     }
   }

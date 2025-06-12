@@ -29,10 +29,11 @@
     {% endif %}
 
     {% render 'meta-tags' %}
-    
-    {%- comment -%} SEO优化器 - 仅影响搜索引擎，不影响页面显示 {%- endcomment -%}
+      {%- comment -%} SEO优化器 - 仅影响搜索引擎，不影响页面显示 {%- endcomment -%}
     {%- if template contains 'product' -%}
       {% render 'seo-optimizer' %}
+    {%- elsif template contains 'collection' -%}
+      {% render 'collection-seo-optimizer' %}
     {%- endif -%}
     
     <script src="{{ 'constants.js' | asset_url }}" defer="defer"></script>

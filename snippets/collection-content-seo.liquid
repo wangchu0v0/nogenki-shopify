@@ -1,0 +1,170 @@
+{% comment %}
+====================================================================
+🎯 集合页面内容SEO优化器 - Collection Content SEO
+====================================================================
+
+为集合页面添加SEO优化的富文本内容，提升关键词密度和用户体验。
+使用方式：在集合页面模板中包含此片段来添加优化内容。
+
+{% include 'collection-content-seo' %}
+
+====================================================================
+{% endcomment %}
+
+{% assign collection_handle = collection.handle %}
+{% assign collection_title = collection.title %}
+
+{% comment %} 🎯 为不同类型的集合生成优化内容 {% endcomment %}
+{% case collection_handle %}
+  {% when 'jiraikei', 'jirai', '地雷系' %}
+    <div class="collection-seo-content" style="margin: 2rem 0; padding: 1.5rem; background: #f9f9f9; border-radius: 8px;">
+      <h2 style="color: #333; margin-bottom: 1rem;">地雷系ファッションについて</h2>
+      <p style="line-height: 1.6; color: #666; margin-bottom: 1rem;">
+        <strong>地雷系ファッション</strong>は、病みかわいい要素を取り入れた日本独特のファッションスタイルです。
+        地雷系女子に人気の<strong>地雷系コーデ</strong>は、ダークでキュートな魅力を演出できるのが特徴。
+        当店では本格的な<strong>地雷系服装</strong>から初心者向けアイテムまで幅広く取り揃えています。
+      </p>
+      <p style="line-height: 1.6; color: #666; margin-bottom: 1rem;">
+        <strong>jiraikei fashion</strong>として海外でも注目される地雷系は、個性を大切にする女性たちから支持されています。
+        病みかわいい・ゆめかわいい系のアクセサリーとの組み合わせで、あなただけの特別なスタイルを作り上げましょう。
+      </p>
+      <div style="margin-top: 1.5rem;">
+        <h3 style="color: #333; margin-bottom: 0.5rem;">地雷系の主要アイテム：</h3>
+        <ul style="color: #666; padding-left: 1.5rem;">
+          <li>フリルやレースを使ったワンピース</li>
+          <li>ダークカラーのスカート</li>
+          <li>病みかわいい系アクセサリー</li>
+          <li>ニーハイソックス・タイツ</li>
+          <li>個性的なヘアアクセサリー</li>
+        </ul>
+      </div>
+    </div>
+
+  {% when 'ryousangata', 'ryousan', '量産型' %}
+    <div class="collection-seo-content" style="margin: 2rem 0; padding: 1.5rem; background: #fff5f5; border-radius: 8px;">
+      <h2 style="color: #333; margin-bottom: 1rem;">量産型ファッションの魅力</h2>
+      <p style="line-height: 1.6; color: #666; margin-bottom: 1rem;">
+        <strong>量産型ファッション</strong>は、量産型ヲタクを中心に人気を集めるキュートで統一感のあるスタイルです。
+        <strong>量産型コーデ</strong>の特徴は、誰でも真似しやすく可愛らしい印象を与えられること。
+        当店の<strong>量産型服装</strong>なら、トレンドを押さえた可愛いアイテムが見つかります。
+      </p>
+      <p style="line-height: 1.6; color: #666; margin-bottom: 1rem;">
+        <strong>ryousangata</strong>スタイルは、統一感がありながらも個性を表現できるのが魅力。
+        量産女子に人気のアイテムを豊富に取り揃え、あなたの理想の量産型コーデをサポートします。
+      </p>
+      <div style="margin-top: 1.5rem;">
+        <h3 style="color: #333; margin-bottom: 0.5rem;">量産型の定番アイテム：</h3>
+        <ul style="color: #666; padding-left: 1.5rem;">
+          <li>パステルカラーのトップス</li>
+          <li>プリーツスカート</li>
+          <li>リボンやハートモチーフ</li>
+          <li>可愛いバッグ・ポーチ</li>
+          <li>キャラクターグッズ</li>
+        </ul>
+      </div>
+    </div>
+
+  {% when 'yamikawaii', 'yami', '病みかわいい' %}
+    <div class="collection-seo-content" style="margin: 2rem 0; padding: 1.5rem; background: #f0f0f5; border-radius: 8px;">
+      <h2 style="color: #333; margin-bottom: 1rem;">病みかわいいファッションの世界</h2>
+      <p style="line-height: 1.6; color: #666; margin-bottom: 1rem;">
+        <strong>病みかわいいファッション</strong>は、ダークでキュートな要素を組み合わせた独特なスタイル。
+        <strong>yamikawaii</strong>として世界的にも注目される病みかわは、内面の複雑さを表現できるファッションです。
+        <strong>病みかわコーデ</strong>で、あなたの個性的な魅力を最大限に引き出しましょう。
+      </p>
+      <p style="line-height: 1.6; color: #666; margin-bottom: 1rem;">
+        当店の<strong>病みかわ服装</strong>は、本格的なアイテムから普段使いできるものまで幅広くご用意。
+        病み可愛い系のアクセサリーとの組み合わせで、唯一無二のスタイルを作れます。
+      </p>
+      <div style="margin-top: 1.5rem;">
+        <h3 style="color: #333; margin-bottom: 0.5rem;">病みかわの特徴的アイテム：</h3>
+        <ul style="color: #666; padding-left: 1.5rem;">
+          <li>ダークカラーの服装</li>
+          <li>病みかわいいグラフィック</li>
+          <li>ゴシック要素のアクセサリー</li>
+          <li>個性的なメイクアイテム</li>
+          <li>ユニークなデザインバッグ</li>
+        </ul>
+      </div>
+    </div>
+
+  {% when 'kawaii', 'cute', 'かわいい' %}
+    <div class="collection-seo-content" style="margin: 2rem 0; padding: 1.5rem; background: #ffe6f2; border-radius: 8px;">
+      <h2 style="color: #333; margin-bottom: 1rem;">かわいいファッションの魅力</h2>
+      <p style="line-height: 1.6; color: #666; margin-bottom: 1rem;">
+        <strong>かわいい服装</strong>は、女性らしさと可愛らしさを最大限に引き出すファッションスタイル。
+        <strong>kawaii fashion</strong>として海外でも大人気の日本発祥のスタイルです。
+        <strong>可愛いファッション</strong>で、毎日をもっと楽しく、もっと特別にしませんか？
+      </p>
+      <p style="line-height: 1.6; color: #666; margin-bottom: 1rem;">
+        当店の<strong>kawaii</strong>アイテムは、キュートファッションの定番から最新トレンドまで豊富にご用意。
+        可愛い通販として、あなたの理想のスタイルをサポートします。
+      </p>
+      <div style="margin-top: 1.5rem;">
+        <h3 style="color: #333; margin-bottom: 0.5rem;">かわいいファッションの要素：</h3>
+        <ul style="color: #666; padding-left: 1.5rem;">
+          <li>パステルカラーのアイテム</li>
+          <li>フリルやレースの装飾</li>
+          <li>可愛いプリント・刺繍</li>
+          <li>リボンやハートモチーフ</li>
+          <li>ふわふわ素材のアイテム</li>
+        </ul>
+      </div>
+    </div>
+
+  {% else %}
+    {% comment %} 🔍 動的コンテンツ生成 - タグベース {% endcomment %}
+    {% assign has_keywords = false %}
+    {% assign content_keywords = '' %}
+    
+    {% for tag in collection.all_tags %}
+      {% assign tag_lower = tag | downcase %}
+      {% if tag_lower contains '地雷系' or tag_lower contains 'jiraikei' %}
+        {% assign has_keywords = true %}
+        {% assign content_keywords = content_keywords | append: '地雷系、' %}
+      {% elsif tag_lower contains '量産型' or tag_lower contains 'ryousangata' %}
+        {% assign has_keywords = true %}
+        {% assign content_keywords = content_keywords | append: '量産型、' %}
+      {% elsif tag_lower contains '病みかわいい' or tag_lower contains 'yamikawaii' %}
+        {% assign has_keywords = true %}
+        {% assign content_keywords = content_keywords | append: '病みかわいい、' %}
+      {% elsif tag_lower contains 'kawaii' or tag_lower contains 'かわいい' %}
+        {% assign has_keywords = true %}
+        {% assign content_keywords = content_keywords | append: 'かわいい、' %}
+      {% elsif tag_lower contains 'gothic' or tag_lower contains 'ゴシック' %}
+        {% assign has_keywords = true %}
+        {% assign content_keywords = content_keywords | append: 'ゴシック、' %}
+      {% endif %}
+    {% endfor %}
+    
+    {% if has_keywords %}
+    <div class="collection-seo-content" style="margin: 2rem 0; padding: 1.5rem; background: #f8f8f8; border-radius: 8px;">
+      <h2 style="color: #333; margin-bottom: 1rem;">{{ collection.title }}コレクション</h2>
+      <p style="line-height: 1.6; color: #666; margin-bottom: 1rem;">
+        {{ collection.title }}の<strong>{{ content_keywords | remove_last: '、' }}</strong>スタイルアイテムを豊富に取り揃えています。
+        トレンドを押さえた高品質なファッションアイテムで、あなたの個性を表現しましょう。
+      </p>
+      <p style="line-height: 1.6; color: #666;">
+        当店では{{ collection.title }}スタイルにぴったりの服装・アクセサリーを多数ご用意。
+        お気に入りのアイテムで、理想のコーディネートを完成させてください。
+      </p>
+    </div>
+    {% endif %}
+{% endcase %}
+
+{% comment %} 📱 レスポンシブ対応のCSS {% endcomment %}
+<style>
+@media (max-width: 768px) {
+  .collection-seo-content {
+    padding: 1rem !important;
+    margin: 1rem 0 !important;
+    font-size: 14px;
+  }
+  .collection-seo-content h2 {
+    font-size: 18px !important;
+  }
+  .collection-seo-content h3 {
+    font-size: 16px !important;
+  }
+}
+</style>
