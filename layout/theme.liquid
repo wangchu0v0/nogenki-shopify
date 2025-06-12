@@ -28,7 +28,14 @@
       <meta name="description" content="{{ page_description | escape }}">
     {% endif %}
 
-    {% render 'meta-tags' %}    <script src="{{ 'constants.js' | asset_url }}" defer="defer"></script>
+    {% render 'meta-tags' %}
+    
+    {%- comment -%} SEO优化器 - 仅影响搜索引擎，不影响页面显示 {%- endcomment -%}
+    {%- if template contains 'product' -%}
+      {% render 'seo-optimizer' %}
+    {%- endif -%}
+    
+    <script src="{{ 'constants.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'pubsub.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'judgeme-modifier-optimized.js' | asset_url }}" defer="defer"></script>

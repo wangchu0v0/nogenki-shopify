@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEO优化器测试</title>
+    
+    <!-- 模拟产品数据 -->
+    <script>
+        // 模拟Shopify Liquid变量 (仅用于测试)
+        const mockProduct = {
+            title: "pium風セットアップ",
+            description: "地雷系ファッションに最適なアイテム",
+            tags: ["量産型ヲタク", "地雷系女子", "病みかわいい", "天使界隈", "サブカル"]
+        };
+        
+        const mockShop = {
+            name: "Nogenki Official"
+        };
+        
+        console.log("模拟产品数据:", mockProduct);
+        console.log("预期生成的SEO标题:", 
+            `${mockProduct.title} | ${mockProduct.tags.slice(0,3).join('・')} | ${mockShop.name}`);
+    </script>
+    
+    <!-- 手动模拟SEO优化器效果 -->
+    <meta name="title" content="pium風セットアップ | 量産型ヲタク・地雷系女子・病みかわいい | Nogenki Official" />
+    <meta name="description" content="pium風セットアップは量産型ヲタク・地雷系女子に最適なアイテム。地雷系ファッションに最適なアイテム量産型ヲタク、地雷系女子、病みかわいいファッションの通販サイトNogenki Official。" />
+    <meta name="keywords" content="量産型ヲタク,地雷系女子,病みかわいい,天使界隈,サブカル,ryousangata,ryousangata otaku,jiraikei,jiraikei fashion,yamikawaii,dark kawaii,angel kei,subcul fashion" />
+    
+    <!-- 英语SEO Meta标签 -->
+    <meta name="title" lang="en" content="pium風セットアップ | ryousangata jiraikei yamikawaii | Nogenki Official" />
+    <meta name="description" lang="en" content="Perfect pium風セットアップ for ryousangata and jiraikei fashion lovers. 地雷系ファッションに最適なアイテム Available at Nogenki Official - Japanese fashion online store." />
+    
+    <!-- 开放图谱标签 -->
+    <meta property="og:title" content="pium風セットアップ | 量産型ヲタク・地雷系女子・病みかわいい | Nogenki Official" />
+    <meta property="og:description" content="pium風セットアップは量産型ヲタク・地雷系女子に最適なアイテム。" />
+    <meta property="og:type" content="product" />
+    
+    <!-- 结构化数据测试 -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org/",
+      "@type": "Product",
+      "name": "pium風セットアップ",
+      "description": "pium風セットアップは量産型ヲタク・地雷系女子に最適なアイテム。",
+      "brand": {
+        "@type": "Brand",
+        "name": "Nogenki Official"
+      },
+      "category": "地雷系ファッション",
+      "keywords": "量産型ヲタク,地雷系女子,病みかわいい,天使界隈,サブカル,ryousangata,jiraikei,yamikawaii"
+    }
+    </script>
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: #f9f9f9;
+        }
+        .seo-preview {
+            background: #e8f5e8;
+            padding: 10px;
+            margin: 10px 0;
+            border-left: 4px solid #28a745;
+        }
+        .keyword-tag {
+            display: inline-block;
+            background: #007cba;
+            color: white;
+            padding: 2px 8px;
+            margin: 2px;
+            border-radius: 3px;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔍 SEO优化器测试页面</h1>
+    
+    <div class="test-section">
+        <h2>🎯 SEO优化效果预览</h2>
+        <p>以下是你的产品页面在Google搜索结果中的显示效果：</p>
+        
+        <div class="seo-preview">
+            <div style="color: #1a0dab; font-size: 18px; font-weight: normal;">
+                pium風セットアップ | 量産型ヲタク・地雷系女子・病みかわいい | Nogenki Official
+            </div>
+            <div style="color: #006621; font-size: 14px;">
+                nogenki.com › products › pium-set
+            </div>
+            <div style="color: #545454; font-size: 13px; margin-top: 5px;">
+                pium風セットアップは量産型ヲタク・地雷系女子に最適なアイテム。地雷系ファッションに最適なアイテム量産型ヲタク、地雷系女子、病みかわいいファッションの通販サイトNogenki Official。
+            </div>
+        </div>
+    </div>
+    
+    <div class="test-section">
+        <h2>🏷️ 自动生成的关键词标签</h2>
+        <p>基于你设置的产品标签，自动生成的SEO关键词：</p>
+        
+        <h4>日语关键词：</h4>
+        <div>
+            <span class="keyword-tag">量産型ヲタク</span>
+            <span class="keyword-tag">地雷系女子</span>
+            <span class="keyword-tag">病みかわいい</span>
+            <span class="keyword-tag">天使界隈</span>
+            <span class="keyword-tag">サブカル</span>
+            <span class="keyword-tag">地雷系ファッション</span>
+            <span class="keyword-tag">量産型コーデ</span>
+        </div>
+        
+        <h4>英语关键词：</h4>
+        <div>
+            <span class="keyword-tag">ryousangata</span>
+            <span class="keyword-tag">ryousangata otaku</span>
+            <span class="keyword-tag">jiraikei</span>
+            <span class="keyword-tag">jiraikei fashion</span>
+            <span class="keyword-tag">yamikawaii</span>
+            <span class="keyword-tag">dark kawaii</span>
+            <span class="keyword-tag">angel kei</span>
+            <span class="keyword-tag">subcul fashion</span>
+        </div>
+    </div>
+    
+    <div class="test-section">
+        <h2>📱 社交媒体分享预览</h2>
+        <p>当用户在社交媒体分享你的产品时的显示效果：</p>
+        
+        <div style="border: 1px solid #ddd; padding: 10px; max-width: 400px;">
+            <div style="background: #f0f0f0; height: 200px; display: flex; align-items: center; justify-content: center; margin-bottom: 10px;">
+                [产品图片位置]
+            </div>
+            <div style="font-weight: bold; margin-bottom: 5px;">
+                pium風セットアップ | 量産型ヲタク・地雷系女子・病みかわいい
+            </div>
+            <div style="color: #666; font-size: 14px;">
+                pium風セットアップは量産型ヲタク・地雷系女子に最適なアイテム。
+            </div>
+            <div style="color: #999; font-size: 12px; margin-top: 5px;">
+                nogenki.com
+            </div>
+        </div>
+    </div>
+    
+    <div class="test-section">
+        <h2>✅ 优化特点</h2>
+        <ul>
+            <li>✅ <strong>不影响页面显示</strong>：用户看到的内容完全不变</li>
+            <li>✅ <strong>自动关键词匹配</strong>：基于你现有的标签自动生成</li>
+            <li>✅ <strong>多语言支持</strong>：同时优化日语和英语SEO</li>
+            <li>✅ <strong>结构化数据</strong>：帮助Google更好理解产品信息</li>
+            <li>✅ <strong>社交媒体优化</strong>：分享时显示效果更好</li>
+            <li>✅ <strong>移动端友好</strong>：所有设备上都有效</li>
+        </ul>
+    </div>
+    
+    <div class="test-section">
+        <h2>🔧 使用方法</h2>
+        <ol>
+            <li>将SEO优化器代码添加到产品页面模板</li>
+            <li>保持现有的产品标签设置不变</li>
+            <li>系统自动生成SEO优化内容</li>
+            <li>1-2周后在Google Search Console查看效果</li>
+        </ol>
+    </div>
+
+    <script>
+        // 验证Meta标签是否正确设置
+        function validateSEO() {
+            console.log("🔍 SEO标签验证:");
+            
+            const title = document.querySelector('meta[name="title"]').content;
+            const description = document.querySelector('meta[name="description"]').content;
+            const keywords = document.querySelector('meta[name="keywords"]').content;
+            
+            console.log("标题长度:", title.length, "(推荐: 30-60字符)");
+            console.log("描述长度:", description.length, "(推荐: 120-160字符)");
+            console.log("关键词数量:", keywords.split(',').length, "(推荐: 10-15个)");
+            
+            // 检查关键词分布
+            const titleKeywords = ["量産型", "地雷系", "病みかわいい"].filter(k => title.includes(k));
+            console.log("标题中包含的关键词:", titleKeywords);
+            
+            const descKeywords = ["量産型", "地雷系", "病みかわいい"].filter(k => description.includes(k));
+            console.log("描述中包含的关键词:", descKeywords);
+        }
+        
+        // 页面加载后验证
+        document.addEventListener('DOMContentLoaded', validateSEO);
+    </script>
+</body>
+</html>

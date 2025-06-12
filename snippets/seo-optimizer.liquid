@@ -1,0 +1,196 @@
+{% comment %}
+SEO优化代码 - 只影响搜索引擎，不影响用户界面
+作者: AI助手
+日期: 2025-06-12
+功能: 自动基于产品标签生成SEO元数据
+{% endcomment %}
+
+{% comment %} 定义日语关键词映射 {% endcomment %}
+{% assign core_keywords_ja = '量産型ヲタク,量産型コーデ,量産型,量産,病みかわいい,病みかわ,天使界隈,地雷系女子,地雷系ワンピース,地雷系ドレス,地雷系セット,地雷系,地雷女,地雷ブランド,地雷,双子コーデ,参戦服,ロリータ,サブカル地雷,サブカル,ゴシック,ガーリーコーデ,ガーリー,お揃いコーデ' | split: ',' %}
+
+{% comment %} 定义英语关键词映射 {% endcomment %}
+{% assign core_keywords_en = 'jiraikei,jiraikei fashion,ryousangata,ryousangata otaku,yamikawaii,dark kawaii,angel kei,jirai kei girl,jirai dress,jirai outfit,jirai set,mine kei,gothic lolita,subcul jirai,subcul fashion,gothic fashion,girly coordinate,girly fashion,twin coordinate,concert outfit,lolita fashion,japanese street fashion,harajuku fashion,alternative fashion' | split: ',' %}
+
+{% comment %} 从产品标签中提取相关关键词 {% endcomment %}
+{% assign matched_keywords_ja = '' %}
+{% assign matched_keywords_en = '' %}
+
+{% for tag in product.tags %}
+  {% assign tag_lower = tag | downcase %}
+  {% for keyword in core_keywords_ja %}
+    {% if tag_lower contains keyword %}
+      {% unless matched_keywords_ja contains keyword %}
+        {% if matched_keywords_ja == '' %}
+          {% assign matched_keywords_ja = keyword %}
+        {% else %}
+          {% assign matched_keywords_ja = matched_keywords_ja | append: ',' | append: keyword %}
+        {% endif %}
+      {% endunless %}
+    {% endif %}
+  {% endfor %}
+{% endfor %}
+
+{% comment %} 英语关键词匹配逻辑 {% endcomment %}
+{% for tag in product.tags %}
+  {% assign tag_lower = tag | downcase %}
+  
+  {% if tag_lower contains '量産型' or tag_lower contains 'りょうさん' %}
+    {% assign matched_keywords_en = matched_keywords_en | append: ',ryousangata,ryousangata otaku' %}
+  {% endif %}
+  
+  {% if tag_lower contains '地雷' or tag_lower contains 'じらい' %}
+    {% assign matched_keywords_en = matched_keywords_en | append: ',jiraikei,jiraikei fashion,jirai kei' %}
+  {% endif %}
+  
+  {% if tag_lower contains '病みかわ' or tag_lower contains 'やみかわ' %}
+    {% assign matched_keywords_en = matched_keywords_en | append: ',yamikawaii,dark kawaii' %}
+  {% endif %}
+  
+  {% if tag_lower contains '天使' %}
+    {% assign matched_keywords_en = matched_keywords_en | append: ',angel kei' %}
+  {% endif %}
+  
+  {% if tag_lower contains 'ゴシック' %}
+    {% assign matched_keywords_en = matched_keywords_en | append: ',gothic fashion,gothic lolita' %}
+  {% endif %}
+  
+  {% if tag_lower contains 'ロリータ' %}
+    {% assign matched_keywords_en = matched_keywords_en | append: ',lolita fashion' %}
+  {% endif %}
+  
+  {% if tag_lower contains 'サブカル' %}
+    {% assign matched_keywords_en = matched_keywords_en | append: ',subcul fashion,japanese street fashion' %}
+  {% endif %}
+{% endfor %}
+
+{% comment %} 清理重复关键词 {% endcomment %}
+{% assign keywords_ja_array = matched_keywords_ja | split: ',' | uniq %}
+{% assign keywords_en_array = matched_keywords_en | split: ',' | uniq %}
+{% assign final_keywords_ja = keywords_ja_array | join: ',' %}
+{% assign final_keywords_en = keywords_en_array | join: ',' %}
+
+{% comment %} 生成SEO标题（不影响页面显示） {% endcomment %}
+{% capture seo_title_ja %}
+{{ product.title | escape }}{% if final_keywords_ja != '' %} | {{ keywords_ja_array | slice: 0, 3 | join: '・' }}{% endif %} | {{ shop.name }}
+{% endcapture %}
+
+{% capture seo_title_en %}
+{{ product.title | escape }}{% if final_keywords_en != '' %} | {{ keywords_en_array | slice: 0, 3 | join: ' ' }}{% endif %} | {{ shop.name }}
+{% endcapture %}
+
+{% comment %} 生成SEO描述 {% endcomment %}
+{% capture seo_description_ja %}
+{{ product.title }}は{% if final_keywords_ja != '' %}{{ keywords_ja_array | slice: 0, 2 | join: '・' }}{% endif %}に最適なアイテム。{{ product.description | strip_html | truncate: 80 }}{% if final_keywords_ja != '' %}{{ keywords_ja_array | slice: 0, 3 | join: '、' }}{% endif %}ファッションの通販サイト{{ shop.name }}。
+{% endcapture %}
+
+{% capture seo_description_en %}
+Perfect {{ product.title }} for {% if final_keywords_en != '' %}{{ keywords_en_array | slice: 0, 2 | join: ' and ' }}{% endif %} fashion lovers. {{ product.description | strip_html | truncate: 80 }} Available at {{ shop.name }} - Japanese fashion online store.
+{% endcapture %}
+
+{% comment %} 输出SEO Meta标签 - 仅影响搜索引擎 {% endcomment %}
+
+<!-- 日语SEO Meta标签 -->
+<meta name="title" content="{{ seo_title_ja | strip }}" />
+<meta name="description" content="{{ seo_description_ja | strip }}" />
+<meta name="keywords" content="{{ final_keywords_ja }}{% if final_keywords_en != '' %},{{ final_keywords_en }}{% endif %}" />
+
+<!-- 英语SEO Meta标签 -->
+<meta name="title" lang="en" content="{{ seo_title_en | strip }}" />
+<meta name="description" lang="en" content="{{ seo_description_en | strip }}" />
+
+<!-- 开放图谱标签 (社交媒体分享) -->
+<meta property="og:title" content="{{ seo_title_ja | strip }}" />
+<meta property="og:description" content="{{ seo_description_ja | strip }}" />
+<meta property="og:type" content="product" />
+<meta property="og:url" content="{{ shop.secure_url }}{{ product.url }}" />
+<meta property="og:image" content="{{ product.featured_image | image_url: width: 1200 }}" />
+
+<!-- Twitter卡片 -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="{{ seo_title_ja | strip }}" />
+<meta name="twitter:description" content="{{ seo_description_ja | strip }}" />
+<meta name="twitter:image" content="{{ product.featured_image | image_url: width: 1200 }}" />
+
+<!-- 多语言标签 -->
+<link rel="alternate" hreflang="ja" href="{{ canonical_url }}" />
+<link rel="alternate" hreflang="en" href="{{ canonical_url }}" />
+<link rel="alternate" hreflang="x-default" href="{{ canonical_url }}" />
+
+<!-- 结构化数据 - 产品信息 -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org/",
+  "@type": "Product",
+  "name": "{{ product.title | escape }}",
+  "description": "{{ seo_description_ja | strip_html | escape }}",
+  "image": [
+    {% for image in product.images limit: 5 %}
+      "{{ image | image_url: width: 800 }}"{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  ],
+  "brand": {
+    "@type": "Brand",
+    "name": "{{ shop.name }}"
+  },
+  "category": "{% if product.collections.size > 0 %}{{ product.collections.first.title }}{% else %}ファッション{% endif %}",
+  "keywords": "{{ final_keywords_ja }}{% if final_keywords_en != '' %}, {{ final_keywords_en }}{% endif %}",
+  "offers": {
+    "@type": "Offer",
+    "price": "{{ product.price | money_without_currency }}",
+    "priceCurrency": "{{ cart.currency.iso_code }}",
+    "availability": "{% if product.available %}https://schema.org/InStock{% else %}https://schema.org/OutOfStock{% endif %}",
+    "seller": {
+      "@type": "Organization",
+      "name": "{{ shop.name }}",
+      "url": "{{ shop.secure_url }}"
+    }
+  }
+}
+</script>
+
+{% comment %} 隐藏的关键词标签 - 仅供搜索引擎 {% endcomment %}
+<div style="display: none;" aria-hidden="true">
+  <span itemscope itemtype="https://schema.org/Product">
+    <meta itemprop="name" content="{{ product.title | escape }}" />
+    <meta itemprop="category" content="{% if final_keywords_ja != '' %}{{ keywords_ja_array.first }}{% endif %}" />
+    {% for keyword in keywords_ja_array limit: 10 %}
+      <meta itemprop="keywords" content="{{ keyword }}" />
+    {% endfor %}
+    {% for keyword in keywords_en_array limit: 10 %}
+      <meta itemprop="keywords" content="{{ keyword }}" />
+    {% endfor %}
+  </span>
+</div>
+
+{% comment %} 面包屑导航 - SEO友好但视觉隐藏 {% endcomment %}
+<nav aria-label="breadcrumb" style="position: absolute; left: -9999px;">
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a itemprop="item" href="{{ routes.root_url }}">
+        <span itemprop="name">ホーム</span>
+      </a>
+      <meta itemprop="position" content="1" />
+    </li>
+    {% if product.collections.size > 0 %}
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="{{ product.collections.first.url }}">
+          <span itemprop="name">{{ product.collections.first.title }}</span>
+        </a>
+        <meta itemprop="position" content="2" />
+      </li>
+    {% endif %}
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <span itemprop="name">{{ product.title }}</span>
+      <meta itemprop="position" content="3" />
+    </li>
+  </ol>
+</nav>
+
+{% comment %} 调试信息 - 开发时可用，生产环境请删除 {% endcomment %}
+{% comment %}
+<!-- SEO调试信息 (开发时可见，生产时删除此部分) -->
+<!-- 匹配的日语关键词: {{ final_keywords_ja }} -->
+<!-- 匹配的英语关键词: {{ final_keywords_en }} -->
+<!-- SEO标题: {{ seo_title_ja | strip }} -->
+<!-- SEO描述: {{ seo_description_ja | strip }} -->
+{% endcomment %}
