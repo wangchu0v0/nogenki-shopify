@@ -37,10 +37,9 @@
       {% render 'blog-seo-optimizer' %}
     {%- endif -%}
       <script src="{{ 'constants.js' | asset_url }}" defer="defer"></script>
-    <script src="{{ 'pubsub.js' | asset_url }}" defer="defer"></script>
-    <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
-    <!-- Judge.me统一修复器 - 解决英语和日语界面reviews显示问题 -->
-    <script src="{{ 'judgeme-unified-fix.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'pubsub.js' | asset_url }}" defer="defer"></script>    <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
+    <!-- Judge.me非破坏性修复器 - 保护功能完整性 -->
+    <script src="{{ 'judgeme-simple-fix.js' | asset_url }}" defer="defer"></script>
     {%- if settings.animations_reveal_on_scroll -%}
       <script src="{{ 'animations.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}

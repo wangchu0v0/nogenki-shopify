@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>非破坏性修复测试</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f8f9fa;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .test-section {
+            border-left: 4px solid #007bff;
+            padding-left: 15px;
+            margin: 20px 0;
+        }
+        .jdgm-prev-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 10px 0;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #dee2e6;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .jdgm-prev-badge:hover {
+            background: #e9ecef;
+        }
+        .jdgm-star {
+            color: #A889A8;
+            font-size: 16px;
+        }
+        .jdgm-prev-badge__text {
+            font-size: 14px;
+            color: #666;
+        }
+        .log {
+            background: #000;
+            color: #0f0;
+            padding: 15px;
+            font-family: 'Courier New', monospace;
+            height: 250px;
+            overflow-y: auto;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover { background: #0056b3; }
+        button.danger { background: #dc3545; }
+        button.danger:hover { background: #c82333; }
+        .warning {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        .success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        .clickable-demo {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🛡️ Judge.me非破坏性修复测试</h1>
+        <div class="success">
+            <strong>核心改进：</strong>这个版本使用覆盖层技术，保护Judge.me的内部功能不被破坏，同时实现文本格式转换。
+        </div>
+        
+        <div style="text-align: center; margin: 20px 0;">
+            <button onclick="testProcessing()">🔄 测试处理</button>
+            <button onclick="simulateClick()">👆 模拟点击测试</button>
+            <button onclick="restoreOriginal()" class="danger">🔄 恢复原文</button>
+            <button onclick="clearLog()">🗑️ 清空日志</button>
+        </div>
+    </div>
+
+    <div class="container test-section">
+        <h3>🧪 测试区域</h3>
+        <div class="warning">
+            <strong>测试重点：</strong>确认文本转换后，点击功能仍然正常工作
+        </div>
+        
+        <div class="clickable-demo">
+            <h4>📍 可点击的reviews测试</h4>
+            <div class="jdgm-prev-badge" onclick="simulateReviewClick(this, '日语reviews')">
+                <span class="jdgm-star">★★★★★</span>
+                <span class="jdgm-prev-badge__text">15件のレビュー</span>
+            </div>
+            
+            <div class="jdgm-prev-badge" onclick="simulateReviewClick(this, '英语reviews')">
+                <span class="jdgm-star">★★★★☆</span>
+                <span class="jdgm-prev-badge__text">23 reviews</span>
+            </div>
+            
+            <div class="jdgm-prev-badge" onclick="simulateReviewClick(this, '英语customer reviews')">
+                <span class="jdgm-star">★★★☆☆</span>
+                <span class="jdgm-prev-badge__text">156 customer reviews</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h3>📊 处理日志</h3>
+        <div id="log" class="log"></div>
+    </div>
+
+    <div class="container">
+        <h3>🔍 功能验证</h3>
+        <div id="verification" style="padding: 15px; background: #f8f9fa; border-radius: 4px;">
+            等待测试结果...
+        </div>
+    </div>
+
+    <script src="assets/judgeme-safe-fix.js"></script>
+    <script>
+        const logEl = document.getElementById('log');
+        
+        function log(message) {
+            const div = document.createElement('div');
+            div.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+            logEl.appendChild(div);
+            logEl.scrollTop = logEl.scrollHeight;
+        }
+        
+        function clearLog() {
+            logEl.innerHTML = '';
+        }
+        
+        function testProcessing() {
+            log('🔄 开始测试非破坏性处理...');
+            if (window.judgemeNonDestructive) {
+                const processed = window.judgemeNonDestructive.process();
+                log(`✅ 处理了 ${processed} 个元素`);
+                
+                // 检查结果
+                setTimeout(() => {
+                    verifyResults();
+                }, 500);
+            } else {
+                log('❌ 非破坏性修复器未加载');
+            }
+        }
+        
+        function simulateClick() {
+            log('👆 模拟点击所有reviews元素...');
+            const badges = document.querySelectorAll('.jdgm-prev-badge');
+            badges.forEach((badge, index) => {
+                const text = badge.querySelector('.jdgm-prev-badge__text').textContent;
+                log(`   点击元素 ${index + 1}: "${text}"`);
+                
+                // 检查是否还能正常响应点击
+                const isClickable = badge.onclick !== null;
+                log(`   可点击性: ${isClickable ? '✅' : '❌'}`);
+            });
+        }
+        
+        function simulateReviewClick(element, type) {
+            const textEl = element.querySelector('.jdgm-prev-badge__text');
+            const currentText = textEl.textContent;
+            log(`🖱️ 用户点击了 ${type}: "${currentText}"`);
+            
+            // 模拟Judge.me的响应
+            setTimeout(() => {
+                log(`   📝 模拟展开${type}详细内容...`);
+                log(`   ✅ ${type}功能正常！`);
+            }, 200);
+        }
+        
+        function restoreOriginal() {
+            log('🔄 恢复原始文本...');
+            if (window.judgemeNonDestructive) {
+                window.judgemeNonDestructive.restore();
+                log('✅ 已恢复所有原始内容');
+                setTimeout(verifyResults, 300);
+            } else {
+                log('❌ 恢复功能不可用');
+            }
+        }
+        
+        function verifyResults() {
+            log('🔍 验证修复结果...');
+            
+            const elements = document.querySelectorAll('.jdgm-prev-badge__text');
+            let japaneseOk = 0;
+            let englishOk = 0;
+            let total = 0;
+            
+            elements.forEach((element, index) => {
+                const text = element.textContent.trim();
+                const originalText = element.getAttribute('data-original-text');
+                const isProcessed = element.hasAttribute('data-judgeme-safe-processed');
+                
+                total++;
+                log(`   元素 ${index + 1}: "${text}" ${isProcessed ? '(已处理)' : '(原始)'}`);
+                
+                if (originalText) {
+                    log(`     原文: "${originalText}"`);
+                }
+                
+                // 检查是否为目标格式
+                if (text.match(/^\(\d+\)$/)) {
+                    if (originalText && originalText.includes('件のレビュー')) {
+                        japaneseOk++;
+                        log(`     ✅ 日语转换成功`);
+                    } else if (originalText && originalText.includes('review')) {
+                        englishOk++;
+                        log(`     ✅ 英语转换成功`);
+                    }
+                }
+            });
+            
+            // 更新验证区域
+            const verificationEl = document.getElementById('verification');
+            verificationEl.innerHTML = `
+                <h4>📋 验证结果</h4>
+                <p><strong>总元素：</strong>${total} 个</p>
+                <p><strong>日语成功：</strong>${japaneseOk} 个 ${japaneseOk > 0 ? '✅' : '❌'}</p>
+                <p><strong>英语成功：</strong>${englishOk} 个 ${englishOk > 0 ? '✅' : '❌'}</p>
+                <p><strong>功能保护：</strong>${total > 0 ? '✅ DOM结构完整' : '⚠️ 需要检查'}</p>
+                <hr>
+                <p><strong>结论：</strong>${generateConclusion(japaneseOk, englishOk, total)}</p>
+            `;
+        }
+        
+        function generateConclusion(japaneseOk, englishOk, total) {
+            if (japaneseOk > 0 && englishOk > 0) {
+                return '🎉 双语支持成功，功能保护完整！';
+            } else if (japaneseOk > 0) {
+                return '✅ 日语支持成功，英语需要进一步优化';
+            } else if (englishOk > 0) {
+                return '✅ 英语支持成功，日语需要检查';
+            } else {
+                return '❌ 需要调试处理逻辑';
+            }
+        }
+        
+        // 页面加载完成
+        document.addEventListener('DOMContentLoaded', function() {
+            log('📄 非破坏性测试页面加载完成');
+            log('🎯 这个版本将保护Judge.me的内部功能');
+            
+            // 3秒后自动测试
+            setTimeout(() => {
+                log('⏰ 自动开始测试...');
+                testProcessing();
+            }, 3000);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>定位修复测试</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f8f9fa;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .jdgm-prev-badge {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 20px 0;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            border: 2px solid #dee2e6;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+        .jdgm-prev-badge:hover {
+            background: #e9ecef;
+            border-color: #007bff;
+            transform: translateY(-1px);
+        }
+        .jdgm-star {
+            color: #A889A8;
+            font-size: 18px;
+            user-select: none;
+        }
+        .jdgm-prev-badge__text {
+            font-size: 14px;
+            color: #666;
+            font-weight: 500;
+        }
+        .test-section {
+            margin: 30px 0;
+            padding: 20px;
+            background: #e3f2fd;
+            border-radius: 8px;
+            border-left: 4px solid #2196f3;
+        }
+        .success {
+            background: #d4edda;
+            color: #155724;
+            padding: 12px;
+            border-radius: 4px;
+            margin: 15px 0;
+        }
+        .btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+            font-size: 14px;
+        }
+        .btn:hover {
+            background: #0056b3;
+        }
+        .btn.danger {
+            background: #dc3545;
+        }
+        .btn.danger:hover {
+            background: #c82333;
+        }
+        #results {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 20px 0;
+            font-family: monospace;
+            font-size: 12px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎯 定位修复测试</h1>
+        <div class="success">
+            <strong>目标：</strong>确保转换后的数字显示在正确的位置（文本区域，不是星星左边）
+        </div>
+        
+        <div style="text-align: center; margin: 20px 0;">
+            <button class="btn" onclick="testConversion()">🔄 测试转换</button>
+            <button class="btn" onclick="testClicks()">👆 测试点击</button>
+            <button class="btn danger" onclick="restore()">🔄 恢复</button>
+        </div>
+
+        <div class="test-section">
+            <h3>📋 测试用例</h3>
+            
+            <div class="jdgm-prev-badge" onclick="handleClick(this, '日语评论')">
+                <span class="jdgm-star">★★★★★</span>
+                <span class="jdgm-prev-badge__text">15件のレビュー</span>
+            </div>
+            
+            <div class="jdgm-prev-badge" onclick="handleClick(this, '英语评论')">
+                <span class="jdgm-star">★★★★☆</span>
+                <span class="jdgm-prev-badge__text">23 reviews</span>
+            </div>
+            
+            <div class="jdgm-prev-badge" onclick="handleClick(this, '英语customer reviews')">
+                <span class="jdgm-star">★★★☆☆</span>
+                <span class="jdgm-prev-badge__text">87 customer reviews</span>
+            </div>
+            
+            <div class="jdgm-prev-badge" onclick="handleClick(this, '英语review(s)')">
+                <span class="jdgm-star">★★★★★</span>
+                <span class="jdgm-prev-badge__text">156 review(s)</span>
+            </div>
+        </div>
+
+        <div id="results"></div>
+    </div>
+
+    <script src="assets/judgeme-safe-fix.js"></script>
+    <script>
+        const resultsEl = document.getElementById('results');
+        
+        function log(message) {
+            const time = new Date().toLocaleTimeString();
+            resultsEl.innerHTML += `<div>[${time}] ${message}</div>`;
+            resultsEl.scrollTop = resultsEl.scrollHeight;
+        }
+        
+        function testConversion() {
+            log('🔄 开始转换测试...');
+            if (window.judgemeNonDestructive) {
+                const result = window.judgemeNonDestructive.process();
+                log(`✅ 处理了 ${result} 个元素`);
+                
+                // 检查定位
+                setTimeout(() => {
+                    const overlays = document.querySelectorAll('.judgeme-text-overlay');
+                    log(`📍 发现 ${overlays.length} 个覆盖层`);
+                    
+                    overlays.forEach((overlay, index) => {
+                        const rect = overlay.getBoundingClientRect();
+                        const parent = overlay.parentElement;
+                        const parentRect = parent.getBoundingClientRect();
+                        
+                        log(`覆盖层 ${index + 1}: 
+                            内容="${overlay.textContent}"
+                            位置: left=${rect.left}px, top=${rect.top}px
+                            父元素: left=${parentRect.left}px, top=${parentRect.top}px`);
+                    });
+                }, 100);
+            } else {
+                log('❌ 修复器未加载');
+            }
+        }
+        
+        function testClicks() {
+            log('👆 测试点击功能...');
+            const badges = document.querySelectorAll('.jdgm-prev-badge');
+            badges.forEach((badge, index) => {
+                badge.click();
+                log(`点击测试 ${index + 1}: ${badge.querySelector('.jdgm-prev-badge__text').textContent}`);
+            });
+        }
+        
+        function handleClick(element, description) {
+            log(`🎯 点击事件触发: ${description}`);
+            log(`   元素: ${element.querySelector('.jdgm-prev-badge__text').textContent}`);
+        }
+        
+        function restore() {
+            log('🔄 恢复原始状态...');
+            if (window.judgemeNonDestructive) {
+                window.judgemeNonDestructive.restore();
+                log('✅ 恢复完成');
+            }
+        }
+        
+        // 页面加载后自动测试
+        setTimeout(() => {
+            log('🚀 页面加载完成，开始自动测试');
+            testConversion();
+        }, 500);
+    </script>
+</body>
+</html>

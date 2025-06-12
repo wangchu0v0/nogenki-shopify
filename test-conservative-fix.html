@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>保守修复测试 - 日语优先</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f8f9fa;
+        }
+        .test-container {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .priority-1 { border-left: 4px solid #28a745; }
+        .priority-2 { border-left: 4px solid #007bff; }
+        .jdgm-prev-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 10px 0;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 4px;
+        }
+        .jdgm-star {
+            color: #A889A8;
+            font-size: 16px;
+        }
+        .jdgm-prev-badge__text {
+            font-size: 14px;
+            color: #666;
+        }
+        .status {
+            margin-left: 10px;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 11px;
+            font-weight: bold;
+        }
+        .success { background: #d4edda; color: #155724; }
+        .pending { background: #fff3cd; color: #856404; }
+        .error { background: #f8d7da; color: #721c24; }
+    </style>
+    <link rel="stylesheet" href="assets/review-stars-optimized.css">
+</head>
+<body>
+    <h1>🛡️ 保守修复测试 - 优先保护日语界面</h1>
+    
+    <!-- 优先级1：确保日语界面不被破坏 -->
+    <div class="test-container priority-1">
+        <h3>🇯🇵 优先级1：日语界面测试（必须工作）</h3>
+        <p><strong>期望结果：</strong>显示为 (数字) 格式</p>
+        
+        <div class="jdgm-prev-badge">
+            <span class="jdgm-star">★★★★★</span>
+            <span class="jdgm-prev-badge__text">15件のレビュー</span>
+            <span class="status pending">等待处理</span>
+        </div>
+        
+        <div class="jdgm-prev-badge">
+            <span class="jdgm-star">★★★★☆</span>
+            <span class="jdgm-prev-badge__text">7件のレビュー</span>
+            <span class="status pending">等待处理</span>
+        </div>
+        
+        <div class="jdgm-prev-badge">
+            <span class="jdgm-star">★★★☆☆</span>
+            <span class="jdgm-prev-badge__text">23件のレビュー</span>
+            <span class="status pending">等待处理</span>
+        </div>
+    </div>
+
+    <!-- 优先级2：英语界面支持 -->
+    <div class="test-container priority-2">
+        <h3>🇺🇸 优先级2：英语界面测试（希望工作）</h3>
+        <p><strong>期望结果：</strong>显示为 (数字) 格式</p>
+        
+        <div class="jdgm-prev-badge">
+            <span class="jdgm-star">★★★★★</span>
+            <span class="jdgm-prev-badge__text">23 reviews</span>
+            <span class="status pending">等待处理</span>
+        </div>
+        
+        <div class="jdgm-prev-badge">
+            <span class="jdgm-star">★★★★☆</span>
+            <span class="jdgm-prev-badge__text">156 customer reviews</span>
+            <span class="status pending">等待处理</span>
+        </div>
+        
+        <div class="jdgm-prev-badge">
+            <span class="jdgm-star">★★★☆☆</span>
+            <span class="jdgm-prev-badge__text">5 review(s)</span>
+            <span class="status pending">等待处理</span>
+        </div>
+    </div>
+
+    <!-- 控制区域 -->
+    <div class="test-container">
+        <h3>🔧 测试控制</h3>
+        <button onclick="checkResults()" style="background:#007bff;color:white;border:none;padding:10px 20px;border-radius:4px;cursor:pointer;">检查结果</button>
+        <button onclick="location.reload()" style="background:#6c757d;color:white;border:none;padding:10px 20px;border-radius:4px;cursor:pointer;margin-left:10px;">重新加载</button>
+    </div>
+
+    <!-- 日志区域 -->
+    <div class="test-container">
+        <h3>📊 处理日志</h3>
+        <div id="log" style="background:#000;color:#0f0;padding:15px;font-family:monospace;height:150px;overflow-y:auto;border-radius:4px;font-size:12px;"></div>
+    </div>
+
+    <script src="assets/judgeme-modifier-optimized.js"></script>
+    <script src="assets/judgeme-modifier-mobile.js"></script>
+    <script>
+        // 控制台重定向
+        const logContainer = document.getElementById('log');
+        const originalLog = console.log;
+        
+        console.log = function(...args) {
+            originalLog.apply(console, args);
+            const div = document.createElement('div');
+            div.textContent = `[${new Date().toLocaleTimeString()}] ${args.join(' ')}`;
+            logContainer.appendChild(div);
+            logContainer.scrollTop = logContainer.scrollHeight;
+        };
+
+        function checkResults() {
+            console.log('🔍 开始检查修复结果...');
+            let japaneseSuccess = 0;
+            let englishSuccess = 0;
+            let total = 0;
+            
+            document.querySelectorAll('.jdgm-prev-badge').forEach((badge, index) => {
+                const textEl = badge.querySelector('.jdgm-prev-badge__text');
+                const statusEl = badge.querySelector('.status');
+                const text = textEl.textContent.trim();
+                const isJapanese = badge.closest('.priority-1');
+                
+                total++;
+                
+                if (text.match(/^\(\d+\)$/)) {
+                    statusEl.textContent = '✅ 成功';
+                    statusEl.className = 'status success';
+                    if (isJapanese) {
+                        japaneseSuccess++;
+                        console.log(`✅ 日语测试${japaneseSuccess}: "${text}" - 成功`);
+                    } else {
+                        englishSuccess++;
+                        console.log(`✅ 英语测试${englishSuccess}: "${text}" - 成功`);
+                    }
+                } else {
+                    statusEl.textContent = '❌ 失败';
+                    statusEl.className = 'status error';
+                    if (isJapanese) {
+                        console.log(`❌ 日语测试失败: "${text}" - 这是关键问题！`);
+                    } else {
+                        console.log(`⚠️ 英语测试失败: "${text}" - 可以接受`);
+                    }
+                }
+            });
+            
+            console.log(`📊 结果汇总:`);
+            console.log(`   日语成功: ${japaneseSuccess}/3 ${japaneseSuccess === 3 ? '✅' : '❌'}`);
+            console.log(`   英语成功: ${englishSuccess}/3 ${englishSuccess > 0 ? '✅' : '⚠️'}`);
+            
+            if (japaneseSuccess === 3) {
+                console.log(`🎉 日语界面完全正常！${englishSuccess > 0 ? '英语也有改善。' : '英语需要进一步优化。'}`);
+            } else {
+                console.log(`🚨 警告：日语界面有问题，需要立即修复！`);
+            }
+        }
+
+        // 2秒后自动检查
+        setTimeout(checkResults, 2000);
+    </script>
+</body>
+</html>

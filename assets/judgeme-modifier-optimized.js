@@ -23,9 +23,8 @@
         if (element.hasAttribute('data-optimized')) return false;
         
         const text = element.textContent.trim();
-        
-        // 快速模式：直接匹配常见格式
-        const reviewMatch = text.match(/(\d+)[\s\u00A0]*(?:件のレビュー|reviews?|个评价|則評價)/i);
+          // 快速模式：直接匹配常见格式 - 扩展英语支持
+        const reviewMatch = text.match(/(\d+)[\s\u00A0]*(?:件のレビュー|reviews?|review\(s\)|customer\s+reviews?|个评价|則評價)/i);
         
         if (reviewMatch) {
             const count = reviewMatch[1];

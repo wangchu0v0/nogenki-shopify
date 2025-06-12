@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>简单调试 - 为什么不工作</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f8f9fa;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .jdgm-prev-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 10px 0;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #dee2e6;
+        }
+        .jdgm-star {
+            color: #A889A8;
+            font-size: 16px;
+        }
+        .jdgm-prev-badge__text {
+            font-size: 14px;
+            color: #666;
+        }
+        .log {
+            background: #000;
+            color: #0f0;
+            padding: 15px;
+            font-family: 'Courier New', monospace;
+            height: 300px;
+            overflow-y: auto;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 简单调试 - 手动测试正则表达式</h1>
+        
+        <h3>📋 测试数据</h3>
+        <div class="jdgm-prev-badge">
+            <span class="jdgm-star">★★★★★</span>
+            <span class="jdgm-prev-badge__text">15件のレビュー</span>
+        </div>
+        <div class="jdgm-prev-badge">
+            <span class="jdgm-star">★★★★☆</span>
+            <span class="jdgm-prev-badge__text">23 reviews</span>
+        </div>
+        <div class="jdgm-prev-badge">
+            <span class="jdgm-star">★★★☆☆</span>
+            <span class="jdgm-prev-badge__text">156 customer reviews</span>
+        </div>
+        
+        <div style="margin: 20px 0;">
+            <button onclick="testRegex()">🧪 测试正则表达式</button>
+            <button onclick="testProcessing()">⚙️ 测试处理逻辑</button>
+            <button onclick="clearLog()">🗑️ 清空</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <h3>📊 测试结果</h3>
+        <div id="log" class="log"></div>
+    </div>
+
+    <script>
+        const logEl = document.getElementById('log');
+        
+        function log(message) {
+            const div = document.createElement('div');
+            div.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+            logEl.appendChild(div);
+            logEl.scrollTop = logEl.scrollHeight;
+        }
+        
+        function clearLog() {
+            logEl.innerHTML = '';
+        }
+        
+        function testRegex() {
+            log('🧪 开始测试正则表达式...');
+            
+            // 您当前的正则表达式
+            const currentRegex = /(\d+)[\s\u00A0]*(?:件のレビュー|reviews?|review\(s\)|customer\s+reviews?|个评价|則評價)/i;
+            
+            // 测试数据
+            const testTexts = [
+                '15件のレビュー',
+                '23 reviews',
+                '156 customer reviews',
+                '1 review',
+                '5 review(s)',
+                'Based on 89 reviews',
+                '42件のレビュー',
+                '7reviews',  // 没有空格
+                '99  reviews'  // 多个空格
+            ];
+            
+            testTexts.forEach(text => {
+                const match = text.match(currentRegex);
+                if (match) {
+                    log(`✅ "${text}" → 匹配成功，提取: ${match[1]}`);
+                } else {
+                    log(`❌ "${text}" → 没有匹配`);
+                }
+            });
+        }
+        
+        function testProcessing() {
+            log('⚙️ 开始测试处理逻辑...');
+            
+            // 模拟您的处理函数
+            function optimizedTextReplace(element) {
+                const text = element.textContent.trim();
+                log(`🔍 处理元素: "${text}"`);
+                
+                // 使用您当前的正则
+                const reviewMatch = text.match(/(\d+)[\s\u00A0]*(?:件のレビュー|reviews?|review\(s\)|customer\s+reviews?|个评价|則評價)/i);
+                
+                if (reviewMatch) {
+                    const count = reviewMatch[1];
+                    const newText = `(${count})`;
+                    log(`  ✅ 匹配成功: ${count} → 应该改为: ${newText}`);
+                    
+                    // 实际修改元素（仅用于测试）
+                    element.textContent = newText;
+                    element.style.cssText = `
+                        font-size: 10px !important;
+                        font-family: "Libre Baskerville", serif !important;
+                        color: #666 !important;
+                        transform: translateY(-1px) !important;
+                        line-height: 1 !important;
+                    `;
+                    return true;
+                } else {
+                    log(`  ❌ 没有匹配到`);
+                    return false;
+                }
+            }
+            
+            // 获取所有测试元素
+            const elements = document.querySelectorAll('.jdgm-prev-badge__text');
+            log(`📍 找到 ${elements.length} 个元素`);
+            
+            let processed = 0;
+            elements.forEach((element, index) => {
+                log(`\n--- 处理元素 ${index + 1} ---`);
+                if (optimizedTextReplace(element)) {
+                    processed++;
+                }
+            });
+            
+            log(`\n📊 总结: 处理了 ${processed}/${elements.length} 个元素`);
+            
+            // 检查实际结果
+            setTimeout(() => {
+                log('\n🔍 检查实际结果:');
+                const updatedElements = document.querySelectorAll('.jdgm-prev-badge__text');
+                updatedElements.forEach((element, index) => {
+                    const text = element.textContent.trim();
+                    if (text.match(/^\(\d+\)$/)) {
+                        log(`  ✅ 元素 ${index + 1}: "${text}" - 成功`);
+                    } else {
+                        log(`  ❌ 元素 ${index + 1}: "${text}" - 失败`);
+                    }
+                });
+            }, 100);
+        }
+        
+        // 页面加载完成后的信息
+        document.addEventListener('DOMContentLoaded', function() {
+            log('📄 页面加载完成');
+            log('🎯 现在可以手动测试正则表达式和处理逻辑');
+            log('💡 如果处理逻辑工作正常，说明问题在于您的JS文件没有正确执行');
+        });
+    </script>
+</body>
+</html>

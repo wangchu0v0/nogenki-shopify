@@ -36,9 +36,8 @@
         
         // 获取文本内容并修整
         const text = element.textContent.trim();
-        
-        // 支持多语言的正则匹配
-        const reviewMatch = text.match(/(\d+)[\s\u00A0]*(?:件のレビュー|reviews?|个评价|則評價|review)/i);
+          // 支持多语言的正则匹配 - 扩展英语支持
+        const reviewMatch = text.match(/(\d+)[\s\u00A0]*(?:件のレビュー|reviews?|review\(s\)|customer\s+reviews?|个评价|則評價|review)/i);
         
         if (reviewMatch) {
             const count = reviewMatch[1];

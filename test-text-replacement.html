@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文本替换验证</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f8f9fa;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .jdgm-prev-badge {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 20px 0;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            border: 2px solid #dee2e6;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .jdgm-prev-badge:hover {
+            background: #e9ecef;
+            border-color: #007bff;
+        }
+        .jdgm-star {
+            color: #A889A8;
+            font-size: 18px;
+        }
+        .jdgm-prev-badge__text {
+            font-size: 14px;
+            color: #666;
+            font-weight: 500;
+        }
+        .btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin: 8px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .btn:hover {
+            background: #0056b3;
+        }
+        .btn.danger {
+            background: #dc3545;
+        }
+        .btn.danger:hover {
+            background: #c82333;
+        }
+        #results {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid #dee2e6;
+        }
+        .success {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+            border: 1px solid #c3e6cb;
+        }
+        .test-grid {
+            display: grid;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .expected {
+            font-style: italic;
+            color: #28a745;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎯 文本替换验证测试</h1>
+        <div class="success">
+            <strong>预期效果：</strong>原文本应该完全被 (数字) 格式替换，不应该显示原文+数字的混合格式
+        </div>
+        
+        <div style="text-align: center; margin: 25px 0;">
+            <button class="btn" onclick="runTest()">🔄 执行测试</button>
+            <button class="btn" onclick="testClicks()">👆 测试点击</button>
+            <button class="btn danger" onclick="restore()">🔄 恢复原文</button>
+            <button class="btn" onclick="clearResults()">🗑️ 清空结果</button>
+        </div>
+
+        <div class="test-grid">
+            <div class="jdgm-prev-badge" onclick="handleClick('日语reviews')">
+                <span class="jdgm-star">★★★★★</span>
+                <span class="jdgm-prev-badge__text">15件のレビュー</span>
+                <div class="expected">预期显示: (15)</div>
+            </div>
+            
+            <div class="jdgm-prev-badge" onclick="handleClick('英语reviews')">
+                <span class="jdgm-star">★★★★☆</span>
+                <span class="jdgm-prev-badge__text">23 reviews</span>
+                <div class="expected">预期显示: (23)</div>
+            </div>
+            
+            <div class="jdgm-prev-badge" onclick="handleClick('英语customer reviews')">
+                <span class="jdgm-star">★★★☆☆</span>
+                <span class="jdgm-prev-badge__text">87 customer reviews</span>
+                <div class="expected">预期显示: (87)</div>
+            </div>
+            
+            <div class="jdgm-prev-badge" onclick="handleClick('单数review')">
+                <span class="jdgm-star">★★★★★</span>
+                <span class="jdgm-prev-badge__text">1 review</span>
+                <div class="expected">预期显示: (1)</div>
+            </div>
+        </div>
+
+        <div id="results"></div>
+    </div>
+
+    <script src="assets/judgeme-safe-fix.js"></script>
+    <script>
+        const resultsEl = document.getElementById('results');
+        
+        function log(message, type = 'info') {
+            const time = new Date().toLocaleTimeString();
+            const color = type === 'success' ? '#28a745' : type === 'error' ? '#dc3545' : '#007bff';
+            resultsEl.innerHTML += `<div style="color: ${color}; margin: 3px 0;">[${time}] ${message}</div>`;
+            resultsEl.scrollTop = resultsEl.scrollHeight;
+        }
+        
+        function clearResults() {
+            resultsEl.innerHTML = '';
+        }
+        
+        function runTest() {
+            log('🔄 开始文本替换验证测试...', 'info');
+            
+            if (window.judgemeNonDestructive) {
+                const processed = window.judgemeNonDestructive.process();
+                log(`处理了 ${processed} 个元素`, 'info');
+                
+                // 等待处理完成后检查结果
+                setTimeout(() => {
+                    verifyTextReplacement();
+                }, 200);
+            } else {
+                log('❌ 修复器未加载！', 'error');
+            }
+        }
+        
+        function verifyTextReplacement() {
+            log('🔍 检查文本替换结果...', 'info');
+            
+            const textElements = document.querySelectorAll('.jdgm-prev-badge__text');
+            let successCount = 0;
+            let totalCount = textElements.length;
+            
+            textElements.forEach((element, index) => {
+                const currentText = element.textContent.trim();
+                const originalText = element.getAttribute('data-original-text');
+                const isProcessed = element.hasAttribute('data-judgeme-safe-processed');
+                
+                log(`元素 ${index + 1}:`, 'info');
+                log(`  当前显示: "${currentText}"`, 'info');
+                log(`  原始文本: "${originalText || '未记录'}"`, 'info');
+                log(`  处理状态: ${isProcessed ? '已处理' : '未处理'}`, 'info');
+                
+                // 检查是否为正确的 (数字) 格式
+                const correctFormat = /^\(\d+\)$/.test(currentText);
+                if (correctFormat) {
+                    successCount++;
+                    log(`  ✅ 格式正确！`, 'success');
+                } else if (currentText.includes('(') && currentText.includes(')')) {
+                    log(`  ⚠️ 包含数字但格式不正确（可能混合显示）`, 'error');
+                } else {
+                    log(`  ❌ 未转换或格式错误`, 'error');
+                }
+                
+                log('', 'info'); // 空行分隔
+            });
+            
+            log(`📊 总结：${successCount}/${totalCount} 个元素格式正确`, 
+                successCount === totalCount ? 'success' : 'error');
+                
+            if (successCount === totalCount && totalCount > 0) {
+                log('🎉 所有文本替换成功！可以部署到生产环境', 'success');
+            } else if (successCount > 0) {
+                log('⚠️ 部分成功，需要进一步优化', 'error');
+            } else {
+                log('❌ 文本替换失败，需要调试修复逻辑', 'error');
+            }
+        }
+        
+        function testClicks() {
+            log('👆 测试点击功能...', 'info');
+            const badges = document.querySelectorAll('.jdgm-prev-badge');
+            badges.forEach((badge, index) => {
+                const textEl = badge.querySelector('.jdgm-prev-badge__text');
+                const text = textEl.textContent;
+                log(`点击测试 ${index + 1}: "${text}"`, 'info');
+            });
+        }
+        
+        function handleClick(type) {
+            log(`🖱️ 用户点击: ${type}`, 'success');
+        }
+        
+        function restore() {
+            log('🔄 恢复原始状态...', 'info');
+            if (window.judgemeNonDestructive) {
+                window.judgemeNonDestructive.restore();
+                log('✅ 已恢复原始文本', 'success');
+            } else {
+                log('❌ 恢复功能不可用', 'error');
+            }
+        }
+        
+        // 页面加载后自动测试
+        window.addEventListener('load', function() {
+            log('📄 页面加载完成', 'info');
+            setTimeout(() => {
+                log('⏰ 自动执行测试...', 'info');
+                runTest();
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Judge.me问题调试器</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f8f9fa;
+        }
+        .debug-container {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .test-cases {
+            border-left: 4px solid #007bff;
+        }
+        .jdgm-prev-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 10px 0;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #dee2e6;
+        }
+        .jdgm-star {
+            color: #A889A8;
+            font-size: 16px;
+        }
+        .jdgm-prev-badge__text {
+            font-size: 14px;
+            color: #666;
+        }
+        .log-container {
+            background: #000;
+            color: #0f0;
+            padding: 15px;
+            font-family: 'Courier New', monospace;
+            height: 400px;
+            overflow-y: auto;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+        .test-label {
+            font-weight: bold;
+            color: #495057;
+            margin-bottom: 5px;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover { background: #0056b3; }
+        .warning {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="debug-container">
+        <h1>🔍 Judge.me问题调试器</h1>
+        <div class="warning">
+            <strong>目的：</strong>找出为什么英语界面的reviews丢失，而日语界面正常。<br>
+            <strong>方法：</strong>扫描所有相关元素，分析选择器、文本模式、可见性等。
+        </div>
+        
+        <div style="text-align: center; margin: 20px 0;">
+            <button onclick="runManualScan()">🔍 手动扫描</button>
+            <button onclick="clearLog()">🗑️ 清空日志</button>
+            <button onclick="exportResults()">💾 导出结果</button>
+        </div>
+    </div>
+
+    <div class="debug-container test-cases">
+        <h3>🧪 测试用例 - 模拟真实情况</h3>
+        
+        <div class="test-label">✅ 日语测试用例（应该工作）：</div>
+        <div class="jdgm-prev-badge">
+            <span class="jdgm-star">★★★★★</span>
+            <span class="jdgm-prev-badge__text">15件のレビュー</span>
+        </div>
+        <div class="jdgm-prev-badge">
+            <span class="jdgm-star">★★★★☆</span>
+            <span class="jdgm-prev-badge__text">7件のレビュー</span>
+        </div>
+        
+        <div class="test-label">❌ 英语测试用例（可能有问题）：</div>
+        <div class="jdgm-prev-badge">
+            <span class="jdgm-star">★★★★★</span>
+            <span class="jdgm-prev-badge__text">23 reviews</span>
+        </div>
+        <div class="jdgm-prev-badge">
+            <span class="jdgm-star">★★★★☆</span>
+            <span class="jdgm-prev-badge__text">156 customer reviews</span>
+        </div>
+        <div class="jdgm-prev-badge">
+            <span class="jdgm-star">★★★☆☆</span>
+            <span class="jdgm-prev-badge__text">Based on 89 reviews</span>
+        </div>
+        
+        <div class="test-label">🔬 边缘情况测试：</div>
+        <div class="jdgm-prev-badge">
+            <span class="jdgm-star">★★★★☆</span>
+            <span class="jdgm-prev-badge__text">5 review(s)</span>
+        </div>
+        <div class="jdgm-prev-badge">
+            <span class="jdgm-star">★★★☆☆</span>
+            <span class="jdgm-prev-badge__text">1 review</span>
+        </div>
+        
+        <!-- 模拟不同类名的情况 -->
+        <div style="margin-top: 20px;">
+            <div class="test-label">🎭 模拟不同类名（可能的英语环境差异）：</div>
+            <div class="jdgm-prev-badge">
+                <span class="jdgm-star">★★★★★</span>
+                <span class="review-count-text">42 reviews</span>
+            </div>
+            <div class="jdgm-prev-badge">
+                <span class="jdgm-star">★★★★☆</span>
+                <span class="product-review-count">18 customer reviews</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="debug-container">
+        <h3>📊 调试日志</h3>
+        <div id="debug-log" class="log-container"></div>
+    </div>
+
+    <div class="debug-container">
+        <h3>📋 调试结果摘要</h3>
+        <div id="summary" style="padding: 15px; background: #f8f9fa; border-radius: 4px;">
+            等待调试器运行...
+        </div>
+    </div>
+
+    <!-- 加载调试器 -->
+    <script src="assets/judgeme-debugger.js"></script>
+    
+    <script>
+        // 控制台重定向到页面
+        const logContainer = document.getElementById('debug-log');
+        const originalLog = console.log;
+        let logCount = 0;
+        
+        console.log = function(...args) {
+            originalLog.apply(console, args);
+            const div = document.createElement('div');
+            div.style.margin = '2px 0';
+            div.textContent = `[${new Date().toLocaleTimeString()}] ${args.join(' ')}`;
+            logContainer.appendChild(div);
+            logContainer.scrollTop = logContainer.scrollHeight;
+            
+            logCount++;
+            if (logCount > 200) {
+                logContainer.removeChild(logContainer.firstChild);
+                logCount--;
+            }
+        };
+
+        function runManualScan() {
+            console.log('🔍 手动触发扫描...');
+            if (window.judgemeDebugInfo) {
+                // 重新运行扫描逻辑
+                location.reload();
+            } else {
+                console.log('❌ 调试器未加载');
+            }
+        }
+
+        function clearLog() {
+            logContainer.innerHTML = '';
+            logCount = 0;
+            console.log('🗑️ 日志已清空');
+        }
+
+        function exportResults() {
+            if (window.judgemeDebugInfo) {
+                console.log('💾 导出调试结果:');
+                console.log(JSON.stringify(window.judgemeDebugInfo, null, 2));
+                
+                // 更新摘要
+                updateSummary();
+            } else {
+                console.log('❌ 没有调试数据可导出');
+            }
+        }
+
+        function updateSummary() {
+            const summaryEl = document.getElementById('summary');
+            if (window.judgemeDebugInfo) {
+                const info = window.judgemeDebugInfo;
+                const matched = info.foundElements.filter(e => e.matchedPattern).length;
+                const total = info.foundElements.length;
+                
+                summaryEl.innerHTML = `
+                    <h4>📊 调试摘要</h4>
+                    <p><strong>发现元素：</strong>${total} 个</p>
+                    <p><strong>成功匹配：</strong>${matched} 个</p>
+                    <p><strong>未匹配：</strong>${info.missedElements.length} 个</p>
+                    <p><strong>日语元素：</strong>${info.foundElements.filter(e => e.text.includes('件のレビュー')).length} 个</p>
+                    <p><strong>英语元素：</strong>${info.foundElements.filter(e => /\d+.*reviews?/i.test(e.text)).length} 个</p>
+                    <hr>
+                    <p><strong>建议：</strong>${generateRecommendation()}</p>
+                `;
+            }
+        }
+
+        function generateRecommendation() {
+            if (!window.judgemeDebugInfo) return '等待调试数据...';
+            
+            const info = window.judgemeDebugInfo;
+            const japaneseElements = info.foundElements.filter(e => e.text.includes('件のレビュー'));
+            const englishElements = info.foundElements.filter(e => /\d+.*reviews?/i.test(e.text));
+            
+            if (japaneseElements.length > 0 && englishElements.length === 0) {
+                return '❌ 没有发现英语reviews元素，可能是选择器问题或元素未加载';
+            } else if (englishElements.length > 0 && englishElements.some(e => !e.matchedPattern)) {
+                return '⚠️ 发现英语reviews但未匹配，可能是正则表达式问题';
+            } else if (englishElements.length > 0 && englishElements.every(e => e.matchedPattern)) {
+                return '✅ 英语reviews能够匹配，可能是处理时机问题';
+            } else {
+                return '🤔 需要更深入的分析';
+            }
+        }
+
+        // 5秒后自动更新摘要
+        setTimeout(() => {
+            updateSummary();
+            setInterval(updateSummary, 2000);
+        }, 5000);
+    </script>
+</body>
+</html>
