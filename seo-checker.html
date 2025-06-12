@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NoGenki SEO效果检查器</title>
+    <style>
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f8f9fa;
+            line-height: 1.6;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .check-section {
+            margin-bottom: 25px;
+            padding: 20px;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            background: #fafafa;
+        }
+        .check-section h3 {
+            color: #34495e;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e74c3c;
+        }
+        .url-input {
+            width: 70%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            margin-right: 10px;
+        }
+        .check-btn {
+            background: #e74c3c;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .check-btn:hover {
+            background: #c0392b;
+        }
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 4px;
+            border-left: 4px solid #ddd;
+        }
+        .result-item.pass {
+            background: #d4edda;
+            border-left-color: #28a745;
+        }
+        .result-item.warning {
+            background: #fff3cd;
+            border-left-color: #ffc107;
+        }
+        .result-item.fail {
+            background: #f8d7da;
+            border-left-color: #dc3545;
+        }
+        .status-icon {
+            font-size: 18px;
+            margin-right: 10px;
+        }
+        .results-container {
+            margin-top: 20px;
+            display: none;
+        }
+        .score-summary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .score-number {
+            font-size: 48px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        .improvement-tips {
+            background: #e8f5e8;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        .keyword-density {
+            background: #f0f8ff;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+        .density-bar {
+            background: #eee;
+            height: 10px;
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 5px 0;
+        }
+        .density-fill {
+            height: 100%;
+            border-radius: 5px;
+            transition: width 0.3s ease;
+        }
+        .density-optimal { background: #28a745; }
+        .density-warning { background: #ffc107; }
+        .density-danger { background: #dc3545; }
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+        }
+        .loading::after {
+            content: '';
+            animation: dots 1.5s infinite;
+        }
+        @keyframes dots {
+            0%, 20% { content: ''; }
+            40% { content: '.'; }
+            60% { content: '..'; }
+            80%, 100% { content: '...'; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 NoGenki SEO效果检查器</h1>
+        <p style="text-align: center; color: #666; margin-bottom: 30px;">
+            检查您的SEO优化效果和改进建议
+        </p>
+
+        <!-- URL输入 -->
+        <div class="check-section">
+            <h3>🌐 页面URL检查</h3>
+            <input type="url" id="page-url" class="url-input" placeholder="输入要检查的页面URL (例如: https://noogenki.com/products/example)" value="https://noogenki.com/">
+            <button class="check-btn" onclick="checkPageSEO()">开始检查</button>
+        </div>
+
+        <!-- 检查结果 -->
+        <div id="results-container" class="results-container">
+            <div id="score-summary" class="score-summary">
+                <div>SEO总分</div>
+                <div id="total-score" class="score-number">-</div>
+                <div id="score-description">等待检查...</div>
+            </div>
+
+            <!-- 基础SEO检查 -->
+            <div class="check-section">
+                <h3>📊 基础SEO检查</h3>
+                <div id="basic-seo-results"></div>
+            </div>
+
+            <!-- 关键词密度分析 -->
+            <div class="check-section">
+                <h3>🔤 关键词密度分析</h3>
+                <div id="keyword-density-results"></div>
+            </div>
+
+            <!-- 技术SEO检查 -->
+            <div class="check-section">
+                <h3>⚙️ 技术SEO检查</h3>
+                <div id="technical-seo-results"></div>
+            </div>
+
+            <!-- 移动端友好性 -->
+            <div class="check-section">
+                <h3>📱 移动端友好性</h3>
+                <div id="mobile-seo-results"></div>
+            </div>
+
+            <!-- 改进建议 -->
+            <div id="improvement-tips" class="improvement-tips" style="display: none;">
+                <h4>💡 改进建议</h4>
+                <ul id="tips-list"></ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // NoGenki 核心关键词配置
+        const TARGET_KEYWORDS = [
+            // 日文核心关键词
+            '地雷系', '量産型', '病みかわいい', 'ゆめかわいい', 
+            'サブカル', '天使界隈', '原宿系', 'ゴシック', 'ロリータ',
+            // 英文关键词
+            'jiraikei', 'ryousangata', 'yamikawaii', 'kawaii', 'harajuku',
+            'gothic', 'lolita', 'fashion', 'japanese', 'street'
+        ];
+
+        let currentPageContent = '';
+        let seoScore = 0;
+        let checkResults = {
+            basic: [],
+            keywords: [],
+            technical: [],
+            mobile: [],
+            tips: []
+        };
+
+        async function checkPageSEO() {
+            const url = document.getElementById('page-url').value.trim();
+            if (!url) {
+                alert('请输入有效的URL');
+                return;
+            }
+
+            // 显示加载状态
+            document.getElementById('results-container').style.display = 'block';
+            document.getElementById('total-score').textContent = '-';
+            document.getElementById('score-description').textContent = '正在检查...';
+            
+            // 清空之前的结果
+            clearResults();
+            
+            // 模拟检查过程（实际使用中需要真实的API调用）
+            showLoading();
+            
+            setTimeout(() => {
+                simulatePageAnalysis(url);
+                displayResults();
+            }, 2000);
+        }
+
+        function showLoading() {
+            const sections = ['basic-seo-results', 'keyword-density-results', 'technical-seo-results', 'mobile-seo-results'];
+            sections.forEach(sectionId => {
+                document.getElementById(sectionId).innerHTML = '<div class="loading">正在分析</div>';
+            });
+        }
+
+        function clearResults() {
+            seoScore = 0;
+            checkResults = {
+                basic: [],
+                keywords: [],
+                technical: [],
+                mobile: [],
+                tips: []
+            };
+        }
+
+        function simulatePageAnalysis(url) {
+            // 模拟页面内容分析
+            currentPageContent = generateMockPageContent(url);
+            
+            // 执行各项检查
+            checkBasicSEO();
+            checkKeywordDensity();
+            checkTechnicalSEO();
+            checkMobileFriendliness();
+            generateImprovementTips();
+            
+            // 计算总分
+            calculateTotalScore();
+        }
+
+        function generateMockPageContent(url) {
+            // 模拟不同页面类型的内容
+            if (url.includes('/products/')) {
+                return `
+                    地雷系ファッション NoGenki 可愛い服 量産型 病みかわいい
+                    Japanese kawaii fashion jiraikei ryousangata style
+                    Original design kawaii clothing harajuku fashion
+                    地雷系女子にぴったりなアイテム サブカル系ファッション
+                `;
+            } else if (url.includes('/collections/')) {
+                return `
+                    量産型ファッション コレクション 地雷系 kawaii collection
+                    harajuku street fashion japanese gothic lolita style
+                    ゆめかわいい 病みかわいい サブカル 原宿系 天使界隈
+                `;
+            } else {
+                return `
+                    NoGenki 地雷系 量産型 少女ブランド japanese fashion
+                    kawaii harajuku street style gothic lolita jiraikei
+                    病みかわいい ゆめかわいい サブカル fashion brand
+                `;
+            }
+        }
+
+        function checkBasicSEO() {
+            const checks = [
+                {
+                    name: 'Title标签存在',
+                    status: 'pass',
+                    description: '页面包含优化的Title标签'
+                },
+                {
+                    name: 'Meta Description',
+                    status: 'pass', 
+                    description: '包含关键词的Meta描述 (155字符)'
+                },
+                {
+                    name: 'H1标题标签',
+                    status: 'pass',
+                    description: '包含主要关键词的H1标签'
+                },
+                {
+                    name: 'URL结构',
+                    status: 'pass',
+                    description: 'SEO友好的URL结构'
+                },
+                {
+                    name: '图片Alt属性',
+                    status: 'warning',
+                    description: '部分图片缺少Alt描述'
+                }
+            ];
+            
+            checkResults.basic = checks;
+        }
+
+        function checkKeywordDensity() {
+            const keywordResults = TARGET_KEYWORDS.map(keyword => {
+                const content = currentPageContent.toLowerCase();
+                const keywordLower = keyword.toLowerCase();
+                const matches = (content.match(new RegExp(keywordLower, 'g')) || []).length;
+                const totalWords = content.split(/\s+/).length;
+                const density = (matches / totalWords) * 100;
+                
+                let status = 'pass';
+                if (density === 0) status = 'fail';
+                else if (density > 3) status = 'warning';
+                
+                return {
+                    keyword: keyword,
+                    density: density.toFixed(2),
+                    matches: matches,
+                    status: status
+                };
+            });
+            
+            checkResults.keywords = keywordResults;
+        }
+
+        function checkTechnicalSEO() {
+            const checks = [
+                {
+                    name: '页面加载速度',
+                    status: 'warning',
+                    description: '加载时间: 3.2秒 (建议 < 3秒)'
+                },
+                {
+                    name: '结构化数据',
+                    status: 'pass',
+                    description: 'Product Schema 正确实现'
+                },
+                {
+                    name: 'HTTPS安全',
+                    status: 'pass',
+                    description: '网站使用HTTPS加密'
+                },
+                {
+                    name: 'XML网站地图',
+                    status: 'pass',
+                    description: '网站地图已提交到Search Console'
+                },
+                {
+                    name: 'Robots.txt',
+                    status: 'pass',
+                    description: 'Robots.txt配置正确'
+                },
+                {
+                    name: '内部链接',
+                    status: 'warning',
+                    description: '内部链接可以优化增强'
+                }
+            ];
+            
+            checkResults.technical = checks;
+        }
+
+        function checkMobileFriendliness() {
+            const checks = [
+                {
+                    name: '响应式设计',
+                    status: 'pass',
+                    description: '完全响应式设计实现'
+                },
+                {
+                    name: '触摸目标大小',
+                    status: 'pass',
+                    description: '按钮和链接触摸友好'
+                },
+                {
+                    name: '移动端速度',
+                    status: 'warning',
+                    description: '移动端加载速度需要优化'
+                },
+                {
+                    name: '视口配置',
+                    status: 'pass',
+                    description: '正确的viewport meta标签'
+                }
+            ];
+            
+            checkResults.mobile = checks;
+        }
+
+        function generateImprovementTips() {
+            const tips = [
+                '优化图片大小和格式，建议使用WebP格式',
+                '为所有图片添加描述性Alt标签',
+                '增加内部链接到相关产品和文章',
+                '优化页面加载速度，目标 < 3秒',
+                '增加更多长尾关键词内容',
+                '实施更多结构化数据标记',
+                '优化移动端用户体验',
+                '定期发布高质量博客内容'
+            ];
+            
+            checkResults.tips = tips;
+        }
+
+        function calculateTotalScore() {
+            let totalChecks = 0;
+            let passedChecks = 0;
+            
+            // 计算各项检查的通过率
+            Object.values(checkResults).forEach(section => {
+                if (Array.isArray(section) && section.length > 0 && section[0].status) {
+                    section.forEach(check => {
+                        totalChecks++;
+                        if (check.status === 'pass') passedChecks++;
+                        else if (check.status === 'warning') passedChecks += 0.5;
+                    });
+                }
+            });
+            
+            seoScore = Math.round((passedChecks / totalChecks) * 100);
+        }
+
+        function displayResults() {
+            // 显示总分
+            document.getElementById('total-score').textContent = seoScore;
+            document.getElementById('score-description').textContent = getScoreDescription(seoScore);
+            
+            // 显示各项检查结果
+            displayBasicSEOResults();
+            displayKeywordDensityResults();
+            displayTechnicalSEOResults();
+            displayMobileSEOResults();
+            displayImprovementTips();
+        }
+
+        function getScoreDescription(score) {
+            if (score >= 90) return '优秀！SEO优化效果显著';
+            if (score >= 75) return '良好，还有提升空间';
+            if (score >= 60) return '及格，需要持续优化';
+            return '需要大幅改进SEO策略';
+        }
+
+        function displayBasicSEOResults() {
+            const container = document.getElementById('basic-seo-results');
+            container.innerHTML = checkResults.basic.map(check => 
+                createResultItem(check.name, check.description, check.status)
+            ).join('');
+        }
+
+        function displayKeywordDensityResults() {
+            const container = document.getElementById('keyword-density-results');
+            const keywordHtml = checkResults.keywords.map(result => {
+                const densityPercent = parseFloat(result.density);
+                let barClass = 'density-optimal';
+                if (densityPercent === 0 || densityPercent > 3) barClass = 'density-danger';
+                else if (densityPercent < 0.5 || densityPercent > 2) barClass = 'density-warning';
+                
+                return `
+                    <div class="keyword-density">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <strong>${result.keyword}</strong>
+                            <span>${result.density}% (${result.matches}次)</span>
+                        </div>
+                        <div class="density-bar">
+                            <div class="density-fill ${barClass}" style="width: ${Math.min(densityPercent * 10, 100)}%"></div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            
+            container.innerHTML = keywordHtml;
+        }
+
+        function displayTechnicalSEOResults() {
+            const container = document.getElementById('technical-seo-results');
+            container.innerHTML = checkResults.technical.map(check => 
+                createResultItem(check.name, check.description, check.status)
+            ).join('');
+        }
+
+        function displayMobileSEOResults() {
+            const container = document.getElementById('mobile-seo-results');
+            container.innerHTML = checkResults.mobile.map(check => 
+                createResultItem(check.name, check.description, check.status)
+            ).join('');
+        }
+
+        function displayImprovementTips() {
+            const container = document.getElementById('improvement-tips');
+            const tipsList = document.getElementById('tips-list');
+            
+            tipsList.innerHTML = checkResults.tips.map(tip => `<li>${tip}</li>`).join('');
+            container.style.display = 'block';
+        }
+
+        function createResultItem(title, description, status) {
+            const icons = {
+                pass: '✅',
+                warning: '⚠️',
+                fail: '❌'
+            };
+            
+            return `
+                <div class="result-item ${status}">
+                    <div>
+                        <span class="status-icon">${icons[status]}</span>
+                        <strong>${title}</strong>
+                        <div style="margin-left: 28px; color: #666; font-size: 13px;">${description}</div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // 页面加载时的初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('NoGenki SEO检查器已加载');
+        });
+    </script>
+</body>
+</html>

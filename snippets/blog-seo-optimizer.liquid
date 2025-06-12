@@ -1,0 +1,235 @@
+{% comment %}
+====================================================================
+🎯 博客文章SEO优化器 - Blog Article SEO Optimizer
+====================================================================
+
+专为博客文章设计的SEO优化系统，自动生成针对教育性内容的SEO标签。
+为每篇文章提供最佳的关键词密度和结构化数据。
+
+使用方式：在blog/article模板中包含此片段
+{% include 'blog-seo-optimizer' %}
+
+====================================================================
+{% endcomment %}
+
+{% comment %} 🔍 收集当前文章信息 {% endcomment %}
+{% assign current_article = article %}
+{% assign article_title = article.title %}
+{% assign article_content = article.content | strip_html %}
+{% assign article_tags = article.tags %}
+
+{% comment %} 📝 博客关键词映射字典 {% endcomment %}
+{% assign blog_keywords_ja = '' %}
+{% assign blog_keywords_en = '' %}
+{% assign seo_title = '' %}
+{% assign seo_description = '' %}
+{% assign target_keywords = '' %}
+
+{% comment %} 🏷️ 根据文章标签和标题检测关键词 {% endcomment %}
+{% assign title_lower = article_title | downcase %}
+{% assign content_excerpt = article.excerpt | default: article.content | strip_html | truncate: 300 %}
+
+{% comment %} 地雷系相关文章 {% endcomment %}
+{% if title_lower contains '地雷系' or title_lower contains 'じらい' or title_lower contains 'jiraikei' %}
+  {% assign target_keywords = '地雷系,地雷系ファッション,地雷系コーデ,地雷系とは,jiraikei,jiraikei fashion,jirai fashion guide' %}
+  {% assign seo_title = article_title | append: ' | 地雷系ファッション完全ガイド - NoGenki' %}
+  {% assign seo_description = '地雷系ファッションの' | append: article_title | append: 'について詳しく解説。地雷系コーデの基本から応用まで、初心者にもわかりやすくご紹介します。' %}
+
+{% comment %} 量産型相关文章 {% endcomment %}
+{% elsif title_lower contains '量産型' or title_lower contains 'りょうさん' or title_lower contains 'ryousangata' %}
+  {% assign target_keywords = '量産型,量産型ファッション,量産型コーデ,量産型ヲタク,ryousangata,ryousangata fashion,mass production fashion' %}
+  {% assign seo_title = article_title | append: ' | 量産型ファッション専門ガイド - NoGenki' %}
+  {% assign seo_description = '量産型ファッションの' | append: article_title | append: 'を徹底解説。量産型コーデの作り方から最新トレンドまで詳しくご紹介。' %}
+
+{% comment %} 病みかわいい相关文章 {% endcomment %}
+{% elsif title_lower contains '病みかわ' or title_lower contains 'やみかわ' or title_lower contains 'yamikawaii' %}
+  {% assign target_keywords = '病みかわいい,病みかわファッション,yamikawaii,dark kawaii,病みかわコーデ,病みかわいいメイク' %}
+  {% assign seo_title = article_title | append: ' | 病みかわいいファッションガイド - NoGenki' %}
+  {% assign seo_description = '病みかわいいファッションの' | append: article_title | append: 'について解説。病みかわコーデとメイクのコツをご紹介します。' %}
+
+{% comment %} 原宿系相关文章 {% endcomment %}
+{% elsif title_lower contains '原宿' or title_lower contains 'はらじゅく' or title_lower contains 'harajuku' %}
+  {% assign target_keywords = '原宿ファッション,harajuku fashion,原宿系,原宿スタイル,kawaii fashion,japanese street fashion' %}
+  {% assign seo_title = article_title | append: ' | 原宿ファッション情報 - NoGenki' %}
+  {% assign seo_description = '原宿ファッションの' | append: article_title | append: 'を詳しく解説。最新の原宿スタイルとトレンドをお届けします。' %}
+
+{% comment %} ゴシック相关文章 {% endcomment %}
+{% elsif title_lower contains 'ゴシック' or title_lower contains 'gothic' %}
+  {% assign target_keywords = 'ゴシックファッション,gothic fashion,ゴスロリ,gothic lolita,ダークファッション' %}
+  {% assign seo_title = article_title | append: ' | ゴシックファッション情報 - NoGenki' %}
+  {% assign seo_description = 'ゴシックファッションの' | append: article_title | append: 'について解説。gothic styleの基本から応用まで詳しくご紹介。' %}
+
+{% comment %} かわいい・kawaii相关文章 {% endcomment %}
+{% elsif title_lower contains 'かわいい' or title_lower contains 'kawaii' or title_lower contains 'cute' %}
+  {% assign target_keywords = 'かわいいファッション,kawaii fashion,cute fashion,kawaii style,キュートファッション,可愛い服装' %}
+  {% assign seo_title = article_title | append: ' | かわいいファッション情報 - NoGenki' %}
+  {% assign seo_description = 'かわいいファッションの' | append: article_title | append: 'をご紹介。kawaii styleの最新情報とコーデのコツを解説します。' %}
+
+{% comment %} コーデ・outfit相关文章 {% endcomment %}
+{% elsif title_lower contains 'コーデ' or title_lower contains 'outfit' or title_lower contains 'coordinate' %}
+  {% assign target_keywords = 'ファッションコーデ,コーディネート,outfit ideas,fashion coordinate,スタイリング,着こなし' %}
+  {% assign seo_title = article_title | append: ' | ファッションコーデガイド - NoGenki' %}
+  {% assign seo_description = 'ファッションコーディネートの' | append: article_title | append: 'を解説。おしゃれなコーデのコツとアイデアをご紹介します。' %}
+
+{% comment %} メイク相关文章 {% endcomment %}
+{% elsif title_lower contains 'メイク' or title_lower contains 'makeup' %}
+  {% assign target_keywords = 'ファッションメイク,kawaii makeup,地雷系メイク,量産型メイク,makeup tutorial,beauty tips' %}
+  {% assign seo_title = article_title | append: ' | ファッションメイクガイド - NoGenki' %}
+  {% assign seo_description = 'ファッションに合わせたメイクの' | append: article_title | append: 'を解説。地雷系・量産型メイクのコツをご紹介。' %}
+
+{% comment %} トレンド相关文章 {% endcomment %}
+{% elsif title_lower contains 'トレンド' or title_lower contains 'trend' or title_lower contains '流行' %}
+  {% assign target_keywords = 'ファッショントレンド,fashion trends,最新ファッション,流行ファッション,トレンド情報' %}
+  {% assign seo_title = article_title | append: ' | 最新ファッショントレンド - NoGenki' %}
+  {% assign seo_description = '最新ファッショントレンドの' | append: article_title | append: 'をお届け。今話題のファッション情報を詳しく解説します。' %}
+
+{% else %}
+  {% comment %} 🔍 デフォルト設定 - 一般的なファッション記事 {% endcomment %}
+  {% assign target_keywords = 'ファッション,fashion,日本ファッション,japanese fashion,ファッション情報,fashion guide' %}
+  {% assign seo_title = article_title | append: ' | ファッション情報 - NoGenki' %}
+  {% assign seo_description = article_title | append: 'について詳しく解説。最新のファッション情報とスタイルガイドをお届けします。' %}
+{% endif %}
+
+{% comment %} 🎯 Meta Tags 生成 {% endcomment %}
+<title>{{ seo_title | strip }}</title>
+<meta name="description" content="{{ seo_description | strip }}">
+<meta name="keywords" content="{{ target_keywords }}">
+
+{% comment %} 📅 記事の公開日とカテゴリ情報 {% endcomment %}
+<meta name="article:published_time" content="{{ article.published_at | date: '%Y-%m-%dT%H:%M:%S%z' }}">
+<meta name="article:modified_time" content="{{ article.updated_at | date: '%Y-%m-%dT%H:%M:%S%z' }}">
+<meta name="article:author" content="{{ article.author | default: shop.name }}">
+<meta name="article:section" content="{{ blog.title }}">
+{% for tag in article.tags limit: 5 %}
+<meta name="article:tag" content="{{ tag }}">
+{% endfor %}
+
+{% comment %} 🌐 Open Graph Tags {% endcomment %}
+<meta property="og:title" content="{{ seo_title | strip }}">
+<meta property="og:description" content="{{ seo_description | strip }}">
+<meta property="og:type" content="article">
+<meta property="og:url" content="{{ shop.url }}{{ article.url }}">
+<meta property="og:article:published_time" content="{{ article.published_at | date: '%Y-%m-%dT%H:%M:%S%z' }}">
+<meta property="og:article:author" content="{{ article.author | default: shop.name }}">
+{% if article.image %}
+<meta property="og:image" content="{{ article.image | img_url: '1200x630' }}">
+{% else %}
+<meta property="og:image" content="{{ 'og-default-blog.jpg' | asset_url }}">
+{% endif %}
+
+{% comment %} 🐦 Twitter Card Tags {% endcomment %}
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ seo_title | strip }}">
+<meta name="twitter:description" content="{{ seo_description | strip }}">
+{% if article.image %}
+<meta name="twitter:image" content="{{ article.image | img_url: '1200x630' }}">
+{% else %}
+<meta name="twitter:image" content="{{ 'twitter-default-blog.jpg' | asset_url }}">
+{% endif %}
+
+{% comment %} 📊 JSON-LD 结构化数据 - 文章 {% endcomment %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "{{ article.title | escape }}",
+  "description": "{{ seo_description | strip_html | escape }}",
+  "image": "{% if article.image %}{{ article.image | img_url: '1200x630' }}{% else %}{{ 'blog-default.jpg' | asset_url }}{% endif %}",
+  "author": {
+    "@type": "Person",
+    "name": "{{ article.author | default: shop.name }}"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "{{ shop.name }}",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "{{ 'logo.png' | asset_url }}"
+    }
+  },
+  "datePublished": "{{ article.published_at | date: '%Y-%m-%dT%H:%M:%S%z' }}",
+  "dateModified": "{{ article.updated_at | date: '%Y-%m-%dT%H:%M:%S%z' }}",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "{{ shop.url }}{{ article.url }}"
+  },
+  "keywords": "{{ target_keywords }}",
+  "articleBody": "{{ article.content | strip_html | escape | truncate: 500 }}",
+  "wordCount": {{ article.content | strip_html | split: ' ' | size }},
+  "articleSection": "{{ blog.title }}",
+  "inLanguage": "ja-JP"
+}
+</script>
+
+{% comment %} 🔍 FAQ结构化数据（如果文章包含FAQ内容） {% endcomment %}
+{% if article.content contains '?' or article.content contains '？' %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": {
+    "@type": "Question",
+    "name": "{{ article.title | escape }}についてよくある質問",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "{{ article.excerpt | default: article.content | strip_html | escape | truncate: 200 }}"
+    }
+  }
+}
+</script>
+{% endif %}
+
+{% comment %} 🔗 Canonical URL {% endcomment %}
+<link rel="canonical" href="{{ shop.url }}{{ article.url }}">
+
+{% comment %} 🌍 Hreflang for international versions {% endcomment %}
+<link rel="alternate" hreflang="ja" href="{{ shop.url }}{{ article.url }}">
+<link rel="alternate" hreflang="en" href="{{ shop.url }}{{ article.url }}?locale=en">
+<link rel="alternate" hreflang="x-default" href="{{ shop.url }}{{ article.url }}">
+
+{% comment %} 📱 Mobile optimization {% endcomment %}
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="format-detection" content="telephone=no">
+
+{% comment %} 🎨 Theme color for mobile browsers {% endcomment %}
+<meta name="theme-color" content="#ff69b4">
+<meta name="msapplication-navbutton-color" content="#ff69b4">
+<meta name="apple-mobile-web-app-status-bar-style" content="#ff69b4">
+
+{% comment %} 📊 面包屑导航结构化数据 {% endcomment %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "ホーム",
+      "item": "{{ shop.url }}"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "{{ blog.title }}",
+      "item": "{{ shop.url }}{{ blog.url }}"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "{{ article.title }}",
+      "item": "{{ shop.url }}{{ article.url }}"
+    }
+  ]
+}
+</script>
+
+{% comment %} 🎯 SEO Debug Info (只在预览模式下显示) {% endcomment %}
+{% if template contains 'preview' %}
+<!-- SEO Debug Info -->
+<!-- Target Keywords: {{ target_keywords }} -->
+<!-- SEO Title: {{ seo_title }} -->
+<!-- SEO Description: {{ seo_description }} -->
+<!-- Article Title: {{ article.title }} -->
+<!-- Word Count: {{ article.content | strip_html | split: ' ' | size }} -->
+{% endif %}
