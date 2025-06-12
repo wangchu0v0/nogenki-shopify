@@ -36,13 +36,11 @@
     {%- elsif template contains 'article' -%}
       {% render 'blog-seo-optimizer' %}
     {%- endif -%}
-    
-    <script src="{{ 'constants.js' | asset_url }}" defer="defer"></script>
+      <script src="{{ 'constants.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'pubsub.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
-    <script src="{{ 'judgeme-modifier-optimized.js' | asset_url }}" defer="defer"></script>
-    <!-- 添加专用移动端处理脚本，确保在所有设备上都正常工作 -->
-    <script src="{{ 'judgeme-modifier-mobile.js' | asset_url }}" defer="defer"></script>
+    <!-- Judge.me统一修复器 - 解决英语和日语界面reviews显示问题 -->
+    <script src="{{ 'judgeme-unified-fix.js' | asset_url }}" defer="defer"></script>
     {%- if settings.animations_reveal_on_scroll -%}
       <script src="{{ 'animations.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
