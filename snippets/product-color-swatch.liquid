@@ -50,6 +50,12 @@
                     {% assign color_code = '#EFE1E3' %}
                 {% when '格子' %}
                     {% assign color_code = 'repeating-conic-gradient(#000 0% 25%, #FFF 0% 50%) 50% / 10px 10px' %}
+                {% when 'ホワイトブルー' %}
+                    {% assign color_code = 'linear-gradient(45deg, #ffffff 50%, #D4ECF6 50%)' %}
+                {% when 'ホワイトピンク' %}
+                    {% assign color_code = 'linear-gradient(45deg, #ffffff 50%, #F0DAE2 50%)' %}
+                {% when 'ブラックピンク' %}
+                    {% assign color_code = 'linear-gradient(45deg, #000000 50%, #F0DAE2 50%)' %}
 
                  
             {% endcase %}
@@ -59,7 +65,7 @@
                 class="color-swatch" 
                 data-variant-inventory="{{ variant.inventory_quantity }}"
                 style="
-                  {% if value contains 'コンビ' %}
+                  {% if value contains 'コンビ' or value contains 'ホワイトブルー' or value contains 'ホワイトピンク' or value contains 'ブラックピンク' %}
                     --swatch-background-image: {{ color_code }};
                   {% elsif value contains 'ガラ' or value contains 'ストライプ' %}
                     --swatch-background-image: {{ color_code }};

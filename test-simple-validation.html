@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Judge.me 修复验证 - 简化版</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .test-case {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: #f9f9f9;
+        }
+        .jdgm-prev-badge {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+        }
+        .jdgm-prev-badge__stars {
+            color: gold;
+            margin-right: 8px;
+        }
+        .jdgm-star {
+            font-size: 16px;
+        }
+        .jdgm-prev-badge__text {
+            font-size: 14px;
+            color: #666;
+        }
+        .log {
+            margin-top: 20px;
+            padding: 10px;
+            background: #f0f0f0;
+            border-radius: 3px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        .status {
+            margin: 10px 0;
+            font-weight: bold;
+        }
+        .success { color: green; }
+        .failure { color: red; }
+    </style>
+</head>
+<body>
+    <h1>Judge.me 修复验证 - 简化版</h1>
+    
+    <div class="test-case">
+        <h3>测试案例 1: "8件のレビュー"</h3>
+        <div class="jdgm-prev-badge">
+            <div class="jdgm-prev-badge__stars">
+                <span class="jdgm-star">★★★★★</span>
+            </div>
+            <div class="jdgm-prev-badge__text" id="test1">8件のレビュー</div>
+        </div>
+        <div class="status" id="status1">等待修复...</div>
+    </div>
+    
+    <div class="test-case">
+        <h3>测试案例 2: "23 reviews"</h3>
+        <div class="jdgm-prev-badge">
+            <div class="jdgm-prev-badge__stars">
+                <span class="jdgm-star">★★★★☆</span>
+            </div>
+            <div class="jdgm-prev-badge__text" id="test2">23 reviews</div>
+        </div>
+        <div class="status" id="status2">等待修复...</div>
+    </div>
+    
+    <div class="test-case">
+        <h3>测试案例 3: 隐藏元素 "9レビュー"</h3>
+        <div class="jdgm-prev-badge">
+            <div class="jdgm-prev-badge__stars">
+                <span class="jdgm-star">★★★★★</span>
+            </div>
+            <div class="jdgm-prev-badge__text" id="test3" style="visibility: hidden;">9レビュー</div>
+        </div>
+        <div class="status" id="status3">等待修复...</div>
+    </div>
+    
+    <div class="log" id="log"></div>
+    
+    <script>
+        function log(message) {
+            const logEl = document.getElementById('log');
+            const timestamp = new Date().toLocaleTimeString();
+            logEl.textContent += `[${timestamp}] ${message}\n`;
+            logEl.scrollTop = logEl.scrollHeight;
+        }
+        
+        function checkElement(elementId, statusId) {
+            const element = document.getElementById(elementId);
+            const statusEl = document.getElementById(statusId);
+            
+            if (!element) {
+                statusEl.textContent = '元素未找到';
+                statusEl.className = 'status failure';
+                return false;
+            }
+            
+            const text = element.textContent.trim();
+            const isCorrectFormat = /^\(\d+\)$/.test(text);
+            
+            const computedStyle = window.getComputedStyle(element);
+            const isVisible = computedStyle.visibility !== 'hidden' && 
+                             computedStyle.display !== 'none' &&
+                             computedStyle.opacity !== '0';
+            
+            if (isCorrectFormat && isVisible) {
+                statusEl.textContent = `✅ 修复成功: "${text}"`;
+                statusEl.className = 'status success';
+                return true;
+            } else {
+                let issue = '';
+                if (!isCorrectFormat) issue += `格式错误("${text}") `;
+                if (!isVisible) issue += `不可见(${computedStyle.visibility}/${computedStyle.display}/${computedStyle.opacity}) `;
+                
+                statusEl.textContent = `❌ 修复失败: ${issue}`;
+                statusEl.className = 'status failure';
+                return false;
+            }
+        }
+        
+        function checkAllElements() {
+            log('开始检查所有元素...');
+            
+            const results = [
+                checkElement('test1', 'status1'),
+                checkElement('test2', 'status2'),
+                checkElement('test3', 'status3')
+            ];
+            
+            const successCount = results.filter(r => r).length;
+            const totalCount = results.length;
+            
+            log(`检查完成: ${successCount}/${totalCount} 个元素修复成功`);
+            
+            if (successCount === totalCount) {
+                log('🎉 所有测试通过!');
+            } else {
+                log(`⚠️ 还有 ${totalCount - successCount} 个元素需要修复`);
+            }
+        }
+        
+        // 加载修复脚本
+        function loadScript() {
+            log('开始加载Judge.me修复脚本...');
+            
+            const script = document.createElement('script');
+            script.src = 'assets/judgeme-modifier-robust.js';
+            script.onload = function() {
+                log('脚本加载成功，等待修复执行...');
+                
+                // 延迟检查，给脚本时间执行
+                setTimeout(() => checkAllElements(), 500);
+                setTimeout(() => checkAllElements(), 1500);
+                setTimeout(() => checkAllElements(), 3000);
+            };
+            script.onerror = function() {
+                log('❌ 脚本加载失败');
+            };
+            
+            document.body.appendChild(script);
+        }
+        
+        // 页面加载完成后开始测试
+        document.addEventListener('DOMContentLoaded', function() {
+            log('页面加载完成，开始测试...');
+            loadScript();
+        });
+        
+        // 定期检查
+        setInterval(checkAllElements, 5000);
+    </script>
+</body>
+</html>

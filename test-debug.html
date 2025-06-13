@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Judge.me 调试测试</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .test-case {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: #f9f9f9;
+        }
+        .jdgm-prev-badge {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+        }
+        .jdgm-prev-badge__stars {
+            color: gold;
+            margin-right: 8px;
+        }
+        .jdgm-prev-badge__text {
+            font-size: 14px;
+            color: #666;
+        }
+        .controls {
+            margin: 20px 0;
+        }
+        button {
+            padding: 8px 15px;
+            margin: 5px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        #console {
+            margin-top: 20px;
+            padding: 10px;
+            background: #000;
+            color: #0f0;
+            font-family: monospace;
+            border-radius: 3px;
+            max-height: 300px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <h1>Judge.me 调试测试</h1>
+    
+    <div class="controls">
+        <button onclick="runFix()">运行修复</button>
+        <button onclick="checkResults()">检查结果</button>
+        <button onclick="clearConsole()">清空日志</button>
+        <button onclick="resetElements()">重置元素</button>
+    </div>
+    
+    <div class="test-case">
+        <h3>测试 1: "8件のレビュー"</h3>
+        <div class="jdgm-prev-badge">
+            <div class="jdgm-prev-badge__stars">★★★★★</div>
+            <div class="jdgm-prev-badge__text" id="test1">8件のレビュー</div>
+        </div>
+    </div>
+    
+    <div class="test-case">
+        <h3>测试 2: "23 reviews"</h3>
+        <div class="jdgm-prev-badge">
+            <div class="jdgm-prev-badge__stars">★★★★☆</div>
+            <div class="jdgm-prev-badge__text" id="test2">23 reviews</div>
+        </div>
+    </div>
+    
+    <div class="test-case">
+        <h3>测试 3: 隐藏的 "9レビュー"</h3>
+        <div class="jdgm-prev-badge">
+            <div class="jdgm-prev-badge__stars">★★★★★</div>
+            <div class="jdgm-prev-badge__text" id="test3" style="visibility: hidden;">9レビュー</div>
+        </div>
+    </div>
+    
+    <div id="console"></div>
+    
+    <script src="assets/judgeme-debug.js"></script>
+    
+    <script>
+        // 重定向console.log到页面
+        const consoleDiv = document.getElementById('console');
+        const originalLog = console.log;
+        
+        console.log = function(...args) {
+            originalLog.apply(console, args);
+            const message = args.map(arg => 
+                typeof arg === 'object' ? JSON.stringify(arg) : String(arg)
+            ).join(' ');
+            
+            const timestamp = new Date().toLocaleTimeString();
+            consoleDiv.textContent += `[${timestamp}] ${message}\n`;
+            consoleDiv.scrollTop = consoleDiv.scrollHeight;
+        };
+        
+        function runFix() {
+            console.log('\n=== 手动运行修复 ===');
+            if (window.judgemeFixer) {
+                window.judgemeFixer.findAndFix();
+            } else {
+                console.log('❌ 修复器未加载');
+            }
+        }
+        
+        function checkResults() {
+            console.log('\n=== 检查修复结果 ===');
+            
+            const elements = document.querySelectorAll('.jdgm-prev-badge__text');
+            let successCount = 0;
+            
+            elements.forEach((el, index) => {
+                const text = el.textContent.trim();
+                const isCorrect = /^\(\d+\)$/.test(text);
+                const computedStyle = window.getComputedStyle(el);
+                const isVisible = computedStyle.visibility !== 'hidden' && 
+                                 computedStyle.display !== 'none' &&
+                                 computedStyle.opacity !== '0';
+                
+                console.log(`元素 ${index + 1}: "${text}", 格式正确: ${isCorrect}, 可见: ${isVisible}`);
+                
+                if (isCorrect && isVisible) {
+                    successCount++;
+                }
+            });
+            
+            console.log(`结果: ${successCount}/${elements.length} 个元素修复成功`);
+        }
+        
+        function clearConsole() {
+            consoleDiv.textContent = '';
+        }
+        
+        function resetElements() {
+            console.log('\n=== 重置所有元素 ===');
+            
+            document.getElementById('test1').textContent = '8件のレビュー';
+            document.getElementById('test2').textContent = '23 reviews';
+            document.getElementById('test3').textContent = '9レビュー';
+            document.getElementById('test3').style.visibility = 'hidden';
+            
+            // 移除修复标记
+            document.querySelectorAll('.jdgm-prev-badge__text').forEach(el => {
+                el.removeAttribute('data-debug-fixed');
+                el.removeAttribute('style');
+            });
+            
+            console.log('✅ 元素已重置');
+        }
+        
+        // 页面加载完成后的初始检查
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('📄 页面加载完成');
+            
+            setTimeout(() => {
+                console.log('\n=== 延迟检查结果 ===');
+                checkResults();
+            }, 3000);
+        });
+    </script>
+</body>
+</html>

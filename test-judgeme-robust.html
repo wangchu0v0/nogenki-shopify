@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Judge.me 全面修复版测试</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .test-section {
+            margin-bottom: 40px;
+            border: 1px solid #eee;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        .test-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #333;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+        .test-case {
+            margin-bottom: 15px;
+            padding: 15px;
+            background: #f9f9f9;
+            border-radius: 4px;
+        }
+        .language-toggle {
+            display: flex;
+            margin-bottom: 20px;
+            gap: 10px;
+        }
+        .language-toggle button {
+            padding: 8px 15px;
+            border: 1px solid #ddd;
+            background: #f5f5f5;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        .language-toggle button.active {
+            background: #007bff;
+            color: white;
+            border-color: #007bff;
+        }
+        .status {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #666;
+        }
+        .jdgm-prev-badge {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .jdgm-prev-badge__stars {
+            color: gold;
+            letter-spacing: 2px;
+            margin-right: 8px;
+        }
+        .jdgm-star {
+            font-size: 18px;
+        }
+        .jdgm-prev-badge__text {
+            font-size: 14px;
+            color: #666;
+        }
+        .log-section {
+            margin-top: 30px;
+            padding: 15px;
+            background: #f5f5f5;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 14px;
+            max-height: 300px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+        }
+        .result-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        .success {
+            background-color: #4caf50;
+        }
+        .pending {
+            background-color: #ff9800;
+        }
+        .failure {
+            background-color: #f44336;
+        }
+        .test-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .test-controls {
+            display: flex;
+            gap: 10px;
+        }
+        #timer-display {
+            font-family: monospace;
+            font-size: 16px;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+        .actions {
+            margin: 20px 0;
+        }
+        .btn {
+            padding: 8px 15px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .btn-secondary {
+            background: #6c757d;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-header">
+        <h1>Judge.me 全面修复版验证</h1>
+        <div class="test-controls">
+            <span id="timer-display">00:00</span>
+            <div class="language-toggle">
+                <button data-lang="ja" class="active">日本語</button>
+                <button data-lang="en">English</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="actions">
+        <button id="toggle-obstacles" class="btn">模拟其他脚本干扰</button>
+        <button id="reset-test" class="btn btn-secondary">重置测试</button>
+    </div>
+    
+    <div class="test-section">
+        <div class="test-title">日文评论 (日语界面)</div>
+        
+        <div class="test-case">
+            <p>标准日文评论 <code>8件のレビュー</code>:</p>
+            <div class="jdgm-prev-badge">
+                <div class="jdgm-prev-badge__stars">
+                    <span class="jdgm-star">★</span>
+                    <span class="jdgm-star">★</span>
+                    <span class="jdgm-star">★</span>
+                    <span class="jdgm-star">★</span>
+                    <span class="jdgm-star">★</span>
+                </div>
+                <div class="jdgm-prev-badge__text">8件のレビュー</div>
+            </div>
+            <div class="status">状态: <span class="result-indicator pending"></span>等待修复</div>
+        </div>
+        
+        <div class="test-case">
+            <p>简化日文评论 <code>8レビュー</code>:</p>
+            <div class="jdgm-prev-badge">
+                <div class="jdgm-prev-badge__stars">
+                    <span class="jdgm-star">★</span>
+                    <span class="jdgm-star">★</span>
+                    <span class="jdgm-star">★</span>
+                    <span class="jdgm-star">★</span>
+                    <span class="jdgm-star">☆</span>
+                </div>
+                <div class="jdgm-prev-badge__text">8レビュー</div>
+            </div>
+            <div class="status">状态: <span class="result-indicator pending"></span>等待修复</div>
+        </div>
+        
+        <div class="test-case">
+            <p>数据属性 <code>data-number-of-reviews="12"</code>:</p>
+            <div class="jdgm-prev-badge">
+                <div class="jdgm-prev-badge__stars">
+                    <span class="jdgm-star">★</span>
+                    <span class="jdgm-star">★</span>
+                    <span class="jdgm-star">★</span>
+                    <span class="jdgm-star">★</span>
+                    <span class="jdgm-star">★</span>
+                </div>
+                <div class="jdgm-prev-badge__text" data-number-of-reviews="12"></div>
+            </div>
+            <div class="status">状态: <span class="result-indicator pending"></span>等待修复</div>
+        </div>
+    </div>
+    
+    <div class="test-section">
+        <div class="test-title">英文评论 (英语界面)</div>
+        
+        <div class="test-case">
+            <p>标准英文评论 <code>23 reviews</code>:</p>
+            <div class="jdgm-prev-badge">
+                <div class="jdgm-prev-badge__stars">
+                    <span class="jdgm-star">★</span>
+                    <span class="jdgm-star">★</span>
+                    <span class="jdgm-star">★</span>
+                    <span class="jdgm-star">★</span>
+                    <span class="jdgm-star">☆</span>
+                </div>
+                <div class="jdgm-prev-badge__text">23 reviews</div>
+            </div>
+            <div class="status">状态: <span class="result-indicator pending"></span>等待修复</div>
+        </div>
+        
+        <div class="test-case">
+            <p>单个评论 <code>1 review</code>:</p>
+            <div class="jdgm-prev-badge">
+                <div class="jdgm-prev-badge__stars">
+                    <span class="jdgm-star">★</span>
+                    <span class="jdgm-star">★</span>
+                    <span class="jdgm-star">★</span>
+                    <span class="jdgm-star">☆</span>
+                    <span class="jdgm-star">☆</span>
+                </div>
+                <div class="jdgm-prev-badge__text">1 review</div>
+            </div>
+            <div class="status">状态: <span class="result-indicator pending"></span>等待修复</div>
+        </div>
+        
+        <div class="test-case">
+            <p>客户评论 <code>45 customer reviews</code>:</p>
+            <div class="jdgm-prev-badge">
+                <div class="jdgm-prev-badge__stars">
+                    <span class="jdgm-star">★</span>
+                    <span class="jdgm-star">★</span>
+                    <span class="jdgm-star">★</span>
+                    <span class="jdgm-star">★</span>
+                    <span class="jdgm-star">★</span>
+                </div>
+                <div class="jdgm-prev-badge__text">45 customer reviews</div>
+            </div>
+            <div class="status">状态: <span class="result-indicator pending"></span>等待修复</div>
+        </div>
+    </div>
+    
+    <div class="test-section">
+        <div class="test-title">抗干扰测试</div>
+        
+        <div class="test-case">
+            <p>隐藏样式评论 (使用CSS visibility:hidden):</p>
+            <div class="jdgm-prev-badge">
+                <div class="jdgm-prev-badge__stars">
+                    <span class="jdgm-star">★</span>
+                    <span class="jdgm-star">★</span>
+                    <span class="jdgm-star">★</span>
+                    <span class="jdgm-star">★</span>
+                    <span class="jdgm-star">★</span>
+                </div>
+                <div class="jdgm-prev-badge__text" style="visibility: hidden;">9件のレビュー</div>
+            </div>
+            <div class="status">状态: <span class="result-indicator pending"></span>等待修复</div>
+        </div>
+        
+        <div class="test-case">
+            <p>动态加载评论 (2秒后加载):</p>
+            <div class="jdgm-prev-badge" id="dynamic-badge">
+                <div class="jdgm-prev-badge__stars">
+                    <span class="jdgm-star">★</span>
+                    <span class="jdgm-star">★</span>
+                    <span class="jdgm-star">★</span>
+                    <span class="jdgm-star">★</span>
+                    <span class="jdgm-star">☆</span>
+                </div>
+                <!-- 此处会动态加载评论文本 -->
+            </div>
+            <div class="status">状态: <span class="result-indicator pending"></span>等待修复</div>
+        </div>
+        
+        <div class="test-case">
+            <p>动态修改评论 (每3秒修改一次):</p>
+            <div class="jdgm-prev-badge">
+                <div class="jdgm-prev-badge__stars">
+                    <span class="jdgm-star">★</span>
+                    <span class="jdgm-star">★</span>
+                    <span class="jdgm-star">★</span>
+                    <span class="jdgm-star">★</span>
+                    <span class="jdgm-star">★</span>
+                </div>
+                <div class="jdgm-prev-badge__text" id="changing-text">18 reviews</div>
+            </div>
+            <div class="status">状态: <span class="result-indicator pending"></span>等待修复</div>
+        </div>
+    </div>
+    
+    <div class="log-section" id="log"></div>
+    
+    <script>
+        // 计时器
+        let seconds = 0;
+        const timerDisplay = document.getElementById('timer-display');
+        setInterval(() => {
+            seconds++;
+            const mins = Math.floor(seconds / 60).toString().padStart(2, '0');
+            const secs = (seconds % 60).toString().padStart(2, '0');
+            timerDisplay.textContent = `${mins}:${secs}`;
+        }, 1000);
+        
+        // 日志函数
+        function logMessage(message) {
+            const logEl = document.getElementById('log');
+            const timestamp = new Date().toLocaleTimeString();
+            logEl.innerHTML += `[${timestamp}] ${message}\n`;
+            logEl.scrollTop = logEl.scrollHeight;
+        }
+        
+        // 语言切换
+        document.querySelectorAll('.language-toggle button').forEach(button => {
+            button.addEventListener('click', function() {
+                const lang = this.getAttribute('data-lang');
+                document.documentElement.lang = lang;
+                
+                document.querySelectorAll('.language-toggle button').forEach(b => {
+                    b.classList.remove('active');
+                });
+                this.classList.add('active');
+                
+                logMessage(`切换语言到: ${lang}`);
+                
+                // 重置测试
+                resetTests();
+            });
+        });
+        
+        // 重置测试
+        function resetTests() {
+            document.querySelectorAll('.jdgm-prev-badge__text').forEach(el => {
+                // 移除所有修改标记
+                const attrs = el.getAttributeNames();
+                attrs.forEach(attr => {
+                    if (attr.startsWith('data-judgeme')) {
+                        el.removeAttribute(attr);
+                    }
+                });
+                
+                // 重置样式
+                el.removeAttribute('style');
+            });
+            
+            document.querySelectorAll('.result-indicator').forEach(el => {
+                el.className = 'result-indicator pending';
+            });
+            
+            document.querySelectorAll('.status').forEach(el => {
+                el.innerHTML = '状态: <span class="result-indicator pending"></span>等待修复';
+            });
+            
+            logMessage('重置所有测试');
+        }
+        
+        // 重置按钮
+        document.getElementById('reset-test').addEventListener('click', function() {
+            resetTests();
+            
+            // 重新加载修复脚本
+            loadFixScript();
+        });
+        
+        // 模拟干扰
+        let obstacleInterval;
+        let obstaclesActive = false;
+        
+        document.getElementById('toggle-obstacles').addEventListener('click', function() {
+            if (obstaclesActive) {
+                clearInterval(obstacleInterval);
+                this.textContent = '模拟其他脚本干扰';
+                obstaclesActive = false;
+                logMessage('停止干扰模拟');
+            } else {
+                obstacleInterval = setInterval(simulateObstacles, 3000);
+                this.textContent = '停止干扰模拟';
+                obstaclesActive = true;
+                logMessage('开始模拟脚本干扰');
+            }
+        });
+        
+        function simulateObstacles() {
+            // 1. 修改文本内容
+            const changingText = document.getElementById('changing-text');
+            const texts = ['18 reviews', '18レビュー', '18件のレビュー', '(18)', '18 customer reviews'];
+            const randomText = texts[Math.floor(Math.random() * texts.length)];
+            changingText.textContent = randomText;
+            logMessage(`干扰: 修改文本为 "${randomText}"`);
+            
+            // 2. 随机修改一个已处理过的元素
+            const modifiedElements = document.querySelectorAll('[data-judgeme-robust-fixed]');
+            if (modifiedElements.length > 0) {
+                const randomElement = modifiedElements[Math.floor(Math.random() * modifiedElements.length)];
+                const originalText = randomElement.textContent;
+                if (originalText.match(/^\(\d+\)$/)) {
+                    const number = originalText.match(/\d+/)[0];
+                    const newFormats = [`${number} reviews`, `${number}レビュー`, `${number}件のレビュー`];
+                    randomElement.textContent = newFormats[Math.floor(Math.random() * newFormats.length)];
+                    logMessage(`干扰: 修改已处理元素 "${originalText}" → "${randomElement.textContent}"`);
+                }
+            }
+            
+            // 3. 随机隐藏一个元素
+            const allElements = document.querySelectorAll('.jdgm-prev-badge__text');
+            if (allElements.length > 0) {
+                const randomIndex = Math.floor(Math.random() * allElements.length);
+                const randomStyle = ['visibility: hidden', 'display: none', 'opacity: 0'][Math.floor(Math.random() * 3)];
+                allElements[randomIndex].style = randomStyle;
+                logMessage(`干扰: 隐藏元素 (${randomStyle})`);
+            }
+        }
+        
+        // 动态加载评论
+        setTimeout(() => {
+            const dynamicBadge = document.getElementById('dynamic-badge');
+            const textEl = document.createElement('div');
+            textEl.className = 'jdgm-prev-badge__text';
+            textEl.textContent = '7 reviews';
+            dynamicBadge.appendChild(textEl);
+            logMessage('动态加载评论元素: "7 reviews"');
+        }, 2000);
+          // 检查修复结果 - 增强版
+        function checkResults() {
+            let totalElements = 0;
+            let successCount = 0;
+            let failureCount = 0;
+            
+            document.querySelectorAll('.jdgm-prev-badge__text').forEach(el => {
+                totalElements++;
+                const parent = el.closest('.test-case');
+                if (!parent) return;
+                
+                const statusEl = parent.querySelector('.status');
+                const indicatorEl = statusEl.querySelector('.result-indicator');
+                
+                // 检查文本格式
+                const text = el.textContent.trim();
+                const hasCorrectFormat = /^\(\d+\)$/.test(text);
+                
+                // 检查可见性 - 更全面的检查
+                const computedStyle = window.getComputedStyle(el);
+                const isVisible = computedStyle.visibility !== 'hidden' && 
+                                 computedStyle.display !== 'none' &&
+                                 computedStyle.opacity !== '0' &&
+                                 computedStyle.opacity !== '';
+                
+                // 检查是否被处理过
+                const isModified = Array.from(el.attributes).some(attr => 
+                    attr.name.startsWith('data-judgeme')
+                );
+                
+                // 额外检查：元素是否在视窗内
+                const rect = el.getBoundingClientRect();
+                const isInViewport = rect.width > 0 && rect.height > 0;
+                
+                if (hasCorrectFormat && isVisible && isInViewport) {
+                    indicatorEl.className = 'result-indicator success';
+                    statusEl.innerHTML = `状态: <span class="result-indicator success"></span>✅ 成功修复为: "${text}"`;
+                    successCount++;
+                } else {
+                    indicatorEl.className = 'result-indicator failure';
+                    failureCount++;
+                    
+                    let failureReason = '';
+                    if (!hasCorrectFormat) {
+                        failureReason = `格式错误: "${text}"`;
+                    } else if (!isVisible) {
+                        failureReason = `元素不可见 (visibility:${computedStyle.visibility}, display:${computedStyle.display}, opacity:${computedStyle.opacity})`;
+                    } else if (!isInViewport) {
+                        failureReason = `元素不在视窗内 (尺寸: ${rect.width}x${rect.height})`;
+                    } else {
+                        failureReason = `未知错误`;
+                    }
+                    
+                    statusEl.innerHTML = `状态: <span class="result-indicator failure"></span>❌ ${failureReason}`;
+                }
+                
+                // 调试信息
+                if (CONFIG && CONFIG.debug) {
+                    console.log(`检查元素: "${text}", 格式正确:${hasCorrectFormat}, 可见:${isVisible}, 在视窗:${isInViewport}, 已修复:${isModified}`);
+                }
+            });
+            
+            // 更新总体状态
+            const overallStatus = `总计: ${totalElements} 个元素, 成功: ${successCount}, 失败: ${failureCount}`;
+            logMessage(overallStatus);
+            
+            // 如果有失败的元素，记录详细信息
+            if (failureCount > 0) {
+                logMessage(`⚠️ 仍有 ${failureCount} 个元素未能正确修复`);
+            } else if (successCount > 0) {
+                logMessage(`🎉 所有 ${successCount} 个元素已成功修复!`);
+            }
+        }// 加载修复脚本
+        function loadFixScript() {
+            logMessage('加载强化修复版脚本');
+            
+            // 移除可能存在的原始版本或强化版
+            const existingScripts = document.querySelectorAll('script[src*="judgeme-modifier-robust"]');
+            existingScripts.forEach(script => script.remove());
+            
+            const script = document.createElement('script');
+            script.src = 'assets/judgeme-modifier-robust.js';  // 使用正确的路径
+            script.onload = function() {
+                logMessage('强化修复版脚本加载成功');
+                // 延迟检查以确保脚本执行完毕
+                setTimeout(checkResults, 200);
+                setTimeout(checkResults, 800);
+                setTimeout(checkResults, 1500);
+                setTimeout(checkResults, 3000);
+            };
+            script.onerror = function() {
+                logMessage('错误: 脚本加载失败');
+            };
+            document.body.appendChild(script);
+            
+            logMessage('开始加载强化修复版脚本...');
+        }
+        
+        // 初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            logMessage('页面加载完成，准备测试');
+            loadFixScript();
+        });
+        
+        // 每隔2秒检查一次修复状态
+        setInterval(checkResults, 2000);
+    </script>
+</body>
+</html>
