@@ -28,18 +28,20 @@
       <meta name="description" content="{{ page_description | escape }}">
     {% endif %}
 
-    {% render 'meta-tags' %}    {%- comment -%} SEO优化器 - 仅影响搜索引擎，不影响页面显示 {%- endcomment -%}
+    {% render 'meta-tags' %}
+      {%- comment -%} SEO优化器 - 仅影响搜索引擎，不影响页面显示 {%- endcomment -%}
     {%- if template contains 'product' -%}
       {% render 'seo-optimizer' %}
     {%- elsif template contains 'collection' -%}
       {% render 'collection-seo-optimizer' %}
-    {%- elsif template contains 'article' -%}
-      {% render 'blog-seo-optimizer' %}
     {%- endif -%}
-      <script src="{{ 'constants.js' | asset_url }}" defer="defer"></script>
-    <script src="{{ 'pubsub.js' | asset_url }}" defer="defer"></script>    <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
-    <!-- Judge.me非破坏性修复器 - 保护功能完整性 -->
-    <script src="{{ 'judgeme-simple-fix.js' | asset_url }}" defer="defer"></script>
+    
+    <script src="{{ 'constants.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'pubsub.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'judgeme-modifier-optimized.js' | asset_url }}" defer="defer"></script>
+    <!-- 添加专用移动端处理脚本，确保在所有设备上都正常工作 -->
+    <script src="{{ 'judgeme-modifier-mobile.js' | asset_url }}" defer="defer"></script>
     {%- if settings.animations_reveal_on_scroll -%}
       <script src="{{ 'animations.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}

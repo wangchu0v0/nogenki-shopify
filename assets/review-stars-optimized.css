@@ -1,5 +1,5 @@
-/* Judge.me 星星颜色和评价文本统一样式 */
-/* 优化版本 - 兼容英语和日语界面 */
+/* Review Stars Optimized - 优化的评价星星样式 */
+/* 精简版本 - 仅处理颜色和基础样式，文字格式由Judge.me插件处理 */
 
 /* === Judge.me 星星颜色 === */
 .jdgm-star,
@@ -30,38 +30,6 @@
   color: #A889A8 !important;
 }
 
-/* === 统一修复器处理的元素样式 === */
-[data-judgeme-unified="true"] {
-  font-size: 10px !important;
-  font-family: "Libre Baskerville", serif !important;
-  color: #666 !important;
-  line-height: 1 !important;
-  vertical-align: middle !important;
-  transform: translateY(-1px) !important;
-  display: inline !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-}
-
-/* === 确保在不同语言和设备下都正常显示 === */
-.jdgm-prev-badge__text {
-  font-family: "Libre Baskerville", serif !important;
-  color: #666 !important;
-  line-height: 1 !important;
-}
-
-/* 确保评价徽章对齐 */
-.jdgm-prev-badge {
-  display: flex !important;
-  align-items: center !important;
-  gap: 6px !important;
-}
-
-.jdgm-prev-badge__stars {
-  display: inline-flex !important;
-  align-items: center !important;
-}
-
 /* === 其他评价插件兼容 === */
 .star-rating,
 .product-reviews .star,
@@ -77,25 +45,6 @@
 .spr-starrating .spr-star {
   color: #A889A8 !important;
   fill: #A889A8 !important;
-}
-
-/* === 响应式调整 === */
-@media screen and (max-width: 768px) {
-  [data-judgeme-unified="true"] {
-    font-size: 10px !important;
-  }
-  .jdgm-star {
-    font-size: 14px !important;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  [data-judgeme-unified="true"] {
-    font-size: 10px !important;
-  }
-  .jdgm-star {
-    font-size: 13px !important;
-  }
 }
 
 /* === 备用样式（确保兼容性） === */
