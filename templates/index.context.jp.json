@@ -28,11 +28,11 @@
         "slider_visual": "dots",
         "auto_rotate": false,
         "change_slides_speed": 5,
-        "header-8157025811d4653e641ad2354f810764": null,
+        "header-182765c32ebe8b0f40d487b7545aafcb": null,
         "image_behavior": "none",
-        "header-a1a84edc804bf39b92070c2e51c83328": null,
+        "header-35d9f69c938fb22443e4667f558e54a6": null,
         "show_text_below": false,
-        "header-d9c08188ef2bc80ff271bad2df26b889": null,
+        "header-be13e07829f67b34a7e91f8f4ff43ad0": null,
         "accessibility_info": ""
       },
       "blocks": {
@@ -52,7 +52,7 @@
             "text_alignment": "center",
             "image_overlay_opacity": 0,
             "color_scheme": "",
-            "header-42348b44d4418eaa1fd0fe69a919d084": null,
+            "header-1f4601dcee1813963b84fe7007af15bf": null,
             "text_alignment_mobile": "center"
           }
         },
@@ -72,7 +72,7 @@
             "text_alignment": "center",
             "image_overlay_opacity": 0,
             "color_scheme": "scheme-1",
-            "header-913fac5a424ae50a4377a7ce07c8baf3": null,
+            "header-b28e2f086d8a5aee9f997543b2147aee": null,
             "text_alignment_mobile": "center"
           }
         },
@@ -92,7 +92,7 @@
             "text_alignment": "center",
             "image_overlay_opacity": 0,
             "color_scheme": "",
-            "header-c9f9945e6e9e044f7abfdc37fb9760a2": null,
+            "header-bc9b2aed1f97ac95fbe7194599658fff": null,
             "text_alignment_mobile": "center"
           }
         },
@@ -112,7 +112,7 @@
             "text_alignment": "center",
             "image_overlay_opacity": 0,
             "color_scheme": "scheme-1",
-            "header-c860cea16ad39353bc0953fbaadfc115": null,
+            "header-77ba3e789edffbae200ccccee0616901": null,
             "text_alignment_mobile": "center"
           }
         },
@@ -132,7 +132,7 @@
             "text_alignment": "center",
             "image_overlay_opacity": 0,
             "color_scheme": "scheme-1",
-            "header-57f26a0607ed6b33e445178b2270691e": null,
+            "header-fe75818f340d972f1927a4e209e00f39": null,
             "text_alignment_mobile": "center"
           }
         }
@@ -169,22 +169,23 @@
         "view_all_style": "solid",
         "enable_desktop_slider": true,
         "color_scheme": "scheme-28957b8d-d6dd-4267-a6b6-e5cd5c83768e",
-        "header-59663563b00f91ec22747accb1a01f95": null,
+        "header-d4298580d358e5e45891c875b607edb1": null,
         "image_ratio": "adapt",
         "image_shape": "default",
         "show_secondary_image": false,
         "show_vendor": false,
         "show_rating": false,
         "quick_add": "none",
-        "header-83816cea1c6aa9f67d65a5c297f8fe50": null,
+        "header-6cf3f06cff22ed25defc3fb46df18c34": null,
         "columns_mobile": "2",
         "swipe_on_mobile": true,
-        "header-e79190e196a69ca6736cd4c2df18b558": null,
+        "header-b48937f6fae13eed5d560f6663e09e85": null,
         "padding_top": 0,
         "padding_bottom": 0
       },
       "blocks": {},
-      "block_order": []
+      "block_order": [],
+      "name": "New Arrivals"
     },
     "featured_collection_ALVRc": {
       "type": "featured-collection",
@@ -210,22 +211,23 @@
         "view_all_style": "solid",
         "enable_desktop_slider": false,
         "color_scheme": "scheme-28957b8d-d6dd-4267-a6b6-e5cd5c83768e",
-        "header-d32b9996fc6cb0d0ec645feadaebf77e": null,
+        "header-75164c4dff753114644f9bf9c6d9c5eb": null,
         "image_ratio": "adapt",
         "image_shape": "default",
         "show_secondary_image": false,
         "show_vendor": false,
         "show_rating": false,
         "quick_add": "none",
-        "header-f6c8eec74341a920b13ccf764163f528": null,
+        "header-ce7085d47445bcc5d56247d89f62776a": null,
         "columns_mobile": "2",
         "swipe_on_mobile": false,
-        "header-12f7811608971ead1549e036326460f0": null,
+        "header-c42972ea76a6f13119479798300f9140": null,
         "padding_top": 4,
         "padding_bottom": 36
       },
       "blocks": {},
-      "block_order": []
+      "block_order": [],
+      "name": "Ranking"
     },
     "rich_text_6Ft4F": {
       "type": "rich-text",
@@ -238,7 +240,7 @@
         "content_alignment": "left",
         "color_scheme": "scheme-28957b8d-d6dd-4267-a6b6-e5cd5c83768e",
         "full_width": true,
-        "header-530f796a2554a2a393c47fc6c64fe95a": null,
+        "header-b07a493df0276d6affa2789654ba78ac": null,
         "padding_top": 28,
         "padding_bottom": 44
       },
@@ -267,7 +269,7 @@
         ".card__inner {border: none !important; box-shadow: none !important; background: none !important;}"
       ],
       "settings": {
-        "title": "トップス",
+        "title": "Tops",
         "heading_size": "h2",
         "description": "<p>Tops</p>",
         "show_description": true,
@@ -280,22 +282,23 @@
         "view_all_style": "solid",
         "enable_desktop_slider": false,
         "color_scheme": "scheme-28957b8d-d6dd-4267-a6b6-e5cd5c83768e",
-        "header-15b801bb445c23720de235d907afe820": null,
+        "header-88de234dd93303dad7145d8f409f1c82": null,
         "image_ratio": "adapt",
         "image_shape": "default",
         "show_secondary_image": false,
         "show_vendor": false,
         "show_rating": false,
         "quick_add": "none",
-        "header-3aa7bba951f38c8ebe78aa31b5e0db01": null,
+        "header-15d1911fa111b5fda5e3c38db9e2a086": null,
         "columns_mobile": "2",
         "swipe_on_mobile": false,
-        "header-f1b8cdc058aea6002f93030262883cbe": null,
+        "header-df9969eb3ee8638b2ce012b93245a133": null,
         "padding_top": 0,
         "padding_bottom": 0
       },
       "blocks": {},
-      "block_order": []
+      "block_order": [],
+      "name": "Tops"
     },
     "featured_collection_y4gY4": {
       "type": "featured-collection",
@@ -308,7 +311,7 @@
         ".card__inner {border: none !important; box-shadow: none !important; background: none !important;}"
       ],
       "settings": {
-        "title": "ボトムス",
+        "title": "Bottoms",
         "heading_size": "h2",
         "description": "",
         "show_description": false,
@@ -321,22 +324,23 @@
         "view_all_style": "solid",
         "enable_desktop_slider": false,
         "color_scheme": "scheme-28957b8d-d6dd-4267-a6b6-e5cd5c83768e",
-        "header-a0b6fa558ebc18b95d3b44b3ca020bbd": null,
+        "header-be37d9671bd6adbda4e6d1d632ba669e": null,
         "image_ratio": "portrait",
         "image_shape": "default",
         "show_secondary_image": false,
         "show_vendor": false,
         "show_rating": false,
         "quick_add": "none",
-        "header-1d4b0b1a051ef0add5a20def414ce3eb": null,
+        "header-2e852bab0f512f23ff6b8f4d038d8bfd": null,
         "columns_mobile": "2",
         "swipe_on_mobile": false,
-        "header-d87b32c8efacf26f71c329e42369dd91": null,
+        "header-a0fb0be70437d29907d2d88851d8edc0": null,
         "padding_top": 0,
         "padding_bottom": 0
       },
       "blocks": {},
-      "block_order": []
+      "block_order": [],
+      "name": "Bottoms"
     },
     "featured_collection_iiBxTX": {
       "disabled": false,
@@ -348,27 +352,13 @@
         ".card__inner {border: none !important; box-shadow: none !important; background: none !important;}"
       ],
       "settings": {
-        "title": "アウター",
+        "title": "Outer",
         "collection": "outer",
         "products_to_show": 15,
         "color_scheme": "scheme-28957b8d-d6dd-4267-a6b6-e5cd5c83768e"
       },
-      "blocks": {}
-    },
-    "featured_collection_whFRMG": {
-      "custom_css": [
-        ".price__regular {font-size: 13px; padding: 2px 4px;}",
-        ".jdgm-prev-badge {font-size: 12px; padding: 2px 4px;}",
-        ".inline-richtext {margin-bottom: 0px;}",
-        ".collection__title {margin-bottom: 0px;}",
-        ".card__inner {border: none !important; box-shadow: none !important; background: none !important;}"
-      ],
-      "settings": {
-        "title": "ワンピースセットアップ",
-        "products_to_show": 14,
-        "color_scheme": "scheme-28957b8d-d6dd-4267-a6b6-e5cd5c83768e"
-      },
-      "blocks": {}
+      "blocks": {},
+      "name": "Outer"
     },
     "featured_collection_Lqyhdh": {
       "custom_css": [
@@ -379,14 +369,15 @@
         ".card__inner {border: none !important; box-shadow: none !important; background: none !important;}"
       ],
       "settings": {
-        "title": "アクセサリー",
+        "title": "Goods",
+        "color_scheme": "scheme-28957b8d-d6dd-4267-a6b6-e5cd5c83768e",
+        "image_ratio": "square",
         "image_shape": "default",
         "show_secondary_image": false,
-        "show_rating": false,
-        "color_scheme": "scheme-28957b8d-d6dd-4267-a6b6-e5cd5c83768e",
-        "image_ratio": "square"
+        "show_rating": false
       },
-      "blocks": {}
+      "blocks": {},
+      "name": "Goods"
     },
     "rich_text_ye7rHj": {
       "settings": {
@@ -398,7 +389,24 @@
             "text": "<h5>ようこそ、♡NoGenki webショップへ</h5><h5>♡NoGenkiは、大人気量産型や地雷系などを取り扱うブランドです。</h5><h5>♡華麗、可愛い、神秘、セクシー♡ </h5><h5>ーーーーーーーーーーーーーーーー</h5><h5></h5><h5>もし何かお気づきの点やご要望などございましたら、お気軽にお知らせいただければ幸いです。 </h5><h5> 皆様のご意見を大切にし、より良いサービスをご提供できるよう努力致します。</h5><h5>また、新しいアイテムも続々と登場予定ですので、ぜひご期待くださいませ。 </h5><h5>今後ともNoGenkiをどうぞよろしくお願い申し上げます。</h5>"
           }
         }
-      }
+      },
+      "name": "Hello"
+    },
+    "featured_collection_whFRMG": {
+      "custom_css": [
+        ".price__regular {font-size: 13px; padding: 2px 4px;}",
+        ".jdgm-prev-badge {font-size: 12px; padding: 2px 4px;}",
+        ".inline-richtext {margin-bottom: 0px;}",
+        ".collection__title {margin-bottom: 0px;}",
+        ".card__inner {border: none !important; box-shadow: none !important; background: none !important;}"
+      ],
+      "settings": {
+        "title": "Onepiece & set",
+        "products_to_show": 14,
+        "color_scheme": "scheme-28957b8d-d6dd-4267-a6b6-e5cd5c83768e"
+      },
+      "blocks": {},
+      "name": "Onepiece"
     }
   },
   "order": [
@@ -407,9 +415,12 @@
     "featured_collection_ALVRc",
     "rich_text_6Ft4F",
     "featured_collection_ERWai",
-    "featured_collection_iiBxTX",
-    "featured_collection_whFRMG",
+    "featured_collection_fPF4pB",
     "featured_collection_y4gY4",
+    "featured_collection_kzYRNQ",
+    "featured_collection_iiBxTX",
+    "rich_text_gTKzVD",
+    "featured_collection_whFRMG",
     "featured_collection_Lqyhdh",
     "rich_text_ye7rHj"
   ]
