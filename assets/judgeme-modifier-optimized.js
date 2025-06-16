@@ -4,6 +4,27 @@
 (function() {
     'use strict';
     
+    // 语言检测函数
+    function getCurrentLanguage() {
+        const htmlLang = document.documentElement.lang || document.querySelector('html').getAttribute('lang');
+        if (htmlLang) {
+            return htmlLang.toLowerCase().substring(0, 2);
+        }
+        if (window.location.pathname.includes('/en')) {
+            return 'en';
+        }
+        return 'ja';
+    }
+    
+    // 语言检测 - 只在日文页面运行
+    const currentLang = getCurrentLanguage();
+    if (currentLang !== 'ja') {
+        console.log(`🚫 检测到${currentLang}页面，跳过Judge.me样式修改`);
+        return;
+    }
+    
+    console.log('🎯 日文页面检测到，开始Judge.me样式修改');
+    
     // 配置参数
     const CONFIG = {
         maxRetries: 10,

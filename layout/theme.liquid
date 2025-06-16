@@ -34,13 +34,11 @@
       {% render 'seo-optimizer' %}
     {%- elsif template contains 'collection' -%}
       {% render 'collection-seo-optimizer' %}
-    {%- endif -%}
-    
-    <script src="{{ 'constants.js' | asset_url }}" defer="defer"></script>
+    {%- endif -%}    <script src="{{ 'constants.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'pubsub.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
+    <!-- Judge.me样式修改脚本 - 已添加多语言支持，只在日文页面生效 -->
     <script src="{{ 'judgeme-modifier-optimized.js' | asset_url }}" defer="defer"></script>
-    <!-- 添加专用移动端处理脚本，确保在所有设备上都正常工作 -->
     <script src="{{ 'judgeme-modifier-mobile.js' | asset_url }}" defer="defer"></script>
     {%- if settings.animations_reveal_on_scroll -%}
       <script src="{{ 'animations.js' | asset_url }}" defer="defer"></script>
