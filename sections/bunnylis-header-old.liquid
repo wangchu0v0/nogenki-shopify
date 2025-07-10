@@ -1,0 +1,193 @@
+{{ 'component-list-menu.css' | asset_url | stylesheet_tag }}
+{{ 'component-search.css' | asset_url | stylesheet_tag }}
+{{ 'component-menu-drawer.css' | asset_url | stylesheet_tag }}
+{{ 'component-cart-notification.css' | asset_url | stylesheet_tag }}
+{{ 'component-cart-items.css' | asset_url | stylesheet_tag }}
+
+<style>
+  .bunnylis-header {
+    background-color: {{ section.settings.header_bg_color }};
+    color: {{ section.settings.header_text_color }};
+    padding: 1rem 0;
+    position: relative;
+    z-index: 3;
+  }
+  
+  .bunnylis-header .header__inline-menu {
+    background-color: transparent;
+  }
+  
+  .bunnylis-header .header__wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+  
+  .bunnylis-header .header__heading-logo {
+    max-width: 200px;
+  }
+  
+  .bunnylis-header .header__heading-logo .header__heading-link {
+    color: {{ section.settings.header_text_color }};
+    text-decoration: none;
+    font-size: 1.8rem;
+    font-weight: bold;
+  }
+  
+  .bunnylis-header .header__heading-logo img {
+    max-height: 60px;
+    width: auto;
+  }
+  
+  .bunnylis-header .header__icons {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .bunnylis-header .header__icon {
+    color: {{ section.settings.header_text_color }};
+    text-decoration: none;
+    padding: 0.5rem;
+  }
+  
+  .bunnylis-header .header__icon:hover {
+    opacity: 0.8;
+  }
+  
+  .bunnylis-header .list-menu {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 2rem;
+  }
+  
+  .bunnylis-header .list-menu__item .link {
+    color: {{ section.settings.header_text_color }};
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.5rem 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .bunnylis-header .list-menu__item .link:hover {
+    opacity: 0.8;
+  }
+  
+  @media screen and (max-width: 749px) {
+    .bunnylis-header .header__wrapper {
+      padding: 0 1rem;
+    }
+    
+    .bunnylis-header .header__inline-menu {
+      display: none;
+    }
+  }
+</style>
+
+<header class="header bunnylis-header gradient">
+  <div class="header__wrapper page-width">
+    <div class="header__heading">
+      {%- if section.settings.logo != blank -%}
+        <div class="header__heading-logo">
+          <a href="{{ routes.root_url }}" class="header__heading-link link link--text focus-inset">
+            <img
+              src="{{ section.settings.logo | image_url: width: 300 }}"
+              alt="{{ shop.name }}"
+              width="{{ section.settings.logo.width }}"
+              height="{{ section.settings.logo.height }}"
+              class="header__heading-logo-image"
+            >
+          </a>
+        </div>
+      {%- else -%}
+        <div class="header__heading-logo">
+          <a href="{{ routes.root_url }}" class="header__heading-link link link--text focus-inset">
+            {{ section.settings.logo_text | default: 'BunnyLis' }}
+          </a>
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- if section.settings.menu != blank -%}
+      <nav class="header__inline-menu">
+        <ul class="list-menu list-menu--inline" role="list">
+          {%- for link in section.settings.menu.links -%}
+            <li class="list-menu__item">
+              <a
+                href="{{ link.url }}"
+                class="link link--text list-menu__item focus-inset"
+                {% if link.current %} aria-current="page"{% endif %}
+              >
+                {{ link.title | escape }}
+              </a>
+            </li>
+          {%- endfor -%}
+        </ul>
+      </nav>
+    {%- endif -%}
+
+    <div class="header__icons">
+      <a href="{{ routes.search_url }}" class="header__icon link link--text focus-inset">
+        {%- render 'icon-search' -%}
+        <span class="visually-hidden">{{ 'general.search.search' | t }}</span>
+      </a>
+
+      <a href="{{ routes.cart_url }}" class="header__icon link link--text focus-inset" id="cart-icon-bubble">
+        {%- render 'icon-cart' -%}
+        <span class="visually-hidden">{{ 'templates.cart.cart' | t }}</span>
+        {%- if cart != empty -%}
+          <div class="cart-count-bubble">
+            {%- if cart.item_count < 100 -%}
+              <span aria-hidden="true">{{ cart.item_count }}</span>
+            {%- endif -%}
+            <span class="visually-hidden">{{ 'sections.header.cart_count' | t: count: cart.item_count }}</span>
+          </div>
+        {%- endif -%}
+      </a>
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "BunnyLis Header",
+  "tag": "header",
+  "class": "section-header",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "BunnyLis Logo"
+    },
+    {
+      "type": "text",
+      "id": "logo_text",
+      "label": "Logo Text",
+      "default": "BunnyLis"
+    },
+    {
+      "type": "color",
+      "id": "header_bg_color",
+      "label": "Header Background Color",
+      "default": "#ffb6c1"
+    },
+    {
+      "type": "color",
+      "id": "header_text_color",
+      "label": "Header Text Color", 
+      "default": "#ffffff"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Navigation Menu",
+      "default": "main-menu"
+    }
+  ]
+}
+{% endschema %}

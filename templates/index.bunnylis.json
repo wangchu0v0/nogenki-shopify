@@ -1,4 +1,5 @@
 {
+  "layout": "bunnylis",
   "sections": {
     "bunnylis_header": {
       "type": "bunnylis-header",

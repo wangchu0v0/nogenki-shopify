@@ -1,64 +1,52 @@
-{{ 'component-list-menu.css' | asset_url | stylesheet_tag }}
-{{ 'component-search.css' | asset_url | stylesheet_tag }}
-{{ 'component-menu-drawer.css' | asset_url | stylesheet_tag }}
-{{ 'component-cart-notification.css' | asset_url | stylesheet_tag }}
-{{ 'component-cart-items.css' | asset_url | stylesheet_tag }}
+<!-- BunnyLis 独立标头 -->
+<svg xmlns="http://www.w3.org/2000/svg" class="hidden">
+  <symbol id="bunnylis-icon-search" viewBox="0 0 18 19" fill="none">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M11.03 11.68A5.784 5.784 0 112.85 3.5a5.784 5.784 0 018.18 8.18zm.26 1.12a6.78 6.78 0 11.72-.7l5.4 5.4a.5.5 0 11-.71.7l-5.41-5.4z" fill="currentColor"/>
+  </symbol>
+  <symbol id="bunnylis-icon-cart" viewBox="0 0 19 19" fill="none">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M3.8 4l1.59 7.16A1 1 0 006.36 12h7.28a1 1 0 00.97-.79L16.2 4H3.8zm-.62-1h-.2a1 1 0 100 2h.56l1.64 7.36A3 3 0 007.36 15h7.28a3 3 0 002.98-2.64L19.22 5H3.18z" fill="currentColor"/>
+    <circle cx="7.5" cy="16.5" r="1.5" fill="currentColor"/>
+    <circle cx="13.5" cy="16.5" r="1.5" fill="currentColor"/>
+  </symbol>
+  <symbol id="bunnylis-icon-hamburger" viewBox="0 0 18 16" fill="none">
+    <path d="M1 .5a.5.5 0 100 1h15a.5.5 0 000-1H1zM.5 8a.5.5 0 01.5-.5h15a.5.5 0 010 1H1A.5.5 0 01.5 8zm0 7a.5.5 0 01.5-.5h15a.5.5 0 010 1H1a.5.5 0 01-.5-.5z" fill="currentColor"/>
+  </symbol>
+</svg>
 
 <style>
   .bunnylis-header {
-    background-color: {{ section.settings.header_bg_color }};
-    color: {{ section.settings.header_text_color }};
+    background-color: {{ section.settings.header_bg_color | default: '#ffb6c1' }};
+    color: {{ section.settings.header_text_color | default: '#ffffff' }};
     padding: 1rem 0;
     position: relative;
-    z-index: 3;
+    z-index: 100;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
   }
   
-  .bunnylis-header .header__inline-menu {
-    background-color: transparent;
-  }
-  
-  .bunnylis-header .header__wrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  .bunnylis-header__container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
   
-  .bunnylis-header .header__heading-logo {
-    max-width: 200px;
-  }
-  
-  .bunnylis-header .header__heading-logo .header__heading-link {
-    color: {{ section.settings.header_text_color }};
-    text-decoration: none;
+  .bunnylis-header__logo {
     font-size: 1.8rem;
     font-weight: bold;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    align-items: center;
   }
   
-  .bunnylis-header .header__heading-logo img {
-    max-height: 60px;
+  .bunnylis-header__logo img {
+    max-height: 50px;
     width: auto;
   }
   
-  .bunnylis-header .header__icons {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-  
-  .bunnylis-header .header__icon {
-    color: {{ section.settings.header_text_color }};
-    text-decoration: none;
-    padding: 0.5rem;
-  }
-  
-  .bunnylis-header .header__icon:hover {
-    opacity: 0.8;
-  }
-  
-  .bunnylis-header .list-menu {
+  .bunnylis-header__nav {
     display: flex;
     list-style: none;
     margin: 0;
@@ -66,64 +54,127 @@
     gap: 2rem;
   }
   
-  .bunnylis-header .list-menu__item .link {
-    color: {{ section.settings.header_text_color }};
+  .bunnylis-header__nav-link {
+    color: inherit;
     text-decoration: none;
     font-weight: 500;
     padding: 0.5rem 0;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.2s ease;
   }
   
-  .bunnylis-header .list-menu__item .link:hover {
+  .bunnylis-header__nav-link:hover {
     opacity: 0.8;
   }
   
-  @media screen and (max-width: 749px) {
-    .bunnylis-header .header__wrapper {
+  .bunnylis-header__actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .bunnylis-header__icon {
+    color: inherit;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    transition: opacity 0.2s ease;
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: relative;
+  }
+  
+  .bunnylis-header__icon:hover {
+    opacity: 0.8;
+  }
+  
+  .bunnylis-header__icon svg {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .bunnylis-header__cart-count {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: #ff4444;
+    color: white;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 1;
+  }
+  
+  .bunnylis-header__mobile-toggle {
+    display: none;
+  }
+  
+  @media (max-width: 768px) {
+    .bunnylis-header__nav {
+      display: none;
+    }
+    
+    .bunnylis-header__mobile-toggle {
+      display: flex;
+    }
+    
+    .bunnylis-header__container {
       padding: 0 1rem;
     }
     
-    .bunnylis-header .header__inline-menu {
-      display: none;
+    .bunnylis-header__logo {
+      font-size: 1.5rem;
     }
+  }
+  
+  .visually-hidden {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+  }
+  
+  .hidden {
+    display: none !important;
   }
 </style>
 
-<header class="header bunnylis-header gradient">
-  <div class="header__wrapper page-width">
-    <div class="header__heading">
-      {%- if section.settings.logo != blank -%}
-        <div class="header__heading-logo">
-          <a href="{{ routes.root_url }}" class="header__heading-link link link--text focus-inset">
-            <img
-              src="{{ section.settings.logo | image_url: width: 300 }}"
-              alt="{{ shop.name }}"
-              width="{{ section.settings.logo.width }}"
-              height="{{ section.settings.logo.height }}"
-              class="header__heading-logo-image"
-            >
-          </a>
-        </div>
+<header class="bunnylis-header">
+  <div class="bunnylis-header__container">
+    <!-- Logo -->
+    <a href="{{ routes.root_url }}" class="bunnylis-header__logo">
+      {%- if section.settings.logo_image != blank -%}
+        <img src="{{ section.settings.logo_image | image_url: width: 200 }}" 
+             alt="{{ shop.name }}" 
+             width="200" 
+             height="50"
+             loading="lazy">
       {%- else -%}
-        <div class="header__heading-logo">
-          <a href="{{ routes.root_url }}" class="header__heading-link link link--text focus-inset">
-            {{ section.settings.logo_text | default: 'BunnyLis' }}
-          </a>
-        </div>
+        {{ section.settings.logo_text | default: shop.name }}
       {%- endif -%}
-    </div>
+    </a>
 
+    <!-- Desktop Navigation -->
     {%- if section.settings.menu != blank -%}
-      <nav class="header__inline-menu">
-        <ul class="list-menu list-menu--inline" role="list">
-          {%- for link in section.settings.menu.links -%}
-            <li class="list-menu__item">
-              <a
-                href="{{ link.url }}"
-                class="link link--text list-menu__item focus-inset"
-                {% if link.current %} aria-current="page"{% endif %}
-              >
-                {{ link.title | escape }}
+      <nav class="bunnylis-header__nav-wrapper">
+        <ul class="bunnylis-header__nav">
+          {%- for link in linklists[section.settings.menu].links -%}
+            <li>
+              <a href="{{ link.url }}" class="bunnylis-header__nav-link">
+                {{ link.title }}
               </a>
             </li>
           {%- endfor -%}
@@ -131,22 +182,38 @@
       </nav>
     {%- endif -%}
 
-    <div class="header__icons">
-      <a href="{{ routes.search_url }}" class="header__icon link link--text focus-inset">
-        {%- render 'icon-search' -%}
-        <span class="visually-hidden">{{ 'general.search.search' | t }}</span>
+    <!-- Header Actions -->
+    <div class="bunnylis-header__actions">
+      <!-- Mobile Menu Toggle -->
+      <button type="button" 
+              class="bunnylis-header__icon bunnylis-header__mobile-toggle"
+              aria-label="打开菜单">
+        <svg aria-hidden="true" focusable="false">
+          <use href="#bunnylis-icon-hamburger"></use>
+        </svg>
+      </button>
+
+      <!-- Search -->
+      <a href="{{ routes.search_url }}" 
+         class="bunnylis-header__icon"
+         aria-label="搜索">
+        <svg aria-hidden="true" focusable="false">
+          <use href="#bunnylis-icon-search"></use>
+        </svg>
       </a>
 
-      <a href="{{ routes.cart_url }}" class="header__icon link link--text focus-inset" id="cart-icon-bubble">
-        {%- render 'icon-cart' -%}
-        <span class="visually-hidden">{{ 'templates.cart.cart' | t }}</span>
+      <!-- Cart -->
+      <a href="{{ routes.cart_url }}" 
+         class="bunnylis-header__icon"
+         aria-label="购物车">
+        <svg aria-hidden="true" focusable="false">
+          <use href="#bunnylis-icon-cart"></use>
+        </svg>
         {%- if cart != empty -%}
-          <div class="cart-count-bubble">
-            {%- if cart.item_count < 100 -%}
-              <span aria-hidden="true">{{ cart.item_count }}</span>
-            {%- endif -%}
-            <span class="visually-hidden">{{ 'sections.header.cart_count' | t: count: cart.item_count }}</span>
-          </div>
+          <span class="bunnylis-header__cart-count">
+            {{ cart.item_count }}
+            <span class="visually-hidden">个商品</span>
+          </span>
         {%- endif -%}
       </a>
     </div>
@@ -156,19 +223,18 @@
 {% schema %}
 {
   "name": "BunnyLis Header",
-  "tag": "header",
-  "class": "section-header",
+  "class": "bunnylis-header-section",
   "settings": [
-    {
-      "type": "image_picker",
-      "id": "logo",
-      "label": "BunnyLis Logo"
-    },
     {
       "type": "text",
       "id": "logo_text",
       "label": "Logo Text",
       "default": "BunnyLis"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_image",
+      "label": "Logo Image"
     },
     {
       "type": "color",
@@ -179,13 +245,13 @@
     {
       "type": "color",
       "id": "header_text_color",
-      "label": "Header Text Color", 
+      "label": "Header Text Color",
       "default": "#ffffff"
     },
     {
       "type": "link_list",
       "id": "menu",
-      "label": "Navigation Menu",
+      "label": "Menu",
       "default": "main-menu"
     }
   ]
