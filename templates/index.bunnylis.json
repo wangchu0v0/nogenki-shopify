@@ -1,5 +1,14 @@
 {
   "sections": {
+    "bunnylis_header": {
+      "type": "bunnylis-header",
+      "settings": {
+        "logo_text": "BunnyLis",
+        "header_bg_color": "#ffb6c1",
+        "header_text_color": "#ffffff",
+        "menu": "main-menu"
+      }
+    },
     "slideshow_bunnylis": {
       "type": "slideshow",
       "blocks": {
@@ -87,6 +96,7 @@
     }
   },
   "order": [
+    "bunnylis_header",
     "slideshow_bunnylis",
     "rich_text_bunnylis",
     "featured_collection_bunnylis"
