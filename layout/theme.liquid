@@ -29,11 +29,17 @@
     {% endif %}
 
     {% render 'meta-tags' %}
-
-    <script src="{{ 'constants.js' | asset_url }}" defer="defer"></script>
+      {%- comment -%} SEO优化器 - 仅影响搜索引擎，不影响页面显示 {%- endcomment -%}
+    {%- if template contains 'product' -%}
+      {% render 'seo-optimizer' %}
+    {%- elsif template contains 'collection' -%}
+      {% render 'collection-seo-optimizer' %}
+    {%- endif -%}    <script src="{{ 'constants.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'pubsub.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
-    <script src="{{ 'judgeme-modifier.js' | asset_url }}" defer="defer"></script>
+    <!-- Judge.me样式修改脚本 - 已添加多语言支持，只在日文页面生效 -->
+    <script src="{{ 'judgeme-modifier-optimized.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'judgeme-modifier-mobile.js' | asset_url }}" defer="defer"></script>
     {%- if settings.animations_reveal_on_scroll -%}
       <script src="{{ 'animations.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
@@ -252,11 +258,9 @@
           font-size: 1.6rem;
         }
       }
-    {% endstyle %}
-
-    {{ 'base.css' | asset_url | stylesheet_tag }}
+    {% endstyle %}    {{ 'base.css' | asset_url | stylesheet_tag }}
     {{ 'custom-styles.css' | asset_url | stylesheet_tag }}
-    {{ 'custom-review-stars.css' | asset_url | stylesheet_tag }}
+    {{ 'review-stars-optimized.css' | asset_url | stylesheet_tag }}
 
     {%- unless settings.type_body_font.system? -%}
       {% comment %}theme-check-disable AssetPreload{% endcomment %}
@@ -289,6 +293,30 @@
       }
     </script>
     
+    <!-- Judge.me 英文页面修复脚本 -->
+    <script>
+    (function() {
+        // 等待页面加载完成
+        function fixJudgemeShopDomain() {
+            if (window.jdgmSettings && !window.jdgmSettings.shop_domain && window.Shopify && window.Shopify.shop) {
+                window.jdgmSettings.shop_domain = window.Shopify.shop;
+                console.log('🔧 Judge.me shop domain已修复:', window.jdgmSettings.shop_domain);
+            }
+        }
+        
+        // 立即尝试修复
+        fixJudgemeShopDomain();
+        
+        // 页面加载完成后再次尝试
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', fixJudgemeShopDomain);
+        }
+        
+        // 延迟修复，确保Judge.me已加载
+        setTimeout(fixJudgemeShopDomain, 1000);
+    })();
+    </script>
+
   </head>
 
   <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">

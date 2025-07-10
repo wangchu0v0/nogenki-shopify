@@ -1,0 +1,213 @@
+{% comment %}
+====================================================================
+🎯 集合页面SEO优化器 - Collection SEO Optimizer
+====================================================================
+
+专为集合页面设计的SEO优化系统，自动生成针对特定关键词的优化内容。
+为每个集合页面提供最佳的SEO标题、描述和结构化数据。
+
+使用方式：在collection.liquid模板中包含此片段
+{% include 'collection-seo-optimizer' %}
+
+====================================================================
+{% endcomment %}
+
+{% comment %} 🔍 收集当前页面信息 {% endcomment %}
+{% assign current_collection = collection %}
+{% assign collection_handle = collection.handle %}
+{% assign collection_title = collection.title %}
+
+{% comment %} 📝 关键词映射字典 - 针对集合页面优化 {% endcomment %}
+{% assign collection_keywords = '' %}
+{% assign seo_title = '' %}
+{% assign seo_description = '' %}
+{% assign target_keywords = '' %}
+
+{% comment %} 🏷️ 核心关键词集合识别 {% endcomment %}
+{% case collection_handle %}
+  {% when 'jiraikei', 'jirai', '地雷系' %}
+    {% assign target_keywords = '地雷系,地雷系ファッション,地雷系女子,jiraikei,jiraikei fashion,jiraikei girl,地雷系コーデ,地雷系服装,地雷系通販' %}
+    {% assign seo_title = '地雷系ファッション通販 | 地雷系女子に人気のアイテム - ' | append: shop.name %}
+    {% assign seo_description = '地雷系ファッション専門通販。地雷系女子に人気の服装・アクセサリーを豊富に取り揃え。病みかわいい・ゆめかわいい系アイテムも多数。送料無料・即日発送対応。' %}
+
+  {% when 'ryousangata', 'ryousan', '量産型' %}
+    {% assign target_keywords = '量産型,量産型ファッション,量産型ヲタク,ryousangata,量産型コーデ,量産型服装,量産型通販,量産女子' %}
+    {% assign seo_title = '量産型ファッション通販 | 量産型ヲタクに人気の服装 - ' | append: shop.name %}
+    {% assign seo_description = '量産型ファッション専門通販。量産型ヲタクに人気の可愛い服装・コーデアイテムを多数取り揃え。プチプラから本格派まで豊富な品揃え。' %}
+
+  {% when 'yamikawaii', 'yami', '病みかわいい' %}
+    {% assign target_keywords = '病みかわいい,病みかわファッション,yamikawaii,病み可愛い,病みかわコーデ,病みかわ服装' %}
+    {% assign seo_title = '病みかわいいファッション通販 | 病みかわアイテム専門 - ' | append: shop.name %}
+    {% assign seo_description = '病みかわいいファッション専門通販。病みかわ・ダークキュート系の服装アイテムを豊富に取り揃え。個性的で可愛い病みかわコーデを提案。' %}
+
+  {% when 'kawaii', 'cute', 'かわいい' %}
+    {% assign target_keywords = 'かわいい服装,kawaii fashion,可愛いファッション,kawaii,キュートファッション,可愛い通販' %}
+    {% assign seo_title = 'かわいいファッション通販 | Kawaii可愛い服装専門 - ' | append: shop.name %}
+    {% assign seo_description = 'かわいいファッション専門通販。kawaii系・キュート系の可愛い服装アイテムを多数取り揃え。女の子らしい可愛いコーデを提案。' %}
+
+  {% when 'gothic', 'goth', 'ゴシック' %}
+    {% assign target_keywords = 'ゴシックファッション,gothic fashion,ゴスロリ,gothic lolita,ダークファッション,黒い服装' %}
+    {% assign seo_title = 'ゴシックファッション通販 | Gothic系服装専門 - ' | append: shop.name %}
+    {% assign seo_description = 'ゴシックファッション専門通販。gothic・ゴスロリ系の服装アイテムを豊富に取り揃え。ダーク&エレガントなコーデを提案。' %}
+
+  {% when 'harajuku', '原宿' %}
+    {% assign target_keywords = '原宿ファッション,harajuku fashion,原宿系,原宿スタイル,個性的ファッション,派手可愛い' %}
+    {% assign seo_title = '原宿ファッション通販 | Harajuku系個性派服装 - ' | append: shop.name %}
+    {% assign seo_description = '原宿ファッション専門通販。harajuku系・個性的で派手可愛い服装アイテムを多数取り揃え。原宿スタイルのユニークなコーデを提案。' %}
+
+  {% else %}
+    {% comment %} 🔍 タグベースの動的キーワード検出 {% endcomment %}
+    {% assign detected_keywords = '' %}
+    {% assign keyword_tags = '地雷系,量産型,病みかわいい,ゴシック,原宿,kawaii,jiraikei,ryousangata,yamikawaii,gothic,harajuku' | split: ',' %}
+    
+    {% for tag in collection.all_tags %}
+      {% assign tag_lower = tag | downcase %}
+      {% for keyword in keyword_tags %}
+        {% if tag_lower contains keyword %}
+          {% unless detected_keywords contains keyword %}
+            {% if detected_keywords != '' %}
+              {% assign detected_keywords = detected_keywords | append: ',' %}
+            {% endif %}
+            {% assign detected_keywords = detected_keywords | append: keyword %}
+          {% endunless %}
+        {% endif %}
+      {% endfor %}
+    {% endfor %}
+    
+    {% if detected_keywords != '' %}
+      {% assign target_keywords = detected_keywords %}
+      {% assign seo_title = collection_title | append: ' | 日系ファッション通販 - ' | append: shop.name %}
+      {% assign seo_description = collection_title | append: 'の服装アイテムを豊富に取り揃え。' | append: detected_keywords | append: '系ファッション専門通販。高品質で可愛いアイテムを多数ご用意。' %}
+    {% else %}
+      {% assign target_keywords = collection_title | append: ',ファッション,服装,通販' %}
+      {% assign seo_title = collection_title | append: ' | ファッション通販 - ' | append: shop.name %}
+      {% assign seo_description = collection_title | append: 'の商品を豊富に取り揃えたファッション通販サイト。高品質なアイテムを多数ご用意しています。' %}
+    {% endif %}
+{% endcase %}
+
+{% comment %} 🎯 Meta Tags 生成 {% endcomment %}
+<title>{{ seo_title }}</title>
+<meta name="description" content="{{ seo_description }}">
+<meta name="keywords" content="{{ target_keywords }}">
+
+{% comment %} 🌐 Open Graph Tags {% endcomment %}
+<meta property="og:title" content="{{ seo_title }}">
+<meta property="og:description" content="{{ seo_description }}">
+<meta property="og:type" content="website">
+<meta property="og:url" content="{{ shop.url }}{{ collection.url }}">
+{% if collection.image %}
+<meta property="og:image" content="{{ collection.image | img_url: '1200x630' }}">
+{% elsif collection.products.first.featured_image %}
+<meta property="og:image" content="{{ collection.products.first.featured_image | img_url: '1200x630' }}">
+{% endif %}
+
+{% comment %} 🐦 Twitter Card Tags {% endcomment %}
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ seo_title }}">
+<meta name="twitter:description" content="{{ seo_description }}">
+{% if collection.image %}
+<meta name="twitter:image" content="{{ collection.image | img_url: '1200x630' }}">
+{% elsif collection.products.first.featured_image %}
+<meta name="twitter:image" content="{{ collection.products.first.featured_image | img_url: '1200x630' }}">
+{% endif %}
+
+{% comment %} 📊 JSON-LD 结构化数据 {% endcomment %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "{{ collection.title }}",
+  "description": "{{ seo_description }}",
+  "url": "{{ shop.url }}{{ collection.url }}",
+  "mainEntity": {
+    "@type": "ItemList",
+    "numberOfItems": {{ collection.products_count }},
+    "itemListElement": [
+      {% for product in collection.products limit: 10 %}
+      {
+        "@type": "Product",
+        "position": {{ forloop.index }},
+        "name": "{{ product.title | escape }}",
+        "url": "{{ shop.url }}{{ product.url }}",
+        "image": "{{ product.featured_image | img_url: '600x600' }}",
+        {% if product.price %}
+        "offers": {
+          "@type": "Offer",
+          "price": "{{ product.price | money_without_currency }}",
+          "priceCurrency": "{{ shop.currency }}",
+          "availability": "{% if product.available %}InStock{% else %}OutOfStock{% endif %}"
+        },
+        {% endif %}
+        "brand": {
+          "@type": "Brand",
+          "name": "{{ shop.name }}"
+        }
+      }{% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    ]
+  },
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "ホーム",
+        "item": "{{ shop.url }}"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "{{ collection.title }}",
+        "item": "{{ shop.url }}{{ collection.url }}"
+      }
+    ]
+  }
+}
+</script>
+
+{% comment %} 🔗 追加的SEO优化标签 {% endcomment %}
+{% comment %} Canonical URL {% endcomment %}
+<link rel="canonical" href="{{ shop.url }}{{ collection.url }}">
+
+{% comment %} Hreflang for international versions {% endcomment %}
+<link rel="alternate" hreflang="ja" href="{{ shop.url }}{{ collection.url }}">
+<link rel="alternate" hreflang="en" href="{{ shop.url }}{{ collection.url }}?locale=en">
+<link rel="alternate" hreflang="x-default" href="{{ shop.url }}{{ collection.url }}">
+
+{% comment %} 📱 Mobile optimization {% endcomment %}
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="format-detection" content="telephone=no">
+
+{% comment %} 🎨 Theme color for mobile browsers {% endcomment %}
+<meta name="theme-color" content="#ff69b4">
+<meta name="msapplication-navbutton-color" content="#ff69b4">
+<meta name="apple-mobile-web-app-status-bar-style" content="#ff69b4">
+
+{% comment %} 🔍 Additional structured data for Fashion categories {% endcomment %}
+{% if target_keywords contains '地雷系' or target_keywords contains 'jiraikei' %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "{{ seo_title }}",
+  "description": "{{ seo_description }}",
+  "keywords": "{{ target_keywords }}",
+  "inLanguage": "ja-JP",
+  "about": {
+    "@type": "Thing",
+    "name": "地雷系ファッション",
+    "description": "地雷系は日本の若い女性に人気のファッションスタイルで、病みかわいい要素を含む個性的なスタイルです。"
+  }
+}
+</script>
+{% endif %}
+
+{% comment %} 🎯 SEO Debug Info (只在预览模式下显示) {% endcomment %}
+{% if template contains 'preview' %}
+<!-- SEO Debug Info -->
+<!-- Target Keywords: {{ target_keywords }} -->
+<!-- SEO Title: {{ seo_title }} -->
+<!-- SEO Description: {{ seo_description }} -->
+<!-- Collection Handle: {{ collection_handle }} -->
+{% endif %}

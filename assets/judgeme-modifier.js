@@ -1,237 +1,363 @@
-// Judge.me Review Text Modifier - Enhanced Version
-// 将"7件のレビュー"修改为"(7)"，字体大小12px
-// 专门解决theme dev环境中的问题
+// Judge.me Review Text Modifier - Multi-Language Support
+// 支持多语言的Judge.me评价修改器
 
 (function() {
     'use strict';
     
-    console.log('🚀 Judge.me增强修改器启动');
+    console.log('🌍 Judge.me多语言修改器启动');
     
-    // 防止重复修改的标记
     const MODIFIED_ATTR = 'data-judgeme-modified';
+    let modificationCount = 0;
     
-    // 创建并注入强制样式
+    // 注入全局样式
     function injectGlobalStyles() {
-        const styleId = 'judgeme-custom-styles';
+        const styleId = 'judgeme-multilang-styles';
         if (!document.getElementById(styleId)) {
             const style = document.createElement('style');
             style.id = styleId;
             style.textContent = `
-                .jdgm-prev-badge__text,
-                [class*="jdgm"] span {
+                /* 评价文字样式 - 括号格式 */
+                .jdgm-prev-badge__text {
                     font-size: 12px !important;
                     color: #666 !important;
                     line-height: 1 !important;
-                    vertical-align: baseline !important;
+                    vertical-align: middle !important;
+                    margin-left: 4px !important;
+                    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !important;
+                    font-weight: 400 !important;
+                    display: inline-flex !important;
+                    align-items: center !important;
+                }
+                
+                /* 星星样式保持一致 */
+                .jdgm-star {
+                    font-size: 16px !important;
+                    line-height: 1 !important;
+                }
+                
+                .jdgm-prev-badge__stars {
+                    display: inline-flex !important;
+                    align-items: center !important;
+                }
+                
+                .jdgm-prev-badge {
+                    display: flex !important;
+                    align-items: center !important;
+                    gap: 6px !important;
+                }
+                
+                /* 响应式调整 */
+                @media screen and (max-width: 768px) {
+                    .jdgm-prev-badge__text {
+                        font-size: 12px !important;
+                    }
+                    .jdgm-star {
+                        font-size: 14px !important;
+                    }
+                }
+                
+                @media screen and (max-width: 480px) {
+                    .jdgm-prev-badge__text {
+                        font-size: 12px !important;
+                    }
+                    .jdgm-star {
+                        font-size: 13px !important;
+                    }
                 }
             `;
             document.head.appendChild(style);
-            console.log('✅ 注入全局样式');
+            console.log('✅ 注入多语言样式');
         }
     }
-    
-    // 主要修改函数
+
+    // 多语言文本修改函数
     function modifyReviewText() {
-        // 注入全局样式
         injectGlobalStyles();
-        let modifiedCount = 0;
         
-        // 方法1: 查找所有可能包含评价文本的元素
+        let count = 0;
+        
+        // 多语言支持的文本模式
+        const reviewPatterns = [
+            // 日语
+            { pattern: /(\d+)件のレビュー/, lang: 'ja' },
+            { pattern: /(\d+)のレビュー/, lang: 'ja' },
+            
+            // 英语
+            { pattern: /(\d+)\s*reviews?$/i, lang: 'en' },
+            { pattern: /(\d+)\s*review\(s\)$/i, lang: 'en' },
+            { pattern: /(\d+)\s*customer\s*reviews?$/i, lang: 'en' },
+            { pattern: /Based on (\d+) reviews?$/i, lang: 'en' },
+            { pattern: /(\d+)\s*verified reviews?$/i, lang: 'en' },
+            
+            // 法语
+            { pattern: /(\d+)\s*avis$/i, lang: 'fr' },
+            
+            // 意大利语
+            { pattern: /(\d+)\s*recensioni$/i, lang: 'it' },
+            
+            // 德语
+            { pattern: /(\d+)\s*bewertungen$/i, lang: 'de' },
+            
+            // 西班牙语
+            { pattern: /(\d+)\s*reseñas$/i, lang: 'es' },
+            
+            // 通用数字模式（作为后备）
+            { pattern: /(\d+)/, lang: 'generic' }
+        ];
+        
+        // 查找所有可能的Judge.me元素选择器
         const selectors = [
             '.jdgm-prev-badge__text',
-            '.jdgm-widget span',
-            '.jdgm-prev-badge span',
-            '[class*="jdgm"] span',
-            'span'
+            '.jdgm-preview-badge .jdgm-prev-badge__text',
+            '.jdgm-widget .jdgm-prev-badge__text',
+            '[class*="jdgm"][class*="text"]',
+            '[class*="review"][class*="count"]',
+            '[class*="review"][class*="text"]'
         ];
         
         selectors.forEach(selector => {
-            const elements = document.querySelectorAll(selector);
+            const elements = document.querySelectorAll(selector + ':not([' + MODIFIED_ATTR + '])');
+            
             elements.forEach(element => {
-                // 跳过已修改的元素
-                if (element.hasAttribute(MODIFIED_ATTR)) {
-                    return;
+                const originalText = element.textContent.trim();
+                
+                if (!originalText || originalText.length === 0) return;
+                
+                let matched = false;
+                
+                // 尝试匹配各种语言模式
+                for (const { pattern, lang } of reviewPatterns) {
+                    const match = originalText.match(pattern);
+                    if (match && match[1]) {
+                        const reviewCount = match[1];
+                        const newText = `(${reviewCount})`;
+                        
+                        // 跳过已经是括号格式的
+                        if (originalText === newText) {
+                            element.setAttribute(MODIFIED_ATTR, 'true');
+                            matched = true;
+                            break;
+                        }
+                        
+                        element.textContent = newText;
+                        element.setAttribute(MODIFIED_ATTR, 'true');
+                        element.style.cssText = `
+                            font-size: 12px !important;
+                            color: #666 !important;
+                            line-height: 1 !important;
+                            vertical-align: middle !important;
+                            margin-left: 4px !important;
+                            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !important;
+                            font-weight: 400 !important;
+                            display: inline-flex !important;
+                            align-items: center !important;
+                        `;
+                        
+                        count++;
+                        console.log(`✅ [${lang}] 修改: "${originalText}" → "${newText}"`);
+                        matched = true;
+                        break;
+                    }
                 }
                 
-                const text = element.textContent;
-                
-                // 检查是否包含日文评价模式且没有子元素
-                if (text && text.includes('のレビュー') && element.children.length === 0) {
-                    const numberMatch = text.match(/(\d+)/);
-                    
+                // 如果元素包含数字但没有匹配到特定模式，且看起来像评价文本
+                if (!matched && /\d+/.test(originalText) && originalText.length < 50) {
+                    const numberMatch = originalText.match(/(\d+)/);
                     if (numberMatch) {
-                        const reviewCount = numberMatch[1];
-                        const newText = '(' + reviewCount + ')';
+                        const newText = `(${numberMatch[1]})`;
                         
-                        // 修改文本
-                        element.textContent = newText;
-                        
-                        // 强制应用样式，使用setProperty确保优先级
-                        element.style.setProperty('font-size', '12px', 'important');
-                        element.style.setProperty('color', '#666', 'important');
-                        element.style.setProperty('line-height', '1', 'important');
-                        element.style.setProperty('vertical-align', 'baseline', 'important');
-                        
-                        // 标记为已修改
-                        element.setAttribute(MODIFIED_ATTR, 'true');
-                        
-                        modifiedCount++;
-                        console.log('✅ 修改:', text, '→', newText);
+                        // 跳过已经是括号格式的
+                        if (originalText !== newText) {
+                            element.textContent = newText;
+                            element.setAttribute(MODIFIED_ATTR, 'true');
+                            element.style.cssText = `
+                                font-size: 12px !important;
+                                color: #666 !important;
+                                line-height: 1 !important;
+                                vertical-align: middle !important;
+                                margin-left: 4px !important;
+                                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !important;
+                                font-weight: 400 !important;
+                                display: inline-flex !important;
+                                align-items: center !important;
+                            `;
+                            count++;
+                            console.log(`✅ [通用] 修改: "${originalText}" → "${newText}"`);
+                        }
                     }
                 }
             });
         });
         
-        // 方法2: 使用TreeWalker查找文本节点（更彻底）
-        const walker = document.createTreeWalker(
-            document.body,
-            NodeFilter.SHOW_TEXT,
-            function(node) {
-                return node.textContent.includes('のレビュー') ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_SKIP;
-            }
-        );
-        
-        const textNodes = [];
-        let node;
-        while (node = walker.nextNode()) {
-            textNodes.push(node);
-        }
-        
-        textNodes.forEach(textNode => {
-            const parent = textNode.parentElement;
-            if (parent && !parent.hasAttribute(MODIFIED_ATTR)) {
-                const text = textNode.textContent;            const numberMatch = text.match(/(\d+)/);
-                
-                if (numberMatch) {
-                    const reviewCount = numberMatch[1];
-                    const newText = '(' + reviewCount + ')';
-                    
-                    // 创建包装元素以应用样式
-                    const span = document.createElement('span');
-                    span.textContent = newText;
-                    span.className = 'jdgm-modified-text';
-                    span.style.setProperty('font-size', '12px', 'important');
-                    span.style.setProperty('color', '#666', 'important');
-                    span.style.setProperty('line-height', '1', 'important');
-                    span.style.setProperty('vertical-align', 'baseline', 'important');
-                    
-                    // 替换原始文本节点
-                    textNode.parentNode.replaceChild(span, textNode);
-                    parent.style.setProperty('font-size', '12px', 'important');
-                    parent.style.setProperty('color', '#666', 'important');
-                    parent.setAttribute(MODIFIED_ATTR, 'true');
-                    
-                    modifiedCount++;
-                    console.log('✅ 文本节点修改:', text, '→', newText);
+        // 深度搜索 - 查找动态加载的内容
+        if (count === 0) {
+            const walker = document.createTreeWalker(
+                document.body,
+                NodeFilter.SHOW_TEXT,
+                {
+                    acceptNode: function(node) {
+                        const text = node.textContent.trim();
+                        if (!text || text.length === 0 || text.length > 100) return NodeFilter.FILTER_REJECT;
+                        
+                        // 检查是否包含评价相关的文本
+                        const hasReviewKeywords = /reviews?|avis|recensioni|bewertungen|reseñas|のレビュー/i.test(text);
+                        const hasNumbers = /\d+/.test(text);
+                        const isJudgemeElement = node.parentElement && (
+                            node.parentElement.className.includes('jdgm') ||
+                            node.parentElement.closest('[class*="jdgm"]')
+                        );
+                        
+                        return (hasReviewKeywords || isJudgemeElement) && hasNumbers && 
+                               !node.parentElement.hasAttribute(MODIFIED_ATTR) ? 
+                               NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+                    }
                 }
+            );
+            
+            const nodesToModify = [];
+            let node;
+            while (node = walker.nextNode()) {
+                nodesToModify.push(node);
             }
-        });
-        
-        if (modifiedCount > 0) {
-            console.log('🎉 总共修改了', modifiedCount, '个文本');
+            
+            nodesToModify.forEach(textNode => {
+                const originalText = textNode.textContent.trim();
+                
+                for (const { pattern, lang } of reviewPatterns) {
+                    const match = originalText.match(pattern);
+                    if (match && match[1]) {
+                        const reviewCount = match[1];
+                        const newText = `(${reviewCount})`;
+                        
+                        if (originalText !== newText) {
+                            const span = document.createElement('span');
+                            span.textContent = newText;
+                            span.setAttribute(MODIFIED_ATTR, 'true');
+                            span.style.cssText = `
+                                font-size: 12px !important;
+                                color: #666 !important;
+                                line-height: 1 !important;
+                                vertical-align: middle !important;
+                                margin-left: 4px !important;
+                                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !important;
+                                font-weight: 400 !important;
+                                display: inline-flex !important;
+                                align-items: center !important;
+                            `;
+                            
+                            textNode.parentElement.replaceChild(span, textNode);
+                            count++;
+                            console.log(`✅ [深度-${lang}] 修改: "${originalText}" → "${newText}"`);
+                            break;
+                        }
+                    }
+                }
+            });
         }
         
-        return modifiedCount;
-    }
-    
-    // 修改星星颜色
-    function updateStarColors() {
-        const stars = document.querySelectorAll('.jdgm-star');
-        stars.forEach(star => {
-            star.style.setProperty('color', '#A889A8', 'important');
-            if (star.classList.contains('jdgm--off')) {
-                star.style.setProperty('color', '#e0e0e0', 'important');
-            }
-        });
-    }
-    
-    // 执行修改
-    function executeModification() {
-        console.log('🔧 执行修改...');
-        const textChanges = modifyReviewText();
-        updateStarColors();
-        return textChanges;
-    }
-    
-    // 立即执行
-    executeModification();
-    
-    // 多次延迟执行，应对Judge.me异步加载
-    const delays = [100, 300, 500, 1000, 1500, 2000, 3000, 5000];
-    delays.forEach(delay => {
-        setTimeout(() => {
-            console.log(`⏰ ${delay}ms后重新检查...`);
-            executeModification();
-        }, delay);
-    });
-    
-    // DOM变化监听器
-    let observer;
-    function startObserver() {
-        if (observer) {
-            observer.disconnect();
+        if (count > 0) {
+            modificationCount += count;
+            console.log(`🎉 本次修改了 ${count} 个评价文本，总计: ${modificationCount}`);
         }
         
-        observer = new MutationObserver(function(mutations) {
-            let shouldProcess = false;
+        return count;
+    }
+
+    // 初始化修改器
+    function initModifier() {
+        console.log('🚀 启动多语言Judge.me修改器...');
+        
+        // 立即执行
+        modifyReviewText();
+        
+        // 分阶段延迟执行
+        setTimeout(modifyReviewText, 500);
+        setTimeout(modifyReviewText, 1500);
+        setTimeout(modifyReviewText, 3000);
+        
+        let lastModification = Date.now();
+        
+        // DOM变化监听
+        const observer = new MutationObserver(function(mutations) {
+            // 避免频繁触发
+            if (Date.now() - lastModification < 800) return;
+            
+            let shouldModify = false;
             
             mutations.forEach(mutation => {
-                if (mutation.addedNodes.length > 0) {
+                if (mutation.addedNodes) {
                     mutation.addedNodes.forEach(node => {
                         if (node.nodeType === 1) {
-                            // 检查是否是Judge.me相关内容
-                            if (node.classList && (
-                                node.classList.contains('jdgm-widget') ||
-                                node.classList.contains('jdgm-prev-badge') ||
-                                node.querySelector && node.querySelector('[class*="jdgm"]')
-                            )) {
-                                shouldProcess = true;
-                            }
-                            
-                            // 检查文本内容
-                            if (node.textContent && node.textContent.includes('のレビュー')) {
-                                shouldProcess = true;
+                            const text = node.textContent || '';
+                            if (text.includes('review') || text.includes('avis') || 
+                                text.includes('のレビュー') || node.querySelector && 
+                                node.querySelector('[class*="jdgm"]')) {
+                                shouldModify = true;
                             }
                         }
                     });
                 }
             });
             
-            if (shouldProcess) {
-                console.log('🔄 检测到Judge.me内容变化，重新执行修改...');
-                setTimeout(executeModification, 100);
+            if (shouldModify) {
+                lastModification = Date.now();
+                setTimeout(modifyReviewText, 300);
             }
         });
         
-        if (document.body) {
-            observer.observe(document.body, {
-                childList: true,
-                subtree: true
+        observer.observe(document.body, {
+            childList: true,
+            subtree: true
+        });
+        
+        // 定期检查未修改的元素
+        setInterval(function() {
+            const selectors = [
+                '.jdgm-prev-badge__text:not([' + MODIFIED_ATTR + '])',
+                '[class*="jdgm"][class*="text"]:not([' + MODIFIED_ATTR + '])'
+            ];
+            
+            let hasUnmodified = false;
+            selectors.forEach(selector => {
+                if (document.querySelectorAll(selector).length > 0) {
+                    hasUnmodified = true;
+                }
             });
-            console.log('👀 DOM监听器已启动');
-        }
+            
+            if (hasUnmodified) {
+                console.log('🔄 发现未修改元素，执行修复...');
+                modifyReviewText();
+            }
+        }, 8000);
+        
+        // 页面焦点恢复时检查
+        window.addEventListener('focus', function() {
+            setTimeout(modifyReviewText, 500);
+        });
+        
+        // Judge.me特定事件监听
+        const judgemeEvents = ['judgeme_loaded', 'judgeme_rendered', 'judgeme_widget_loaded'];
+        judgemeEvents.forEach(event => {
+            window.addEventListener(event, function() {
+                console.log(`🎯 检测到Judge.me事件: ${event}`);
+                setTimeout(modifyReviewText, 300);
+            });
+        });
+        
+        console.log('✅ 多语言修改器初始化完成');
     }
     
-    // 启动监听器
+    // 启动
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', startObserver);
+        document.addEventListener('DOMContentLoaded', initModifier);
     } else {
-        startObserver();
+        initModifier();
     }
     
-    // 定期强制检查
-    setInterval(() => {
-        console.log('🔄 定期检查...');
-        executeModification();
-    }, 8000);
+    // 导出到全局以便调试
+    window.judgemeMultilangModifier = {
+        modify: modifyReviewText,
+        count: () => modificationCount
+    };
     
-    // 监听页面可见性变化
-    document.addEventListener('visibilitychange', function() {
-        if (!document.hidden) {
-            console.log('📱 页面重新可见，执行检查...');
-            setTimeout(executeModification, 500);
-        }
-    });
-    
-    console.log('🎯 Judge.me增强修改器初始化完成');
 })();

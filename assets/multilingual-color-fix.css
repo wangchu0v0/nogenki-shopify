@@ -1,0 +1,184 @@
+/**
+ * Multilingual Color Scheme Fix
+ * Ensures proper color schemes are applied across all languages/markets
+ * Version: 1.0.0
+ */
+
+/* Force proper color scheme inheritance for all language variants */
+html[lang^="en"], 
+html[lang^="ar"], 
+html[lang^="fr"], 
+html[lang^="de"], 
+html[lang^="es"] {
+  --color-background: 244, 244, 244;
+  --color-foreground: 43, 44, 45;
+  --color-button: 183, 172, 162;
+  --color-button-text: 38, 38, 38;
+}
+
+/* Ensure body always has a background color */
+body {
+  background-color: rgb(var(--color-background)) !important;
+  color: rgba(var(--color-foreground), 0.75) !important;
+}
+
+/* Fix white background issue by ensuring gradient classes are applied */
+.gradient,
+body.gradient {
+  background: rgb(var(--color-background)) !important;
+}
+
+/* Ensure sections have proper color schemes */
+section:not([class*="color-"]):not(.gradient) {
+  background-color: rgb(var(--color-background));
+  color: rgba(var(--color-foreground), 0.75);
+}
+
+/* Fix for product cards in multilingual markets */
+.card:not([class*="color-"]) {
+  background-color: rgb(var(--color-background));
+  color: rgba(var(--color-foreground), 0.75);
+}
+
+/* Fix header background for all languages */
+.header:not([class*="color-"]) {
+  background-color: rgb(var(--color-background));
+}
+
+/* Fix footer background for all languages */
+.footer:not([class*="color-"]) {
+  background-color: rgb(var(--color-background));
+}
+
+/* Specific fixes for English market pages */
+html[lang="en"], 
+html[lang="en-US"], 
+html[lang="en-GB"], 
+html[lang="en-AU"] {
+  /* Ensure proper theme colors are loaded */
+  --color-scheme-1-background: 244, 244, 244;
+  --color-scheme-1-foreground: 43, 44, 45;
+  --color-scheme-2-background: 255, 255, 255;
+  --color-scheme-2-foreground: 38, 38, 38;
+}
+
+/* Fix for missing color scheme classes */
+body:not([class*="color-"]):not(.gradient) {
+  background: rgb(244, 244, 244) !important;
+  color: rgba(43, 44, 45, 0.75) !important;
+}
+
+/* Add gradient class if missing */
+body:not(.gradient) {
+  background: rgb(var(--color-background, 244, 244, 244)) !important;
+}
+
+/* Price display fixes for different markets */
+.price-item, 
+.money, 
+.price {
+  font-family: var(--font-body-family);
+  letter-spacing: 0.06rem;
+}
+
+/* Currency symbol positioning fixes */
+.localization-form__currency {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Product title fixes for RTL languages */
+html[dir="rtl"] .product__title,
+html[lang="ar"] .product__title {
+  text-align: right;
+  direction: rtl;
+}
+
+/* Ensure proper font loading for all languages */
+html[lang^="en"] {
+  font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+html[lang^="ar"] {
+  font-family: var(--font-body-family), "Noto Sans Arabic", Arial, sans-serif;
+}
+
+html[lang^="zh"] {
+  font-family: var(--font-body-family), "Noto Sans CJK SC", "PingFang SC", sans-serif;
+}
+
+/* Fix for Judge.me reviews in multilingual context */
+.jdgm-rev-widg:not([class*="color-"]) {
+  background-color: transparent;
+  color: inherit;
+}
+
+/* Ensure proper contrast for all text elements */
+.card__content,
+.product__info,
+.collection__title,
+.page__title {
+  color: rgba(var(--color-foreground), 0.75);
+}
+
+/* Fix button colors in multilingual markets */
+.btn:not([class*="color-"]),
+.button:not([class*="color-"]) {
+  background-color: rgb(var(--color-button));
+  color: rgb(var(--color-button-text));
+}
+
+/* Media queries for responsive color scheme fixes */
+@media screen and (max-width: 749px) {
+  /* Mobile-specific color scheme fixes */
+  .header-drawer:not([class*="color-"]) {
+    background-color: rgb(var(--color-background));
+  }
+  
+  .mobile-nav:not([class*="color-"]) {
+    background-color: rgb(var(--color-background));
+  }
+}
+
+@media screen and (min-width: 750px) {
+  /* Desktop-specific color scheme fixes */
+  .header:not([class*="color-"]) {
+    background-color: rgb(var(--color-background));
+  }
+}
+
+/* Fix for announcement bar in all languages */
+.announcement-bar:not([class*="color-"]) {
+  background-color: rgb(var(--color-background));
+  color: rgba(var(--color-foreground), 0.75);
+}
+
+/* Fallback styles if CSS variables fail to load */
+@supports not (color: rgb(var(--color-background))) {
+  body {
+    background-color: #f4f4f4 !important;
+    color: #2b2c2d !important;
+  }
+  
+  .header, .footer, .main {
+    background-color: #f4f4f4;
+    color: #2b2c2d;
+  }
+}
+
+/* Force inheritance of theme variables */
+* {
+  --inherit-color-background: inherit;
+  --inherit-color-foreground: inherit;
+}
+
+/* Debug mode - uncomment to identify elements missing color schemes */
+/*
+[class*="section"]:not([class*="color-"]):not(.gradient) {
+  outline: 2px solid red !important;
+}
+
+[class*="card"]:not([class*="color-"]) {
+  outline: 2px solid blue !important;
+}
+*/

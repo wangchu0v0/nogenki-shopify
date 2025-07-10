@@ -1,0 +1,63 @@
+/* Review Stars Optimized - 优化的评价星星样式 */
+/* 精简版本 - 仅处理颜色和基础样式，文字格式由Judge.me插件处理 */
+
+/* === Judge.me 星星颜色 === */
+.jdgm-star,
+.jdgm-star.jdgm--on,
+.jdgm-star.jdgm--off,
+.jdgm-widget .jdgm-star,
+.jdgm-prev-badge__stars .jdgm-star {
+  color: #A889A8 !important;
+  background-color: transparent !important;
+}
+
+/* 星星图标内容覆盖 */
+.jdgm-star:before,
+.jdgm-star.jdgm--on:before {
+  color: #A889A8 !important;
+  content: "★" !important;
+}
+
+.jdgm-star.jdgm--off:before {
+  color: #e0e0e0 !important;
+  content: "☆" !important;
+}
+
+/* SVG星星支持 */
+.jdgm-widget svg,
+.jdgm-star svg {
+  fill: #A889A8 !important;
+  color: #A889A8 !important;
+}
+
+/* === 其他评价插件兼容 === */
+.star-rating,
+.product-reviews .star,
+.review-star,
+.rating-star,
+.stars,
+.star-filled,
+.fa-star,
+.review-rating .star,
+.yotpo-star,
+.loox-rating .loox-star,
+.stamped-starrating .stamped-fa-star,
+.spr-starrating .spr-star {
+  color: #A889A8 !important;
+  fill: #A889A8 !important;
+}
+
+/* === 备用样式（确保兼容性） === */
+/* 仅在Judge.me插件CSS失效时生效 */
+.jdgm-prev-badge__text {
+  font-size: 12px !important;
+  font-family: "Libre Baskerville", serif !important;
+  color: #666 !important;
+  line-height: 1 !important;
+}
+
+@media screen and (max-width: 768px) {
+  .jdgm-prev-badge__text {
+    font-size: 12px !important;
+  }
+}

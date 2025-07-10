@@ -1,1 +1,604 @@
-{"sections":{"slideshow_bVUMbc":{"type":"slideshow","blocks":{"slide_cyDURA":{"type":"slide","settings":{"image":"shopify:\/\/shop_images\/c76cb2cd8fe22b6438d907fd3b376a49_7bf3361a-3dcb-459a-aea6-82b936e4d7f5.jpg","heading":"","heading_size":"h1","subheading":"","button_label":"","link":"","button_style_secondary":false,"box_align":"middle-center","show_text_box":true,"text_alignment":"center","image_overlay_opacity":0,"color_scheme":"","text_alignment_mobile":"center"}},"slide_gg6wi6":{"type":"slide","settings":{"image":"shopify:\/\/shop_images\/c76cb2cd8fe22b6438d907fd3b376a49_7bf3361a-3dcb-459a-aea6-82b936e4d7f5.jpg","heading":"","heading_size":"h1","subheading":"","button_label":"","link":"","button_style_secondary":false,"box_align":"middle-center","show_text_box":true,"text_alignment":"center","image_overlay_opacity":0,"color_scheme":"","text_alignment_mobile":"center"}}},"block_order":["slide_cyDURA","slide_gg6wi6"],"custom_css":[".slideshow__text-wrapper {position: reverse;}",".slider-button--prev {position: absolute; left: 4vw; top: 50%; transform: translateY(-50%);}",".slider-button--next {position: absolute; right: 4vw; top: 50%; transform: translateY(-50%);}",".slideshow__text.banner__box {background: none;}",".slider-buttons {transform: translate(0px, -100%); border: none;}"],"settings":{"layout":"full_bleed","slide_height":"adapt_image","slider_visual":"dots","auto_rotate":false,"change_slides_speed":5,"image_behavior":"none","show_text_below":false,"accessibility_info":""}},"172175305816df98a9":{"type":"apps","settings":{"include_margins":true}},"image_banner":{"type":"image-banner","disabled":true,"settings":{"image":"shopify:\/\/shop_images\/c76cb2cd8fe22b6438d907fd3b376a49.jpg","image_overlay_opacity":0,"image_height":"adapt","desktop_content_position":"middle-left","show_text_box":false,"desktop_content_alignment":"left","color_scheme":"scheme-2","image_behavior":"none","mobile_content_alignment":"center","stack_images_on_mobile":true,"show_text_below":false}},"image_with_text_Hr9Q4n":{"type":"image-with-text","blocks":{"text_qTRWAh":{"type":"text","settings":{"text":"<h4><a href=\"\/products\/新品-地雷系\" title=\"「幻夜」ミニワンピ ３点セット 2色 4サイズ | 番号：NG2406\">NG2406 新色 9月1日より予約開始！<\/a><\/h4>","text_style":"body"}}},"block_order":["text_qTRWAh"],"disabled":true,"settings":{"image":"shopify:\/\/shop_images\/1.jpg","height":"adapt","desktop_image_width":"medium","layout":"image_first","desktop_content_position":"top","desktop_content_alignment":"left","content_layout":"no-overlap","section_color_scheme":"scheme-2","color_scheme":"scheme-2","image_behavior":"none","mobile_content_alignment":"left","padding_top":36,"padding_bottom":36}},"featured_collection_iiBxTX":{"type":"featured-collection","custom_css":[".card .card__inner .card__media {width: 100%;}",".card--standard .card__media {margin: 4px;}",".card--card:after,.card--standard .card__inner:after {background: #f4f4f4;}"],"settings":{"title":"オープンキャンペン","heading_size":"h2","description":"","show_description":false,"description_style":"body","collection":"tops","products_to_show":4,"columns_desktop":4,"full_width":false,"show_view_all":true,"view_all_style":"solid","enable_desktop_slider":false,"color_scheme":"scheme-2","image_ratio":"portrait","image_shape":"default","show_secondary_image":false,"show_vendor":false,"show_rating":false,"quick_add":"none","columns_mobile":"2","swipe_on_mobile":false,"padding_top":36,"padding_bottom":36}},"featured_collection_whFRMG":{"type":"featured-collection","custom_css":[".card .card__inner .card__media {width: 100%;}",".card--standard .card__media {margin: 4px;}",".card--card:after,.card--standard .card__inner:after {background: #f4f4f4;}"],"settings":{"title":"ワンピースセット","heading_size":"h2","description":"","show_description":false,"description_style":"body","collection":"ワンピース","products_to_show":4,"columns_desktop":4,"full_width":false,"show_view_all":true,"view_all_style":"solid","enable_desktop_slider":false,"color_scheme":"scheme-2","image_ratio":"portrait","image_shape":"default","show_secondary_image":false,"show_vendor":false,"show_rating":false,"quick_add":"none","columns_mobile":"2","swipe_on_mobile":false,"padding_top":36,"padding_bottom":36}},"featured_collection_Lqyhdh":{"type":"featured-collection","custom_css":[".card .card__inner .card__media {width: 100%;}",".card--standard .card__media {margin: 4px;}",".card--card:after,.card--standard .card__inner:after {background: #f4f4f4;}"],"settings":{"title":"グッズ","heading_size":"h2","description":"","show_description":false,"description_style":"body","collection":"goods","products_to_show":4,"columns_desktop":4,"full_width":false,"show_view_all":true,"view_all_style":"solid","enable_desktop_slider":false,"color_scheme":"scheme-2","image_ratio":"adapt","image_shape":"default","show_secondary_image":false,"show_vendor":false,"show_rating":false,"quick_add":"none","columns_mobile":"2","swipe_on_mobile":false,"padding_top":36,"padding_bottom":36}},"rich_text_ye7rHj":{"type":"rich-text","blocks":{"text_V6VNdW":{"type":"text","settings":{"text":"<h5>もし何かお気づきの点やご要望などございましたら、お気軽にお知らせいただければ幸いです。\u2028<\/h5><h5>スタッフ一同、より良いサービスをご提供できるよう努力致します。<\/h5><h5>また、新しいアイテムも続々と登場予定ですので、ぜひご期待くださいませ。\u2028今後ともNoGenkiをどうぞよろしくお願い申し上げます。<\/h5>"}}},"block_order":["text_V6VNdW"],"settings":{"desktop_content_position":"center","content_alignment":"center","color_scheme":"scheme-2","full_width":true,"padding_top":40,"padding_bottom":52}}},"order":["slideshow_bVUMbc","172175305816df98a9","image_banner","image_with_text_Hr9Q4n","featured_collection_iiBxTX","featured_collection_whFRMG","featured_collection_Lqyhdh","rich_text_ye7rHj"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "slideshow_bVUMbc": {
+      "type": "slideshow",
+      "blocks": {
+        "slide_4yYyMf": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/8da268663168055b51e5c43c2fe5ec76.jpg",
+            "heading": "",
+            "heading_size": "h1",
+            "subheading": "",
+            "button_label": "",
+            "link": "shopify://products/透け感コルセット付けロングワンピース",
+            "button_style_secondary": false,
+            "box_align": "middle-center",
+            "show_text_box": true,
+            "text_alignment": "center",
+            "image_overlay_opacity": 0,
+            "color_scheme": "scheme-1",
+            "text_alignment_mobile": "center"
+          }
+        },
+        "slide_rkD63A": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/20511-2.jpg",
+            "heading": "",
+            "heading_size": "h1",
+            "subheading": "",
+            "button_label": "",
+            "link": "shopify://products/スクエアネックビッグリボンワンピースセット-1",
+            "button_style_secondary": false,
+            "box_align": "middle-center",
+            "show_text_box": true,
+            "text_alignment": "center",
+            "image_overlay_opacity": 0,
+            "color_scheme": "scheme-1",
+            "text_alignment_mobile": "center"
+          }
+        },
+        "slide_EQBmHQ": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/20250425-225221_933dc776-5513-4550-9d58-ff380983e16f.jpg",
+            "heading": "",
+            "heading_size": "h1",
+            "subheading": "",
+            "button_label": "",
+            "link": "shopify://products/ゴスクロスプリント浴衣セット",
+            "button_style_secondary": false,
+            "box_align": "middle-center",
+            "show_text_box": true,
+            "text_alignment": "center",
+            "image_overlay_opacity": 0,
+            "color_scheme": "scheme-1",
+            "text_alignment_mobile": "center"
+          }
+        },
+        "slide_KHkzyH": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/7e4ac2be9f3bfbbc64c85a9d58c1a4cc.jpg",
+            "heading": "",
+            "heading_size": "h1",
+            "subheading": "",
+            "button_label": "",
+            "link": "shopify://products/姫袖リボンレースアップブラウス",
+            "button_style_secondary": false,
+            "box_align": "middle-center",
+            "show_text_box": true,
+            "text_alignment": "center",
+            "image_overlay_opacity": 0,
+            "color_scheme": "scheme-1",
+            "text_alignment_mobile": "center"
+          }
+        },
+        "slide_JGm8zF": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/a7bcf6b8c5483eeaea0930a116533d72.jpg",
+            "heading": "",
+            "heading_size": "h1",
+            "subheading": "",
+            "button_label": "",
+            "link": "shopify://products/チャイナ風ワンピースセットアップ",
+            "button_style_secondary": false,
+            "box_align": "middle-center",
+            "show_text_box": true,
+            "text_alignment": "center",
+            "image_overlay_opacity": 0,
+            "color_scheme": "scheme-1",
+            "text_alignment_mobile": "center"
+          }
+        }
+      },
+      "block_order": [
+        "slide_4yYyMf",
+        "slide_rkD63A",
+        "slide_EQBmHQ",
+        "slide_KHkzyH",
+        "slide_JGm8zF"
+      ],
+      "custom_css": [
+        ".slideshow__text-wrapper {position: reverse;}",
+        ".slider-button--prev {position: absolute; left: 4vw; top: 50%; transform: translateY(-50%);}",
+        ".slider-button--next {position: absolute; right: 4vw; top: 50%; transform: translateY(-50%);}",
+        ".slideshow__text.banner__box {background: none;}",
+        ".slider-buttons {transform: translate(0px, -100%); border: none;}"
+      ],
+      "settings": {
+        "layout": "full_bleed",
+        "slide_height": "adapt_image",
+        "slider_visual": "dots",
+        "auto_rotate": true,
+        "change_slides_speed": 5,
+        "image_behavior": "none",
+        "show_text_below": false,
+        "accessibility_info": ""
+      }
+    },
+    "featured_collection_eVyW4": {
+      "type": "featured-collection",
+      "custom_css": [
+        ".price__regular {font-size: 13px; padding: 2px 4px;}",
+        ".jdgm-prev-badge {font-size: 12px; padding: 2px 4px;}",
+        ".inline-richtext {margin-bottom: 0px;}",
+        ".collection__title {margin-bottom: 0px;}",
+        ".card__inner {border: none !important; box-shadow: none !important; background: none !important;}"
+      ],
+      "name": "New Arrivals",
+      "settings": {
+        "title": "New Arrivals",
+        "heading_size": "h2",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "collection": "newarrivals",
+        "products_to_show": 18,
+        "columns_desktop": 4,
+        "full_width": false,
+        "show_view_all": false,
+        "view_all_style": "solid",
+        "enable_desktop_slider": true,
+        "color_scheme": "scheme-28957b8d-d6dd-4267-a6b6-e5cd5c83768e",
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "columns_mobile": "2",
+        "swipe_on_mobile": true,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "featured_collection_iDiJp": {
+      "type": "featured-collection",
+      "custom_css": [
+        ".price__regular {font-size: 13px; padding: 2px 4px;}",
+        ".jdgm-prev-badge {font-size: 12px; padding: 2px 4px;}",
+        ".inline-richtext {margin-bottom: 0px;}",
+        ".collection__title {margin-bottom: 0px;}",
+        ".card__inner {border: none !important; box-shadow: none !important; background: none !important;}"
+      ],
+      "name": "Ranking",
+      "settings": {
+        "title": "Ranking",
+        "heading_size": "h2",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "collection": "ranking",
+        "products_to_show": 10,
+        "columns_desktop": 4,
+        "full_width": false,
+        "show_view_all": false,
+        "view_all_style": "solid",
+        "enable_desktop_slider": false,
+        "color_scheme": "scheme-28957b8d-d6dd-4267-a6b6-e5cd5c83768e",
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 4,
+        "padding_bottom": 36
+      }
+    },
+    "rich_text_3CFUb": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_XByW8M": {
+          "type": "heading",
+          "settings": {
+            "heading": "アイテム別から探す",
+            "heading_size": "h2"
+          }
+        }
+      },
+      "block_order": [
+        "heading_XByW8M"
+      ],
+      "custom_css": [
+        ".rich-text__heading {margin-left: -20px;}"
+      ],
+      "settings": {
+        "desktop_content_position": "left",
+        "content_alignment": "left",
+        "color_scheme": "scheme-28957b8d-d6dd-4267-a6b6-e5cd5c83768e",
+        "full_width": true,
+        "padding_top": 28,
+        "padding_bottom": 44
+      }
+    },
+    "featured_collection_AVqrX": {
+      "type": "featured-collection",
+      "custom_css": [
+        ".price__regular {font-size: 13px; padding: 2px 4px;}",
+        ".jdgm-prev-badge {font-size: 12px; padding: 2px 4px;}",
+        ".inline-richtext {margin-bottom: 0px;}",
+        ".collection__title {margin-bottom: 0px;}",
+        ".card__inner {border: none !important; box-shadow: none !important; background: none !important;}"
+      ],
+      "name": "Tops",
+      "settings": {
+        "title": "Tops",
+        "heading_size": "h2",
+        "description": "<p>Tops</p>",
+        "show_description": true,
+        "description_style": "body",
+        "collection": "tops",
+        "products_to_show": 25,
+        "columns_desktop": 4,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "enable_desktop_slider": false,
+        "color_scheme": "scheme-28957b8d-d6dd-4267-a6b6-e5cd5c83768e",
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "featured_collection_fPF4pB": {
+      "type": "featured-collection",
+      "custom_css": [
+        ".price__regular {font-size: 13px; padding: 2px 4px;}",
+        ".jdgm-prev-badge {font-size: 12px; padding: 2px 4px;}",
+        ".inline-richtext {margin-bottom: 0px;}",
+        ".collection__title {margin-bottom: 0px;}",
+        ".card__inner {border: none !important; box-shadow: none !important; background: none !important;}"
+      ],
+      "name": "Onepiece",
+      "settings": {
+        "title": "Onepiece & set",
+        "heading_size": "h2",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "collection": "ワンピース",
+        "products_to_show": 14,
+        "columns_desktop": 4,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "enable_desktop_slider": false,
+        "color_scheme": "scheme-28957b8d-d6dd-4267-a6b6-e5cd5c83768e",
+        "image_ratio": "portrait",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "featured_collection_GhAB9": {
+      "type": "featured-collection",
+      "custom_css": [
+        ".price__regular {font-size: 13px; padding: 2px 4px;}",
+        ".jdgm-prev-badge {font-size: 12px; padding: 2px 4px;}",
+        ".inline-richtext {margin-bottom: 0px;}",
+        ".collection__title {margin-bottom: 0px;}",
+        ".card__inner {border: none !important; box-shadow: none !important; background: none !important;}"
+      ],
+      "name": "Bottoms",
+      "settings": {
+        "title": "Bottoms",
+        "heading_size": "h2",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "collection": "bottoms",
+        "products_to_show": 10,
+        "columns_desktop": 4,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "enable_desktop_slider": false,
+        "color_scheme": "scheme-28957b8d-d6dd-4267-a6b6-e5cd5c83768e",
+        "image_ratio": "portrait",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "featured_collection_kzYRNQ": {
+      "type": "featured-collection",
+      "custom_css": [
+        ".price__regular {font-size: 13px; padding: 2px 4px;}",
+        ".jdgm-prev-badge {font-size: 12px; padding: 2px 4px;}",
+        ".inline-richtext {margin-bottom: 0px;}",
+        ".collection__title {margin-bottom: 0px;}",
+        ".card__inner {border: none !important; box-shadow: none !important; background: none !important;}"
+      ],
+      "name": "Goods",
+      "settings": {
+        "title": "Goods",
+        "heading_size": "h2",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "collection": "goods",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "enable_desktop_slider": false,
+        "color_scheme": "scheme-28957b8d-d6dd-4267-a6b6-e5cd5c83768e",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "featured_collection_GYntyi": {
+      "type": "featured-collection",
+      "custom_css": [
+        ".price__regular {font-size: 13px; padding: 2px 4px;}",
+        ".jdgm-prev-badge {font-size: 12px; padding: 2px 4px;}",
+        ".inline-richtext {margin-bottom: 0px;}",
+        ".collection__title {margin-bottom: 0px;}",
+        ".card__inner {border: none !important; box-shadow: none !important; background: none !important;}"
+      ],
+      "name": "Outer",
+      "settings": {
+        "title": "Outer",
+        "heading_size": "h2",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "collection": "outer",
+        "products_to_show": 15,
+        "columns_desktop": 4,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "enable_desktop_slider": false,
+        "color_scheme": "scheme-28957b8d-d6dd-4267-a6b6-e5cd5c83768e",
+        "image_ratio": "portrait",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "rich_text_gTKzVD": {
+      "type": "rich-text",
+      "blocks": {
+        "text_ytQWTA": {
+          "type": "text",
+          "settings": {
+            "text": "<h5>ようこそ、♡NoGenki webショップへ</h5><h5>♡NoGenkiは、大人気量産型や地雷系などを取り扱うブランドです。</h5><h5>♡華麗、可愛い、神秘、セクシー♡ </h5><h5>ーーーーーーーーーーーーーーーー</h5><h5></h5><h5>もし何かお気づきの点やご要望などございましたら、お気軽にお知らせいただければ幸いです。 </h5><h5> 皆様のご意見を大切にし、より良いサービスをご提供できるよう努力致します。</h5><h5>また、新しいアイテムも続々と登場予定ですので、ぜひご期待くださいませ。 </h5><h5>今後ともNoGenkiをどうぞよろしくお願い申し上げます。</h5>"
+          }
+        }
+      },
+      "block_order": [
+        "text_ytQWTA"
+      ],
+      "name": "Hello",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-28957b8d-d6dd-4267-a6b6-e5cd5c83768e",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
+    "featured_collection_8jPHE": {
+      "type": "featured-collection",
+      "disabled": true,
+      "settings": {
+        "title": "New Arrivals",
+        "heading_size": "h2",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "collection": "newarrivals",
+        "products_to_show": 18,
+        "columns_desktop": 4,
+        "full_width": false,
+        "show_view_all": false,
+        "view_all_style": "solid",
+        "enable_desktop_slider": true,
+        "color_scheme": "scheme-28957b8d-d6dd-4267-a6b6-e5cd5c83768e",
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "columns_mobile": "2",
+        "swipe_on_mobile": true,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "featured_collection_iiBxTX": {
+      "type": "featured-collection",
+      "disabled": true,
+      "custom_css": [
+        ".card .card__inner .card__media {width: 100%;}",
+        ".card--standard .card__media {margin: 4px;}",
+        ".card--card:after,.card--standard .card__inner:after {background: #f4f4f4;}"
+      ],
+      "settings": {
+        "title": "オープンキャンペン",
+        "heading_size": "h2",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "collection": "tops",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "enable_desktop_slider": false,
+        "color_scheme": "scheme-2",
+        "image_ratio": "portrait",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "featured_collection_whFRMG": {
+      "type": "featured-collection",
+      "disabled": true,
+      "custom_css": [
+        ".card .card__inner .card__media {width: 100%;}",
+        ".card--standard .card__media {margin: 4px;}",
+        ".card--card:after,.card--standard .card__inner:after {background: #f4f4f4;}"
+      ],
+      "settings": {
+        "title": "ワンピースセット",
+        "heading_size": "h2",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "collection": "ワンピース",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "enable_desktop_slider": false,
+        "color_scheme": "scheme-2",
+        "image_ratio": "portrait",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "featured_collection_Lqyhdh": {
+      "type": "featured-collection",
+      "disabled": true,
+      "custom_css": [
+        ".card .card__inner .card__media {width: 100%;}",
+        ".card--standard .card__media {margin: 4px;}",
+        ".card--card:after,.card--standard .card__inner:after {background: #f4f4f4;}"
+      ],
+      "settings": {
+        "title": "グッズ",
+        "heading_size": "h2",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "collection": "goods",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "enable_desktop_slider": false,
+        "color_scheme": "scheme-2",
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "rich_text_ye7rHj": {
+      "type": "rich-text",
+      "blocks": {
+        "text_V6VNdW": {
+          "type": "text",
+          "settings": {
+            "text": "<h5>もし何かお気づきの点やご要望などございましたら、お気軽にお知らせいただければ幸いです。 </h5><h5>スタッフ一同、より良いサービスをご提供できるよう努力致します。</h5><h5>また、新しいアイテムも続々と登場予定ですので、ぜひご期待くださいませ。 今後ともNoGenkiをどうぞよろしくお願い申し上げます。</h5>"
+          }
+        }
+      },
+      "block_order": [
+        "text_V6VNdW"
+      ],
+      "disabled": true,
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-2",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    }
+  },
+  "order": [
+    "slideshow_bVUMbc",
+    "featured_collection_eVyW4",
+    "featured_collection_iDiJp",
+    "rich_text_3CFUb",
+    "featured_collection_AVqrX",
+    "featured_collection_fPF4pB",
+    "featured_collection_GhAB9",
+    "featured_collection_kzYRNQ",
+    "featured_collection_GYntyi",
+    "rich_text_gTKzVD",
+    "featured_collection_8jPHE",
+    "featured_collection_iiBxTX",
+    "featured_collection_whFRMG",
+    "featured_collection_Lqyhdh",
+    "rich_text_ye7rHj"
+  ]
+}
