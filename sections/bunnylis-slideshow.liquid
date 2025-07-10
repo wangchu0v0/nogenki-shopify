@@ -152,8 +152,7 @@
                 sizes: sizes,
                 widths: widths,
                 alt: block.settings.image.alt | escape,
-                loading: loading,
-                fetchpriority: fetch_priority
+                loading: loading
             }}
           {%- else -%}
             {%- assign placeholder_slide = forloop.index | modulo: 2 -%}
