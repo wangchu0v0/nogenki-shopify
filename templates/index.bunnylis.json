@@ -99,7 +99,7 @@
   "order": [
     "bunnylis_header",
     "slideshow_bunnylis",
-    "rich_text_bunnylis",
-    "featured_collection_bunnylis"
+    "featured_collection_bunnylis",
+    "rich_text_bunnylis"
   ]
 }

@@ -1,8 +1,6 @@
 <!doctype html>
 <html class="js" lang="{{ request.locale.iso_code }}">
   <head>
-    {{ 'tax-included.css' | asset_url | stylesheet_tag }}
-    {{ 'component-color-swatch.css' | asset_url | stylesheet_tag }}
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -29,17 +27,10 @@
     {% endif %}
 
     {% render 'meta-tags' %}
-      {%- comment -%} SEO优化器 - 仅影响搜索引擎，不影响页面显示 {%- endcomment -%}
-    {%- if template contains 'product' -%}
-      {% render 'seo-optimizer' %}
-    {%- elsif template contains 'collection' -%}
-      {% render 'collection-seo-optimizer' %}
-    {%- endif -%}    <script src="{{ 'constants.js' | asset_url }}" defer="defer"></script>
+
+    <script src="{{ 'constants.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'pubsub.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
-    <!-- Judge.me样式修改脚本 - 已添加多语言支持，只在日文页面生效 -->
-    <script src="{{ 'judgeme-modifier-optimized.js' | asset_url }}" defer="defer"></script>
-    <script src="{{ 'judgeme-modifier-mobile.js' | asset_url }}" defer="defer"></script>
     {%- if settings.animations_reveal_on_scroll -%}
       <script src="{{ 'animations.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
@@ -199,7 +190,7 @@
 
         --buttons-radius: {{ settings.buttons_radius }}px;
         --buttons-radius-outset: {% if settings.buttons_radius > 0 %}{{ settings.buttons_radius | plus: settings.buttons_border_thickness }}{% else %}0{% endif %}px;
-        --buttons-border-width: {{ settings.buttons_border_thickness }}px;
+        --buttons-border-width: {% if settings.buttons_border_opacity > 0 %}{{ settings.buttons_border_thickness }}{% else %}0{% endif %}px;
         --buttons-border-opacity: {{ settings.buttons_border_opacity | divided_by: 100.0 }};
         --buttons-shadow-opacity: {{ settings.buttons_shadow_opacity | divided_by: 100.0 }};
         --buttons-shadow-visible: {% if settings.buttons_shadow_opacity > 0 %}1{% else %}0{% endif %};
@@ -260,6 +251,8 @@
       }
     {% endstyle %}
 
+    {{ 'base.css' | asset_url | stylesheet_tag }}
+
     {%- unless settings.type_body_font.system? -%}
       <link rel="preload" as="font" href="{{ settings.type_body_font | font_url }}" type="font/woff2" crossorigin>
     {%- endunless -%}
@@ -277,7 +270,6 @@
     {%- endif -%}
 
     <script>
-      document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
       if (Shopify.designMode) {
         document.documentElement.classList.add('shopify-design-mode');
       }
@@ -293,8 +285,8 @@
       {%- render 'cart-drawer' -%}
     {%- endif -%}
 
-    <!-- BunnyLis 使用独立的标头，不包含原主题的 header-group -->
-    
+    {% comment %} BunnyLis pages use custom header, not the main site header-group {% endcomment %}
+
     <main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
       {{ content_for_layout }}
     </main>
