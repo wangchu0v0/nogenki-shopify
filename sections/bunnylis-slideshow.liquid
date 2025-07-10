@@ -145,14 +145,7 @@
             {{
               block.settings.image
               | image_url: width: 3840
-              | image_tag:
-                width: block.settings.image.width,
-                height: height,
-                class: 'banner__media',
-                sizes: sizes,
-                widths: widths,
-                alt: block.settings.image.alt | escape,
-                loading: loading
+              | image_tag: class: 'banner__media', alt: block.settings.image.alt, loading: loading
             }}
           {%- else -%}
             {%- assign placeholder_slide = forloop.index | modulo: 2 -%}
