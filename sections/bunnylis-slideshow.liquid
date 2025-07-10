@@ -7,14 +7,14 @@
     @media screen and (max-width: 749px) {
       #Slideshow-{{ section.id }} .slideshow__media,
       #Slideshow-{{ section.id }} .slideshow__slide .banner {
-        height: {{ section.blocks.first.settings.image | image_url: width: 750 | image_tag: '', sizes: '', widths: '' | img_tag: '', '', '', '', '', loading: 'eager', fetchpriority: 'high' | split: 'height="' | last | split: '"' | first | plus: 0 | divided_by: section.blocks.first.settings.image.aspect_ratio | round }}px;
+        height: {{ section.blocks.first.settings.image | image_url: width: 750 | image_tag: loading: 'eager' | split: 'height="' | last | split: '"' | first | plus: 0 | divided_by: section.blocks.first.settings.image.aspect_ratio | round }}px;
       }
     }
 
     @media screen and (min-width: 750px) {
       #Slideshow-{{ section.id }} .slideshow__media,
       #Slideshow-{{ section.id }} .slideshow__slide .banner {
-        height: {{ section.blocks.first.settings.image | image_url: width: 1500 | image_tag: '', sizes: '', widths: '' | img_tag: '', '', '', '', '', loading: 'eager', fetchpriority: 'high' | split: 'height="' | last | split: '"' | first | plus: 0 | divided_by: section.blocks.first.settings.image.aspect_ratio | round }}px;
+        height: {{ section.blocks.first.settings.image | image_url: width: 1500 | image_tag: loading: 'eager' | split: 'height="' | last | split: '"' | first | plus: 0 | divided_by: section.blocks.first.settings.image.aspect_ratio | round }}px;
       }
     }
   {%- endstyle -%}
