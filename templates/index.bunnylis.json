@@ -42,7 +42,7 @@
       }
     },
     "featured_collection_bunnylis": {
-      "type": "featured-collection",
+      "type": "bunnylis-featured-collection",
       "settings": {
         "title": "Featured BunnyLis Items",
         "heading_size": "h2",
@@ -70,7 +70,7 @@
       }
     },
     "rich_text_bunnylis": {
-      "type": "rich-text",
+      "type": "bunnylis-rich-text",
       "blocks": {
         "heading_bunnylis": {
           "type": "heading",
@@ -99,7 +99,7 @@
   "order": [
     "bunnylis_header",
     "slideshow_bunnylis",
-    "featured_collection_bunnylis",
-    "rich_text_bunnylis"
+    "rich_text_bunnylis",
+    "featured_collection_bunnylis"
   ]
 }
